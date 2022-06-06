@@ -117,7 +117,7 @@ reverb = ( _* (dry_wetrvbecho) * rvbgain:re.mono_freeverb(fb1, fb2, damp, spread
 
 
 //UI
-dry_wetrvbecho = uiEffects(vslider(" EchoVerb Dry/Wet[style:knob]", 0.5, 0, 1, 0.001));
+dry_wetrvbecho = uiEffects(vslider(" EchoVerb Dry/Wet[style:knob]", 0.5, 0, 5, 0.001));
 
 //       _---~~(~~-_.
 //     _{  XXX    )XX)
@@ -137,7 +137,7 @@ recstart=uiGlitch(checkbox("[1]Rec"));
 tone=uiGlitch(vslider("[9]TONE",1,0.5,2,0.0001));
 
 gain=uiMix(hslider("[0]AudioIn[style:knob]",1,0,2,0.0001));
-drywet=uiMix(hslider("[1]GlitchiMix[style:knob]",0.5,0,2,0.0001));
+drywet=uiMix(hslider("[1]GlitchiMix[style:knob]",0.5,0,3,0.0001));
 
 
 //Groups UI
