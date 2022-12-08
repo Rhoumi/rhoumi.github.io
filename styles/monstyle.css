@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'VG5000';
- src: url(styles/VG5000/VG5000-Regular.otf) format("opentype"), 
-        url(styles/VG5000/VG5000-Regular_web.eot),     
-       url(styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
-       url(styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
-        url(styles/VG5000/VG5000-Regular_web.otf) format("opentype");
+ src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
   
 }
 
