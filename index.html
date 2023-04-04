@@ -56,15 +56,8 @@
 <!--
 <p class="news">NEWS </p> -->
        <div id="rectnews">
-	       <div style="text-align: left; line-height: 11px; letter-spacing: -1px;">
-		       	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
-		       	━━┏┓━━━━━━┏┓━┏┓━━━━━━━━━━━━━━━━━━━━━━┏┓━━━┏┓━━━━</br>
-			━━┃┃━━━━━━┃┃━┃┃━━━━━━━━━━━━━━━━━━━━━━┃┃━━━┃┃━━━━</br>
-			━━┃┗━┓┏━━┓┃┃━┃┃━┏━━┓━━━━┏┓┏┓┏┓┏━━┓┏━┓┃┃━┏━┛┃━━━━</br>
-			━━┃┏┓┃┃┏┓┃┃┃━┃┃━┃┏┓┃━━━━┃┗┛┗┛┃┃┏┓┃┃┏┛┃┃━┃┏┓┃━━━━</br>
-			━━┃┃┃┃┃┃━┫┃┗┓┃┗┓┃┗┛┃━━━━┗┓┏┓┏┛┃┗┛┃┃┃━┃┗┓┃┗┛┃━━━━</br>
-			━━┗┛┗┛┗━━┛┗━┛┗━┛┗━━┛━━━━━┗┛┗┛━┗━━┛┗┛━┗━┛┗━━┛━━━━</br>
-		       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+	       <div id="randtext" style="text-align: left; line-height: 11px; letter-spacing: -1px;">
+		       
       
 	       </div>
 <marquee direction="right" behavior="alternate" scrollamount="9"><div  class="bandeau">My name is Rémi GEORGES</div></marquee>
@@ -74,6 +67,27 @@
       
         
        </div>
+	<script>
+		// Liste des titres possibles
+		var titres = [
+			"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+		       	━━┏┓━━━━━━┏┓━┏┓━━━━━━━━━━━━━━━━━━━━━━┏┓━━━┏┓━━━━</br>
+			━━┃┃━━━━━━┃┃━┃┃━━━━━━━━━━━━━━━━━━━━━━┃┃━━━┃┃━━━━</br>
+			━━┃┗━┓┏━━┓┃┃━┃┃━┏━━┓━━━━┏┓┏┓┏┓┏━━┓┏━┓┃┃━┏━┛┃━━━━</br>
+			━━┃┏┓┃┃┏┓┃┃┃━┃┃━┃┏┓┃━━━━┃┗┛┗┛┃┃┏┓┃┃┏┛┃┃━┃┏┓┃━━━━</br>
+			━━┃┃┃┃┃┃━┫┃┗┓┃┗┓┃┗┛┃━━━━┗┓┏┓┏┛┃┗┛┃┃┃━┃┗┓┃┗┛┃━━━━</br>
+			━━┗┛┗┛┗━━┛┗━┛┗━┛┗━━┛━━━━━┗┛┗┛━┗━━┛┗┛━┗━┛┗━━┛━━━━</br>
+		       	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>",
+			"Titre 2",
+			"Titre 3",
+			"Titre 4",
+			"Titre 5"
+		];
+		// Choisir un titre aléatoire
+		var titreAleatoire = titres[Math.floor(Math.random() * titres.length)];
+		// Afficher le titre aléatoire dans la balise h1
+		document.getElementById("randtext").innerHTML = titreAleatoire;
+	</script>
   <div class="footer">@2023    @Rémi_Georges    <a href="mailto:remi.georges@protonmail.com">Contact</a></div>
   </body>
 </html>
