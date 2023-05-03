@@ -88,12 +88,12 @@
 .menu {
     margin-left: 44%;
     width: 175px;
-
+    margin-top: 20px;
 }
 
 .contact {
     width: 75px;
-
+    margin-top: 12px;
 }
 
 .livecoding {
