@@ -203,6 +203,7 @@ font-family: 'VG5000';
     margin: 5% 2% 2% 10%;
     padding: 0px;
     box-shadow: 2px 2px 12px #555;
+    line-height: 1em;
 }
 
 #CPL {
