@@ -196,6 +196,15 @@ font-family: 'VG5000';
     box-shadow: 2px 2px 12px #555;
 }
 
+#imageprofilcode {
+    float: left;
+    border: 15px ridge #f7bd40;
+    background-color: WhiteSmoke;
+    margin: 5% 2% 2% 10%;
+    padding: 0px;
+    box-shadow: 2px 2px 12px #555;
+}
+
 #CPL {
     float: left;
     width: 250px;
