@@ -68,7 +68,8 @@
 
 .dropdown:hover .dropbtn {   
    text-shadow: -100px -20px red, 100px -20px darkgreen, 50px 20px darkblue;
-    z-index: 7;                                                /* Permettent un changement de couleur au passage de la souris sur le menu déroulant */
+    z-index: 7;     
+      position: relative;   /* Permettent un changement de couleur au passage de la souris sur le menu déroulant */
     background-color: grey;
 
 } 
