@@ -52,7 +52,8 @@
 
 .dropdown-content a:hover {
    text-shadow: -100px -20px red, 100px -20px darkgreen, 50px 20px darkblue;
-    z-index: 7;  
+    z-index: 7;
+    position: relative;
     background-color: grey;
 
 } 
