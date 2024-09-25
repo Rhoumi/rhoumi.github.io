@@ -32,8 +32,8 @@ text(
 "  and sounds                                                                    \n"+
 "                                                                                \n"+
 "  WARNING : You are curently using the unstable QWERTY fork version of OSCII    \n"+
-"  Real version is available at https://adelfaure.net/tools/liblab               \n"+
-"  this version was clumsily made by ralt144mi                                   \n"+
+"  AZERTY version is available at https://adelfaure.net/tools/liblab             \n"+
+"  this QWERTY version was clumsily made by ralt144mi                            \n"+
 "                                                                                \n"+
 "  Other point : saving file will currently only save drawing, everything in     \n"+
 "  code will be lost.                                                            \n"+
