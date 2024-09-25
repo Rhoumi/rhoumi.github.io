@@ -1,0 +1,392 @@
+                                                                                
+ ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  
+ :::: ___________ : ___________ : ___________ : ___________ : ___________ ::::  
+ ::::|  _______  |:|  _________|:|  _________|:|____   ____|:|____   ____|::::  
+ ::::| |:::::::| |:| |_________ :| |::::::::::::::::| |:::::::::::| |:::::::::  
+ ::::| |:::::::| |:|_________  |:| |::::::::::::::::| |:::::::::::| |:::::::::  
+ ::::| |_______| |: _________| |:| |_________ : ____| |____ : ____| |____ ::::  
+ ::::|___________|:|___________|:|___________|:|___________|:|___________|::::  
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+                                                                                
+  (c) Adel Faure 2023 contact@adelfaure.net                                     
+                                                                                
+                                                                                
+  OSCII is a web software for drawing and live-coding textmode visuals          
+  and sounds                                                                    
+                                                                                
+  WARNING : the current version is made for AZERTY keyboard only. Sorry I'm     
+  working on it for QWERTY, if you need other keyboard support please contact   
+  me via contact@adelfaure.net.                                                 
+                                                                                
+  Other point : saving file will currently only save drawing, everything in     
+  code will be lost.                                                            
+                                                                                
+  Git repository : https://gitlab.com/adelfaure/oscii.git                       
+                                                                                
+                                                                                
+                 Use arrows keys to scroll and move this text                   
+                                                                                
+  ...........................................................................   
+                                                                                
+                         _____ _____ ____  _____ __ __                          
+                        |     |     |    \|   __|  |  |                         
+                         |   ||  |  |  |  |   __|-   -|                         
+                        |_____|__|__|____/|_____|__|__|                         
+                                                                                
+     I. Interface                                                               
+    II. Modes                                                                   
+   III. Keys                                                                    
+    IV. Read and code                                                           
+     V. Variables                                                                
+    VI. Functions                                                               
+   VII. Instruments                                                             
+  VIII. License                                                                 
+                                                                                
+  ...........................................................................   
+                                                                                
+             _____ _____ _____ _____ _____ _____ _____ _____ _____              
+            |     |     |     |   __|  _  |   __|  _  |     |   __|             
+             |   ||  |  |_   _|   __|    _|   __|     |   --|   __|             
+            |_____|__|__||___||_____|__\__|__|  |__|__|_____|_____|             
+                                                                                
+                                                                                
+  Fig.1 : Diplayed infos at top of the screen                                   
+                                                                                
+         A           B                                                          
+         |           |                                                          
+                                                                                
+    Mode 123456789 : Help                                                       
+    step = 1; cursor = 39,19; data = 11,0,255; cam = 0,0; sel = 1,1; scale = 3; 
+                                                                                
+    |         |               |                |          |          |          
+    C         D               E                F          G          H          
+                                                                                
+    A. Modes numbers and selected mode                                          
+    B. Name of the selected mode                                                
+    C. Current step, value by which will move cursor and selection              
+    D. Cursor coordinates                                                       
+    E. Data values of the character under the cursor. First value is            
+    background color code, second is foreground color code, third is            
+    glyph code.                                                                 
+    F. Camera coordinates                                                       
+    G. Selection width and height                                               
+    H. Zoom level                                                               
+                                                                                
+ Fig.2 : Table shown in draw and color mode in top left of the screen           
+                                                                                
+    A                  A. Keyboard keys                                         
+    |                  B. Shapes or colors corresponding to keys                
+                                                                                
+    1234567890                                                                  
+    ##########  --B                                                             
+    AZERTYUIOP                                                                  
+    ##########                                                                  
+    QSDFGHJKLM                                                                  
+    ##########                                                                  
+    WXCVBN,;:!                                                                  
+    ##########                                                                  
+                                                                                
+  ...........................................................................   
+                                                                                
+                         __ __ _____ ____  _____ _____                          
+                        |  V  |     |    \|   __|   __|                         
+                        |     |  |  |  |  |   __|__   |                         
+                        |__V__|_____|____/|_____|_____|                         
+                                                                                
+                                                                                
+  Keys     | Mode               | Purpose                                       
+  ---------|--------------------|---------------------------------------------  
+  Ctrl + 1 | Draw(1)            | Drawing with semi-graphic characters          
+  Ctrl + 2 | Write(2)           | Writing text                                  
+  Ctrl + 3 | Camera(3)          | Moving camera, zomming in and out             
+  Ctrl + 4 | Color(4)           | Change drawing and writing color              
+  Ctrl + 5 | Sheet(5)           | Change semi-graphic sheet                     
+  Ctrl + 6 | Step(6)            | Change step value                             
+  Ctrl + 7 | Read(7)            | Define reading zone                           
+  Ctrl + 8 | Code(8)            | Add code to execute for the reader            
+  Ctrl + 9 | Help(9) // current | Display this page                             
+                                                                                
+  ...........................................................................   
+                                                                                
+                            __ __ _____ _____ _____                             
+                           |  |  |   __|  |  |   __|                            
+                           |    -|   __|_ | _|__   |                            
+                           |__|__|_____||___||_____|                            
+                                                                                
+                                                                                
+  Modes            | Keys       | Function                                      
+  -----------------|------------|---------------------------------------------  
+  Any              | Ctrl + S   | save to file                                  
+                   |            |                                               
+  Any              | Ctrl + L   | load file (might need to press Enter before)  
+                   |            |                                               
+  Draw(1)          | 1234567890 | type shapes                                   
+                   | AZERTYUIOP |                                               
+                   | QSDFGHJKLM |                                               
+                   | WXCVBN,;:! |                                               
+                   |            |                                               
+  Write(2)         | Any        | write characters                              
+                   |            |                                               
+  Color(4)         | 1234567890 | change foreground color                       
+                   | AZERTYUIOP |                                               
+                   |            |                                               
+  Color(4)         | QSDFGHJKLM | change background color                       
+                   | WXCVBN,;:! |                                               
+                   |            |                                               
+  Sheet(5)         | 12345      | change sheet                                  
+                   |            |                                               
+  Step(6)          | 1234567890 | change step value                             
+                   | AZERTYUIOP |                                               
+                   | QSDFGHJKLM |                                               
+                   | WXCVBN,;:! |                                               
+                   |            |                                               
+  Help(9)          | Arrow keys | move text                                     
+                   |            |                                               
+  Draw(1) Write(2) | Arrow keys | move cursor                                   
+  Read(7) Code(8)  |            |                                               
+                   |            |                                               
+  Camera(3)        | Arrow keys | move camera                                   
+                   |            |                                               
+  Camera(3)        | I          | zoom in                                       
+                   |            |                                               
+  Camera(3)        | O          | zoom out                                      
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl +     | change selection size                         
+  Read(7)          | Arrow keys |                                               
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + C   | copy selection                                
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + V   | paste selection                               
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + P   | pick color                                    
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + I   | invert foreground and background color        
+  Color(3)         |            |                                               
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + F   | fill selection foreground and background      
+                   |            | with current colors                           
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + Z   | Undo                                          
+                   |            |                                               
+  Draw(1) Write(2) | Ctrl + Y   | Redo                                          
+                   |            |                                               
+  Read(7)          | Spacebar   | Start to read current selection               
+                   |            |                                               
+  Code(8)          | Enter      | Activate / deactivate current code line       
+                   |            |                                               
+  Code(8)          | Ctrl +     | Add an empty line                             
+                   | Enter      |                                               
+                   |            |                                               
+  Code(8)          | Escape     | Execute current code line                     
+                   |            |                                               
+  Code(8)          | Ctrl +     | Move current line up                          
+                   | Up Arrow   |                                               
+                   |            |                                               
+  Code(8)          | Ctrl +     | Move current line down                        
+                   | Down Arrow |                                               
+                                                                                
+  IMPORTANT : Except in write and code mode, keys are not case sensitive        
+                                                                                
+  ...........................................................................   
+                                                                                
+   _____ _____ _____ ____      _____ _____ ____      _____ _____ ____  _____    
+  |  _  |   __|  _  |    \    |  _  |     |    \    |     |     |    \|   __|   
+  |    _|   __|     |  |  |   |     |  |  |  |  |   |   --|  |  |  |  |   __|   
+  |__\__|_____|__|__|____/    |__|__|__|__|____/    |_____|_____|____/|_____|   
+                                                                                
+                                                                                
+  Reader mode purpose is to define zones to \"read\". That mean that each       
+  codeline written in Code(8) will be executed for each character in the        
+  defined zone. The zones are read from left to right col by col.               
+                                                                                
+  To define such a zone, move the cursor to place the upper left corner of the  
+  zone, define its size with Ctrl + Arrows keys and press spacebar to confirm   
+  its placement. Only one zone can be defined at a time, precedent one will be  
+  erased by the new one.                                                        
+                                                                                
+  While by default each character read will trigger every activated code line,  
+  the way to filter executed code by character is the `d` variable. d[0] being  
+  character color, d[1] background color, d[2] character code. You can find     
+  the character under cursor data information on the interface                  
+  `data = 11,0,255`, 11 being black color code of background, 0 being white     
+  color code and 255 being empty character.                                     
+                                                                                
+  For example :                                                                 
+                                                                                
+    - if (d[2] != 255) O[0].play();                                             
+                                                                                
+  Will play the sound from the first oscillator of the O[0-99] list.            
+                                                                                
+  ...........................................................................   
+                                                                                
+             _____ __ __ _____ _____ _____ _____ _____ _____ _____              
+            |   __|  |  |     |     |     |     |     |     |   __|             
+            |   __|  |  |  |  |   --|_   _||   ||  |  |  |  |__   |             
+            |__|  |_____|__|__|_____||___||_____|_____|__|__|_____|             
+                                                                                
+                                                                                
+  write(A,B,C,D,E)                                                              
+                                                                                
+    Do : write a message at a given position                                    
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Message, must be a string                                                
+    B. X position, must be integer                                              
+    C. Y position, must be integer                                              
+    D. Message foreground color, optional, white by default                     
+    E. Message background color, optional, black by default                     
+                                                                                
+  s(A)                                                                          
+                                                                                
+    Do : parse value to string                                                  
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Anything that can be converted to string                                 
+                                                                                
+  sg(A,B,C,D,E)                                                                 
+                                                                                
+    Do : set glyph at position                                                  
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Glyph code [0-199]                                                       
+    B. X position, must be integer                                              
+    C. Y position, must be integer                                              
+    D. Message foreground color, optional, white by default                     
+    E. Message background color, optional, black by default                     
+                                                                                
+  [array].i(A)                                                                  
+                                                                                
+    Do : check if array contain value, return true or false                     
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Value, string, integer, float, object etc.                               
+                                                                                
+  I(A)                                                                          
+                                                                                
+    Do : parse float to integer                                                 
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Float                                                                    
+                                                                                
+  II(A)                                                                         
+                                                                                
+    Do : check if integer, return true or false                                 
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. Value, float or integer                                                  
+                                                                                
+  r(A,B)                                                                        
+                                                                                
+    Do : return random interger                                                 
+                                                                                
+    Arguments :                                                                 
+                                                                                
+    A. minimum value                                                            
+    B. maximum value                                                            
+                                                                                
+  ...........................................................................   
+                                                                                
+             __ __ _____ _____ _____ _____ _____ ___   _____ _____              
+            |  |  |  _  |  _  |     |  _  |  _  |   | |   __|   __|             
+            |  |  |     |    _||   ||     |  _ -|   |_|   __|__   |             
+             \___/|__|__|__\__|_____|__|__|_____|_____|_____|_____|             
+                                                                                
+                                                                                
+  E                                                                             
+                                                                                
+    Use : object that can be used as global, E[\"foo\"] = bar                   
+                                                                                
+  [A-G][0-9]                                                                    
+                                                                                
+    Use : tones frequency values, C4 = 261.63, A6 = 1760 etc.                   
+                                                                                
+  [A-G]s[0-9]                                                                   
+                                                                                
+    Use : semi-tones frequency values, Cs4 = 277.1, As6 = 1864.6 etc.           
+                                                                                
+  N[0-62]                                                                       
+                                                                                
+    Use : tones stored in an array, N[28] = C4, N[47] = A6 etc.                 
+                                                                                
+  Ns[0-107]                                                                     
+                                                                                
+    Use : tones and semi-tones in an array, Ns[51] = Cs4, N[83] = As6 etc.      
+                                                                                
+  ...........................................................................   
+                                                                                
+       _____ _____ _____ _____ _____ __ __ __ __ _____ _____ _____ _____        
+      |     |     |   __|     |  _  |  |  |  V  |   __|     |     |   __|       
+       |   ||  |  |__   |_   _|    _|  |  |     |   __|  |  |_   _|__   |       
+      |_____|__|__|_____||___||__\__|_____|__V__|_____|__|__||___||_____|       
+                                                                                
+                                                                                
+  O[0-99].f                                                                     
+                                                                                
+    Use : change frequency of oscillators                                       
+                                                                                
+  O[0-99].g                                                                     
+                                                                                
+    Use : change gain of oscillators (float value)                              
+                                                                                
+  O[0-99].i                                                                     
+                                                                                
+    Use : change attack duration (in seconds, float value)                      
+                                                                                
+  O[0-99].o                                                                     
+                                                                                
+    Use : change release duration (in seconds, float value)                     
+                                                                                
+  O[0-99].l                                                                     
+                                                                                
+    Use : change length of oscillator notes (full gain duration, in seconds,    
+    float value)                                                                
+                                                                                
+  O[0-99].w                                                                     
+                                                                                
+    Use : change wave type of oscillator ("'sine'", "'triangle'", "'square'")   
+                                                                                
+  O[0-99].a                                                                     
+                                                                                
+    Use : change active state of oscillator (true or false)                     
+                                                                                
+  O[0-99].s                                                                     
+                                                                                
+    Use : change oscillator to sample player ("'kick'","'snare'","'hit'",       
+    "'hat'","'clap'","'bell'")                                                  
+                                                                                
+  O[0-99].p                                                                     
+                                                                                
+    Use : change pitch of sample player (float value)                           
+                                                                                
+  O[0-99].play()                                                                
+                                                                                
+    Use : play oscillator                                                       
+                                                                                
+  ...........................................................................   
+                                                                                
+                   ___   _____ _____ _____ _____ _____ _____                    
+                  |   | |     |     |   __|     |     |   __|                   
+                  |   |_ |   ||   --|   __|  |  |   --|   __|                   
+                  |_____|_____|_____|_____|__|__|_____|_____|                   
+                                                                                
+                                                                                
+  This program is free software: you can redistribute it and/or modify it       
+  under the terms of the GNU General Public License as published by the Free    
+  Software Foundation, either version 3 of the License, or (at your option)     
+  any later version.                                                            
+                                                                                
+  This program is distributed in the hope that it will be useful, but WITHOUT   
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or         
+  FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for     
+  more details.                                                                 
+                                                                                
+  You should have received a copy of the GNU General Public License along with  
+  this program.  If not, see <https://www.gnu.org/licenses/>.                   
+                                                                                
+                                                                                
