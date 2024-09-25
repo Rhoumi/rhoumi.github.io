@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+body {
+  height: 100vh;
+  background-color: #444;
+}
+canvas {
+  display: inline-block;
+}
+pre {
+  color:white;
+}
