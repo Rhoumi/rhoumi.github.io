@@ -16,3 +16,14 @@ osc(10, 0, () => (a.fft[2]*3))
      // .hue(() => Math.sin(time))
  	)
   	.out(o0)
+
+
+
+hydraText.font = "serif"
+hydraText.lineWidth = "2%"
+str = " hydra_! "
+solid(1,.2)
+	.blend(src(o0).scale(1.02).colorama(.02))
+	.layer(text(str))
+	.diff(strokeText(str).modulateScale(noise(1,1), .4))
+	.out()
