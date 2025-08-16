@@ -7,6 +7,20 @@
     <link rel="icon" type="image/png" href="../images/favicon.png" />
 				<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/fantasque-sans-mono" type="text/css"/>
 
+
+ <style>
+    dialog {
+      padding: 1em;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    dialog::backdrop {
+      background: rgba(0,0,0,0.5);
+    }
+  </style>
+
+		
 	</head>
 
 	<body background="../images/fond.png">
@@ -797,27 +811,31 @@
 
 
 <script>
-  document.querySelectorAll("dialog").forEach(dialog => {
-    dialog.addEventListener("click", (e) => {
-      const rect = dialog.getBoundingClientRect();
-      if (
-        e.clientX < rect.left ||
-        e.clientX > rect.right ||
-        e.clientY < rect.top ||
-        e.clientY > rect.bottom
-      ) {
-        dialog.close();
-      }
-    });
+    document.querySelectorAll("dialog").forEach(dialog => {
+      // clic en dehors = fermer
+      dialog.addEventListener("click", (e) => {
+        const rect = dialog.getBoundingClientRect();
+        if (
+          e.clientX < rect.left ||
+          e.clientX > rect.right ||
+          e.clientY < rect.top ||
+          e.clientY > rect.bottom
+        ) {
+          dialog.close();
+        }
+      });
 
-    // optionnel : support du lien <a href="#!" ...>Close</a>
-    dialog.querySelectorAll("[href='#!']").forEach(closeBtn => {
-      closeBtn.addEventListener("click", () => dialog.close());
+      // boutons/lien Close (href="#!")
+      dialog.querySelectorAll("[href='#!']").forEach(closeBtn => {
+        closeBtn.addEventListener("click", (evt) => {
+          evt.preventDefault(); // évite de scroller en haut
+          dialog.close();
+        });
+      });
     });
-  });
-</script>
-
+  </script>
 		
 	</body>
 </html>
+
 
