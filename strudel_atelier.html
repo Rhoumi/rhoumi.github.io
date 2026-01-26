@@ -5,68 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de référence pour Strudel.cc</title>
     <style>
+        @font-face {
+  font-family: 'VG5000';
+ src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
+  
+}
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'VG5000', monospace;
             line-height: 1.6;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #000000;
+            color: #00ff00;
         }
         h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+            color: #00ff00;
+            border-bottom: 3px solid #00cc00;
             padding-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #00ff00;
         }
         h2 {
-            color: #34495e;
+            color: #00ff00;
             margin-top: 30px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #00cc00;
             padding-left: 10px;
+            font-size: 2em;
+            text-shadow: 0 0 8px #00ff00;
+        }
+        h3 {
+            color: #00dd00;
+            font-size: 1.5em;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #0a0a0a;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
         }
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #00cc00;
+            font-size: 1.2em;
         }
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: #001a00;
+            color: #00ff00;
             font-weight: bold;
+            border-bottom: 2px solid #00ff00;
         }
         tr:hover {
-            background-color: #f2f2f2;
+            background-color: #001a00;
         }
         code {
-            background-color: #ecf0f1;
+            background-color: #001a00;
             padding: 2px 6px;
             border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            color: #e74c3c;
+            font-family: 'VT323', monospace;
+            color: #00ff00;
+            border: 1px solid #00cc00;
         }
         ul {
-            background-color: white;
+            background-color: #0a0a0a;
             padding: 20px 40px;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #00cc00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
         }
         li {
             margin: 10px 0;
+            font-size: 1.2em;
         }
         hr {
             border: none;
-            border-top: 2px solid #bdc3c7;
+            border-top: 2px solid #00cc00;
             margin: 30px 0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
         .centered {
             text-align: center;
+        }
+        p {
+            font-size: 1.2em;
+            color: #00dd00;
+        }
+        strong {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
         }
     </style>
 </head>
