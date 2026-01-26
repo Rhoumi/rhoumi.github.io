@@ -6,105 +6,157 @@
     <title>Guide de référence pour Strudel.cc</title>
     <style>
         @font-face {
-  font-family: 'VG5000';
- src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
-        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
-       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
-       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
-        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
-  
-}
+            font-family: 'VG5000';
+            src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
+                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
+                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
+                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
+                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
+        }
+        
         body {
             font-family: 'VG5000', monospace;
             line-height: 1.6;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: black;
-            color: darkgreen;
+            background-color: beige;
+            color: olive;
         }
+        
         h1 {
             color: darkgreen;
-            border-bottom: 3px solid darkgreen;
+            border-bottom: 5px ridge olive;
             padding-bottom: 10px;
             font-size: 2.5em;
-            text-shadow: 0 0 10px darkolivegreen;
         }
+        
         h2 {
             color: darkgreen;
             margin-top: 30px;
-            border-left: 4px solid darkolivegreen;
-            padding-left: 10px;
+            border-left: 8px ridge olive;
+            padding-left: 15px;
             font-size: 2em;
-            text-shadow: 0 0 8px darkgreen;
         }
+        
         h3 {
-            color: darkgreen;
+            color: olive;
             font-size: 1.5em;
+            margin-top: 20px;
         }
+        
+        .links-box {
+            background-color: wheat;
+            border: 6px ridge olive;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+        
+        .links-box h3 {
+            margin-top: 0;
+            color: darkgreen;
+        }
+        
+        .links-box ul {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding-left: 20px;
+        }
+        
+        .links-box a {
+            color: olive;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .links-box a:hover {
+            color: darkgreen;
+            text-decoration: underline;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background-color: Grey;
-            border: 2px solid DarkGrey;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            background-color: wheat;
+            border: 6px ridge olive;
         }
+        
         th, td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid darkolivegreen;
+            border-bottom: 3px ridge olive;
             font-size: 1.2em;
         }
+        
         th {
-            background-color: green;
+            background-color: tan;
             color: darkgreen;
             font-weight: bold;
-            border-bottom: 2px solid darkolivegreen;
+            border-bottom: 4px ridge olive;
         }
+        
         tr:hover {
-            background-color: green;
+            background-color: tan;
         }
+        
         code {
-            background-color: green;
+            background-color: tan;
             padding: 2px 6px;
             border-radius: 3px;
             font-family: 'VG5000', monospace;
-            color: darkgreen;
-            border: 1px solid darkolivegreen;
+            color: olive;
+            border: 2px ridge olive;
         }
+        
         ul {
-            background-color: green;
+            background-color: wheat;
             padding: 20px 40px;
             border-radius: 5px;
-            border: 1px solid darkolivegreen;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            border: 4px ridge olive;
         }
+        
         li {
             margin: 10px 0;
             font-size: 1.2em;
+            color: olive;
         }
+        
         hr {
             border: none;
-            border-top: 2px solid green;
+            border-top: 4px ridge olive;
             margin: 30px 0;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
+        
         .centered {
             text-align: center;
         }
+        
         p {
             font-size: 1.2em;
-            color: darkolivegreen;
+            color: olive;
         }
+        
         strong {
-            color: green;
-            text-shadow: 0 0 5px darkolivegreen;
+            color: darkgreen;
         }
     </style>
 </head>
 <body>
     <h1>Guide de référence pour Strudel.cc</h1>
+
+    <div class="links-box">
+        <h3>Liens utiles</h3>
+        <ul>
+            <li><a href="https://strudel.cc/" target="_blank">Site officiel Strudel.cc</a></li>
+            <li><a href="https://strudel.cc/learn/" target="_blank">Tutoriels et documentation</a></li>
+            <li><a href="https://strudel.cc/workshop/" target="_blank">Atelier interactif</a></li>
+            <li><a href="https://github.com/tidalcycles/strudel" target="_blank">GitHub Strudel</a></li>
+            <li><a href="https://discord.gg/HGEdXmRkzT" target="_blank">Communauté Discord</a></li>
+        </ul>
+    </div>
 
     <h2>1. Mini-Notation : Syntaxe de base et motifs</h2>
     <table>
