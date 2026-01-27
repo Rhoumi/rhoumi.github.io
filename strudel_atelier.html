@@ -1,474 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide de référence pour Strudel.cc</title>
-    <style>
-        @font-face {
-            font-family: 'VG5000';
-            src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
-                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
-                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
-                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
-                url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
-        }
-        
-        body {
-            font-family: 'VG5000', monospace;
-            line-height: 1.6;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: beige;
-            color: olive;
-        }
-        
-        h1 {
-            color: darkgreen;
-            border-bottom: 5px ridge olive;
-            padding-bottom: 10px;
-            font-size: 2.5em;
-        }
-        
-        h2 {
-            color: darkgreen;
-            margin-top: 30px;
-            border-left: 8px ridge olive;
-            padding-left: 15px;
-            font-size: 2em;
-        }
-        
-        h3 {
-            color: olive;
-            font-size: 1.5em;
-            margin-top: 20px;
-        }
-        
-        .links-box {
-            background-color: wheat;
-            border: 6px ridge olive;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 5px;
-        }
-        
-        .links-box h3 {
-            margin-top: 0;
-            color: darkgreen;
-        }
-        
-        .links-box ul {
-            background-color: transparent;
-            border: none;
-            box-shadow: none;
-            padding-left: 20px;
-        }
-        
-        .links-box a {
-            color: olive;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .links-box a:hover {
-            color: darkgreen;
-            text-decoration: underline;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: wheat;
-            border: 6px ridge olive;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 3px ridge olive;
-            font-size: 1.2em;
-        }
-        
-        th {
-            background-color: tan;
-            color: darkgreen;
-            font-weight: bold;
-            border-bottom: 4px ridge olive;
-        }
-        
-        tr:hover {
-            background-color: tan;
-        }
-        
-        code {
-            background-color: tan;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'VG5000', monospace;
-            color: olive;
-            border: 2px ridge olive;
-        }
-        
-        ul {
-            background-color: wheat;
-            padding: 20px 40px;
-            border-radius: 5px;
-            border: 4px ridge olive;
-        }
-        
-        li {
-            margin: 10px 0;
-            font-size: 1.2em;
-            color: olive;
-        }
-        
-        hr {
-            border: none;
-            border-top: 4px ridge olive;
-            margin: 30px 0;
-        }
-        
-        .centered {
-            text-align: center;
-        }
-        
-        p {
-            font-size: 1.2em;
-            color: olive;
-        }
-        
-        strong {
-            color: darkgreen;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Strudel – Cheat Sheet complète</title>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f4f4;
+  color: #111;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  margin-top: 40px;
+  border-bottom: 6px ridge #333;
+  padding-bottom: 6px;
+}
+
+table.strudel {
+  width: 100%;
+  border-collapse: collapse;
+  border: 8px ridge #333;
+  margin: 20px 0 40px 0;
+  background: #fff;
+}
+
+table.strudel th,
+table.strudel td {
+  border: 6px ridge #666;
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+table.strudel th {
+  background: #e0e0e0;
+  font-weight: bold;
+}
+
+.section {
+  margin-bottom: 70px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Guide de référence pour Strudel.cc</h1>
 
-    <div class="links-box">
-        <h3>Liens utiles</h3>
-        <ul>
-            <li><a href="https://strudel.cc/" target="_blank">Site officiel Strudel.cc</a></li>
-            <li><a href="https://strudel.cc/learn/" target="_blank">Tutoriels et documentation</a></li>
-            <li><a href="https://strudel.cc/workshop/" target="_blank">Atelier interactif</a></li>
-            <li><a href="https://github.com/tidalcycles/strudel" target="_blank">GitHub Strudel</a></li>
-            <li><a href="https://discord.gg/HGEdXmRkzT" target="_blank">Communauté Discord</a></li>
-        </ul>
-    </div>
+<h1>🎛️ Strudel – Cheat Sheet (complète)</h1>
 
-    <h2>1. Mini-Notation : Syntaxe de base et motifs</h2>
-    <table>
-        <thead>
-            <tr>
-                <th class="centered">Caractère</th>
-                <th>Fonction</th>
-                <th>Exemple</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="centered"><code>&lt; &gt;</code></td>
-                <td>Séquence</td>
-                <td><code>&lt;a b c&gt;</code></td>
-                <td>Joue <code>a</code>, puis <code>b</code>, puis <code>c</code></td>
-            </tr>
-            <tr>
-                <td class="centered"><code>[ ]</code></td>
-                <td>Empilement</td>
-                <td><code>[bd hh]</code></td>
-                <td>Joue <code>bd</code> et <code>hh</code> simultanément</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>/</code></td>
-                <td>Division</td>
-                <td><code>bd/2</code></td>
-                <td>Joue <code>bd</code> deux fois plus lentement</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>*</code></td>
-                <td>Multiplication</td>
-                <td><code>sd*4</code></td>
-                <td>Joue <code>sd</code> quatre fois plus vite</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>!</code></td>
-                <td>Sélection aléatoire</td>
-                <td><code>sd!3</code></td>
-                <td>Sélectionne 3 événements du motif aléatoirement</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>~</code></td>
-                <td>Pause / Silence</td>
-                <td><code>&lt;a ~ b&gt;</code></td>
-                <td>Joue <code>a</code>, puis pause, puis <code>b</code></td>
-            </tr>
-            <tr>
-                <td class="centered"><code>&amp;</code></td>
-                <td>Parallèle</td>
-                <td><code>a&amp;b</code></td>
-                <td>Joue a et b simultanément (comme Stack mais plus flexible)</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>,</code></td>
-                <td>Choix aléatoire</td>
-                <td><code>&lt;a,b,c&gt;</code></td>
-                <td>Choisit aléatoirement entre <code>a</code>, <code>b</code> ou <code>c</code></td>
-            </tr>
-            <tr>
-                <td class="centered"><code>@</code></td>
-                <td>Décalage temporel</td>
-                <td><code>bd@2</code></td>
-                <td>Décale le motif de 2 unités vers l'avant</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>s()</code></td>
-                <td>Jouer un sample</td>
-                <td><code>s("bd")</code></td>
-                <td>Joue le sample de grosse caisse</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>n()</code></td>
-                <td>Jouer des notes</td>
-                <td><code>n("c4")</code></td>
-                <td>Joue la note Do4</td>
-            </tr>
-        </tbody>
-    </table>
+<!-- ===================================================== -->
+<div class="section">
+<h2>1) Samples & Synths de base</h2>
 
-    <hr>
+<table class="strudel">
+<tr><th>Type</th><th>Nom</th><th>Description</th></tr>
 
-    <h2>2. Samples et instruments</h2>
-    <p>Strudel dispose d'une série de samples intégrés et peut également charger des paquets externes.</p>
+<tr><td>Sample</td><td>bd</td><td>Bass drum</td></tr>
+<tr><td>Sample</td><td>sd</td><td>Snare</td></tr>
+<tr><td>Sample</td><td>hh</td><td>Hi-hat fermé</td></tr>
+<tr><td>Sample</td><td>oh</td><td>Hi-hat ouvert</td></tr>
+<tr><td>Sample</td><td>cp</td><td>Clap</td></tr>
+<tr><td>Sample</td><td>rim</td><td>Rimshot</td></tr>
+<tr><td>Sample</td><td>cr</td><td>Crash</td></tr>
+<tr><td>Sample</td><td>rd</td><td>Ride</td></tr>
+<tr><td>Sample</td><td>sh</td><td>Shaker</td></tr>
+<tr><td>Sample</td><td>lt / mt / ht</td><td>Toms</td></tr>
+<tr><td>Sample</td><td>cb</td><td>Cowbell</td></tr>
+<tr><td>Sample</td><td>perc</td><td>Percussions diverses</td></tr>
 
-    <table>
-        <thead>
-            <tr>
-                <th class="centered">Raccourci</th>
-                <th>Sample</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="centered"><code>bd</code></td>
-                <td><code>kick</code></td>
-                <td>Grosse caisse</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>sd</code></td>
-                <td><code>snare</code></td>
-                <td>Caisse claire</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>cp</code></td>
-                <td><code>clap</code></td>
-                <td>Claquement de mains</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>hh</code></td>
-                <td><code>hi-hat</code></td>
-                <td>Charleston (fermé)</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>oh</code></td>
-                <td><code>open hi-hat</code></td>
-                <td>Charleston (ouvert)</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>cr</code></td>
-                <td><code>crash cymbal</code></td>
-                <td>Cymbale crash</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>ride</code></td>
-                <td><code>ride cymbal</code></td>
-                <td>Cymbale ride</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>lt</code></td>
-                <td><code>low tom</code></td>
-                <td>Tom basse</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>mt</code></td>
-                <td><code>mid tom</code></td>
-                <td>Tom medium</td>
-            </tr>
-            <tr>
-                <td class="centered"><code>ht</code></td>
-                <td><code>high tom</code></td>
-                <td>Tom aigu</td>
-            </tr>
-        </tbody>
-    </table>
+<tr><td>Synth</td><td>sine</td><td>Onde sinusoïdale</td></tr>
+<tr><td>Synth</td><td>square</td><td>Onde carrée</td></tr>
+<tr><td>Synth</td><td>sawtooth</td><td>Dent de scie</td></tr>
+<tr><td>Synth</td><td>triangle</td><td>Triangle</td></tr>
+<tr><td>Synth</td><td>white / pink / brown</td><td>Bruits</td></tr>
+</table>
+</div>
 
-    <h3>Instruments généraux :</h3>
-    <ul>
-        <li><code>s("synth")</code> : Un synthétiseur analogique classique</li>
-        <li><code>s("fm")</code> : Un synthétiseur FM</li>
-        <li><code>s("superfm")</code> : Un synthétiseur FM avec oscillateur de type SuperSaw</li>
-        <li><code>s("string")</code> : Génération sonore type cordes</li>
-        <li><code>s("am")</code> : Un synthétiseur AM</li>
-        <li><code>s("sine")</code> : Un oscillateur simple à onde sinusoïdale</li>
-    </ul>
+<!-- ===================================================== -->
+<div class="section">
+<h2>2) Effets audio</h2>
 
-    <h3>Sons General MIDI (GM) :</h3>
-    <ul>
-        <li><code>s("gm_acoustic_grand_piano")</code> : Piano acoustique</li>
-        <li><code>s("gm_acoustic_guitar_steel")</code> : Guitare acoustique à cordes d'acier</li>
-        <li><code>s("gm_electric_bass_finger")</code> : Basse électrique</li>
-        <li><code>s("gm_violin")</code> : Violon</li>
-        <li>... et bien d'autres, accessibles via <code>gm_[nom_instrument]</code></li>
-    </ul>
+<table class="strudel">
+<tr><th>Effet</th><th>Fonction</th></tr>
 
-    <hr>
+<tr><td>stretch</td><td>Time stretch</td></tr>
+<tr><td>gain</td><td>Volume</td></tr>
+<tr><td>lpf</td><td>Low-pass filter</td></tr>
+<tr><td>hpf</td><td>High-pass filter</td></tr>
+<tr><td>bandpass</td><td>Passe-bande</td></tr>
+<tr><td>vowel</td><td>Formant vocal</td></tr>
+<tr><td>coarse</td><td>Sample rate reduction</td></tr>
+<tr><td>crush</td><td>Bitcrusher</td></tr>
+<tr><td>shape</td><td>Wave shaping</td></tr>
+<tr><td>distort</td><td>Distorsion</td></tr>
+<tr><td>tremolo</td><td>Amplitude modulation</td></tr>
+<tr><td>compressor</td><td>Compression</td></tr>
+<tr><td>pan</td><td>Stéréo pan</td></tr>
+<tr><td>phaser</td><td>Phaser</td></tr>
+<tr><td>post</td><td>Post-gain</td></tr>
+<tr><td>delay</td><td>Delay send</td></tr>
+<tr><td>room</td><td>Reverb send</td></tr>
+<tr><td>duck</td><td>Ducking</td></tr>
+</table>
+</div>
 
-    <h2>3. Effets et modificateurs de paramètres</h2>
-    <p>Les effets sont ajoutés à un motif avec la syntaxe par point.</p>
+<!-- ===================================================== -->
+<div class="section">
+<h2>3) Mini-Notation (COMPLÈTE)</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Fonction</th>
-                <th>Paramètre</th>
-                <th>Exemple</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>gain()</code></td>
-                <td><code>0.0</code> - <code>1.0</code></td>
-                <td><code>.gain(0.5)</code></td>
-                <td>Règle le volume</td>
-            </tr>
-            <tr>
-                <td><code>room()</code></td>
-                <td><code>0.0</code> - <code>1.0</code></td>
-                <td><code>.room(.7)</code></td>
-                <td>Ajoute de la réverbération</td>
-            </tr>
-            <tr>
-                <td><code>delay()</code></td>
-                <td>Temps en cycles</td>
-                <td><code>.delay(.25)</code></td>
-                <td>Ajoute un écho</td>
-            </tr>
-            <tr>
-                <td><code>pan()</code></td>
-                <td><code>-1.0</code> - <code>1.0</code></td>
-                <td><code>.pan(-1)</code></td>
-                <td>Position dans le panoramique stéréo</td>
-            </tr>
-            <tr>
-                <td><code>lpf()</code></td>
-                <td>Fréquence (Hz)</td>
-                <td><code>.lpf(1000)</code></td>
-                <td>Filtre passe-bas</td>
-            </tr>
-            <tr>
-                <td><code>hpf()</code></td>
-                <td>Fréquence (Hz)</td>
-                <td><code>.hpf(8000)</code></td>
-                <td>Filtre passe-haut</td>
-            </tr>
-            <tr>
-                <td><code>shape()</code></td>
-                <td><code>0.0</code> - <code>1.0</code></td>
-                <td><code>.shape(.3)</code></td>
-                <td>Effet de distorsion</td>
-            </tr>
-            <tr>
-                <td><code>crush()</code></td>
-                <td><code>1</code> - <code>16</code></td>
-                <td><code>.crush(8)</code></td>
-                <td>Bitcrusher</td>
-            </tr>
-            <tr>
-                <td><code>phaser()</code></td>
-                <td>Fréquence</td>
-                <td><code>.phaser(4)</code></td>
-                <td>Effet phaser</td>
-            </tr>
-            <tr>
-                <td><code>speed()</code></td>
-                <td>Valeur</td>
-                <td><code>.speed(.5)</code></td>
-                <td>Modifie la vitesse de lecture des samples</td>
-            </tr>
-            <tr>
-                <td><code>note()</code></td>
-                <td>Gamme</td>
-                <td><code>.note().scale("c:minor")</code></td>
-                <td>Joue les notes comme mélodie depuis la gamme</td>
-            </tr>
-            <tr>
-                <td><code>chord()</code></td>
-                <td>Nom d'accord</td>
-                <td><code>.chord("Cmaj7")</code></td>
-                <td>Joue un accord</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="strudel">
+<tr><th>Syntaxe</th><th>Signification</th></tr>
 
-    <hr>
+<tr><td>val1 val2</td><td>Séquence</td></tr>
+<tr><td>[]</td><td>Groupement</td></tr>
+<tr><td>[a b c]</td><td>Subdivision interne</td></tr>
+<tr><td>&lt;a b&gt;</td><td>Alternance par cycle</td></tr>
+<tr><td>a,b</td><td>Parallèle / stacking</td></tr>
+<tr><td>* n</td><td>Accélération</td></tr>
+<tr><td>/ n</td><td>Ralentissement</td></tr>
+<tr><td>!</td><td>Répétition</td></tr>
+<tr><td>@</td><td>Durée étendue</td></tr>
+<tr><td>~</td><td>Silence</td></tr>
+<tr><td>_</td><td>Hold / sustain</td></tr>
+<tr><td>()</td><td>Priorité syntaxique</td></tr>
+<tr><td>{}</td><td>Polymètre</td></tr>
+<tr><td>#</td><td>Application paramètre</td></tr>
+<tr><td>:</td><td>Index / variation</td></tr>
+<tr><td>?</td><td>Condition probabiliste</td></tr>
+<tr><td>|</td><td>Fork / alternative</td></tr>
+</table>
+</div>
 
-    <h2>4. Temps, gammes et fonctions génératives</h2>
+<!-- ===================================================== -->
+<div class="section">
+<h2>4) Modifiers (INTÉGRAUX)</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Fonction</th>
-                <th>Exemple</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>setcps()</code></td>
-                <td><code>setcps(0.75)</code></td>
-                <td>Définit la vitesse en <strong>Cycles par Seconde</strong></td>
-            </tr>
-            <tr>
-                <td><code>setbpm()</code></td>
-                <td><code>setbpm(120)</code></td>
-                <td>Définit la vitesse en <strong>Battements par Minute</strong></td>
-            </tr>
-            <tr>
-                <td><code>rand()</code></td>
-                <td><code>rand.range(0,1)</code></td>
-                <td>Génère un nombre aléatoire</td>
-            </tr>
-            <tr>
-                <td><code>perlin()</code></td>
-                <td><code>perlin.range(.6, .9)</code></td>
-                <td>Génère des valeurs aléatoires fluides (bruit de Perlin)</td>
-            </tr>
-            <tr>
-                <td><code>sine()</code></td>
-                <td><code>sine.range(1, 10)</code></td>
-                <td>Génère une onde sinusoïdale</td>
-            </tr>
-            <tr>
-                <td><code>scale()</code></td>
-                <td><code>scale("c:minor")</code></td>
-                <td>Convertit les notes dans une gamme spécifique</td>
-            </tr>
-            <tr>
-                <td><code>pick()</code></td>
-                <td><code>pick([a,b,c])</code></td>
-                <td>Choisit un motif dans une liste</td>
-            </tr>
-            <tr>
-                <td><code>pickRestart()</code></td>
-                <td><code>pickRestart([a,b])</code></td>
-                <td>Choisit un motif et redémarre depuis le début quand il se termine</td>
-            </tr>
-        </tbody>
-    </table>
+<h3>⏱ Time modifiers</h3>
+<table class="strudel">
+<tr><th>Modifier</th><th>Action</th></tr>
+
+<tr><td>slow(n)</td><td>Ralentit</td></tr>
+<tr><td>fast(n)</td><td>Accélère</td></tr>
+<tr><td>rev</td><td>Inverse</td></tr>
+<tr><td>early</td><td>Décale tôt</td></tr>
+<tr><td>late</td><td>Décale tard</td></tr>
+<tr><td>iter(n)</td><td>Rotation</td></tr>
+<tr><td>ply(n)</td><td>Répétition events</td></tr>
+<tr><td>euclid(p,s)</td><td>Euclidien</td></tr>
+<tr><td>segment(n)</td><td>Découpe temporelle</td></tr>
+<tr><td>chunk(n, fn)</td><td>Bloc + modif</td></tr>
+</table>
+
+<h3>🎲 Random modifiers</h3>
+<table class="strudel">
+<tr><th>Modifier</th><th>Action</th></tr>
+
+<tr><td>choose</td><td>Choix aléatoire</td></tr>
+<tr><td>wchoose</td><td>Choix pondéré</td></tr>
+<tr><td>degrade</td><td>~50% supprimé</td></tr>
+<tr><td>degradeBy(p)</td><td>Probabilité</td></tr>
+<tr><td>undegrade</td><td>Inverse degrade</td></tr>
+<tr><td>sometimes</td><td>Probabilité moyenne</td></tr>
+<tr><td>often</td><td>Probabilité élevée</td></tr>
+<tr><td>rarely</td><td>Probabilité faible</td></tr>
+<tr><td>rand</td><td>Valeur random continue</td></tr>
+<tr><td>irand</td><td>Random entier</td></tr>
+</table>
+
+<h3>🎛 Conditional modifiers</h3>
+<table class="strudel">
+<tr><th>Modifier</th><th>Action</th></tr>
+
+<tr><td>firstOf(n)</td><td>Premiers cycles</td></tr>
+<tr><td>lastOf(n)</td><td>Derniers cycles</td></tr>
+<tr><td>when(cond, fn)</td><td>Condition</td></tr>
+<tr><td>hush</td><td>Mute</td></tr>
+<tr><td>mute</td><td>Mute pattern</td></tr>
+<tr><td>invert</td><td>Inverse logique</td></tr>
+<tr><td>mask</td><td>Masque pattern</td></tr>
+<tr><td>pick(n)</td><td>Sélection index</td></tr>
+</table>
+</div>
+
+<!-- ===================================================== -->
+<div class="section">
+<h2>5) Tempo & Visual feedback</h2>
+
+<table class="strudel">
+<tr><th>Fonction</th><th>Usage</th></tr>
+
+<tr><td>setcpm(x)</td><td>Tempo global</td></tr>
+<tr><td>pianoroll</td><td>Vue notes</td></tr>
+<tr><td>punchcard</td><td>Timeline circulaire</td></tr>
+<tr><td>_pianoroll</td><td>Inline visual</td></tr>
+<tr><td>_punchcard</td><td>Inline visual</td></tr>
+<tr><td>sliders</td><td>Contrôles UI</td></tr>
+</table>
+</div>
 
 </body>
 </html>
