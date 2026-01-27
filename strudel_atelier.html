@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Strudel – Référence complète</title>
+<title>Strudel – Référence Atelier</title>
 
 <style>
 
@@ -60,7 +60,7 @@ table.strudel th {
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>1) Samples et Synths de base</h2>
+<h2>1) <a href="https://strudel.cc/learn/samples/">Samples</a> et <a href="https://strudel.cc/learn/synths/">Synths</a> de base</h2>
 
 <table class="strudel">
 <tr><th>Type</th><th>Identifiant</th><th>Description</th></tr>
@@ -88,7 +88,7 @@ table.strudel th {
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>2) Mini-Notation</h2>
+<h2>2) <a href="https://strudel.cc/learn/mini-notation/">Mini-Notation</a></h2>
 
 <table class="strudel">
 <tr><th>Syntaxe</th><th>Fonctionnement</th></tr>
@@ -116,161 +116,230 @@ table.strudel th {
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>3) Effets audio – Audio Effects</h2>
+<h2>3) <a href="https://strudel.cc/learn/effects/">Effets audio</a></h2>
 
 <table class="strudel">
-<tr><th>Effet</th><th>Définition et paramètres</th></tr>
+  <tr>
+    <th>Catégorie</th>
+    <th>Fonction</th>
+    <th>Définition</th>
+    <th>Variables / valeurs possibles</th>
+  </tr>
 
-<tr>
-<td>gain(x).</td>
-<td>
-Contrôle le niveau de sortie.<br>
-Paramètres :<br>
-• x : gain linéaire (1 = niveau original)
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="2">Time / Gain</td>
+    <td>stretch()</td>
+    <td>Time-stretch via phase vocoder.</td>
+    <td>pattern numérique, ratios, mini-notation</td>
+  </tr>
+  <tr>
+    <td>gain()</td>
+    <td>Gain principal du signal audio.</td>
+    <td>float ≥ 0, pattern numérique</td>
+  </tr>
 
-<tr>
-<td>lpf(freq).</td>
-<td>
-Filtre passe-bas supprimant les hautes fréquences.<br>
-Paramètres :<br>
-• freq : fréquence de coupure (Hz)
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="9">Filters</td>
+    <td>lpf()</td>
+    <td>Filtre passe-bas.</td>
+    <td>fréquence Hz, pattern, "freq:q"</td>
+  </tr>
+  <tr>
+    <td>lpq()</td>
+    <td>Résonance du filtre passe-bas.</td>
+    <td>float ≥ 0</td>
+  </tr>
+  <tr>
+    <td>hpf()</td>
+    <td>Filtre passe-haut.</td>
+    <td>fréquence Hz, pattern</td>
+  </tr>
+  <tr>
+    <td>hpq()</td>
+    <td>Résonance du filtre passe-haut.</td>
+    <td>float ≥ 0</td>
+  </tr>
+  <tr>
+    <td>bpf()</td>
+    <td>Filtre passe-bande.</td>
+    <td>fréquence centrale Hz</td>
+  </tr>
+  <tr>
+    <td>bpq()</td>
+    <td>Résonance du filtre passe-bande.</td>
+    <td>float ≥ 0</td>
+  </tr>
+  <tr>
+    <td>ftype()</td>
+    <td>Type de filtre.</td>
+    <td>0 (12db), 1 (ladder), 2 (24db)</td>
+  </tr>
+  <tr>
+    <td>vowel()</td>
+    <td>Filtre formant vocal.</td>
+    <td>string ("a e i o u"), pattern</td>
+  </tr>
+  <tr>
+    <td>shape()</td>
+    <td>Waveshaping non-linéaire.</td>
+    <td>float ≥ 0</td>
+  </tr>
 
-<tr>
-<td>hpf(freq).</td>
-<td>
-Filtre passe-haut supprimant les basses fréquences.<br>
-Paramètres :<br>
-• freq : fréquence de coupure (Hz)
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="2">Resolution</td>
+    <td>coarse()</td>
+    <td>Réduction du sample rate.</td>
+    <td>float ≥ 1</td>
+  </tr>
+  <tr>
+    <td>crush()</td>
+    <td>Réduction de la résolution (bitcrush).</td>
+    <td>float ≥ 0</td>
+  </tr>
 
-<tr>
-<td>bandpass(freq, q).</td>
-<td>
-Filtre centré sur une bande de fréquences.<br>
-Paramètres :<br>
-• freq : fréquence centrale<br>
-• q : largeur de bande (résonance)
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td>Distortion</td>
+    <td>distort()</td>
+    <td>Distorsion audio.</td>
+    <td>"distortion:postgain:type"</td>
+  </tr>
 
-<tr>
-<td>vowel(v).</td>
-<td>
-Filtre formant simulant des voyelles.<br>
-Paramètres :<br>
-• v : index ou pattern de voyelles
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="5">Tremolo</td>
+    <td>tremolosync()</td>
+    <td>Synchronisation du tremolo.</td>
+    <td>cycles, float</td>
+  </tr>
+  <tr>
+    <td>tremolodepth()</td>
+    <td>Profondeur du tremolo.</td>
+    <td>0 → 1</td>
+  </tr>
+  <tr>
+    <td>tremoloskew()</td>
+    <td>Asymétrie de la forme.</td>
+    <td>float</td>
+  </tr>
+  <tr>
+    <td>tremolophase()</td>
+    <td>Décalage de phase.</td>
+    <td>0 → 1</td>
+  </tr>
+  <tr>
+    <td>tremoloshape()</td>
+    <td>Forme d’onde.</td>
+    <td>0 → 1</td>
+  </tr>
 
-<tr>
-<td>crush(bits).</td>
-<td>
-Bitcrusher réduisant la résolution audio.<br>
-Paramètres :<br>
-• bits : profondeur de bits
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td>Dynamics</td>
+    <td>compressor()</td>
+    <td>Compresseur dynamique.</td>
+    <td>"threshold:ratio:knee:attack:release"</td>
+  </tr>
 
-<tr>
-<td>coarse(rate).</td>
-<td>
-Réduction du sample rate (aliasing).<br>
-Paramètres :<br>
-• rate : facteur de réduction
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td>Stereo</td>
+    <td>pan()</td>
+    <td>Placement stéréo.</td>
+    <td>0 (gauche) → 1 (droite)</td>
+  </tr>
 
-<tr>
-<td>shape(amount).</td>
-<td>
-Distorsion par waveshaping non linéaire.<br>
-Paramètres :<br>
-• amount : intensité
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="4">Phaser</td>
+    <td>phaser()</td>
+    <td>Effet phaser.</td>
+    <td>float (vitesse)</td>
+  </tr>
+  <tr>
+    <td>phaserdepth()</td>
+    <td>Profondeur du phaser.</td>
+    <td>0 → 1</td>
+  </tr>
+  <tr>
+    <td>phasercenter()</td>
+    <td>Fréquence centrale.</td>
+    <td>Hz</td>
+  </tr>
+  <tr>
+    <td>phasersweep()</td>
+    <td>Étendue du balayage.</td>
+    <td>Hz / range</td>
+  </tr>
 
-<tr>
-<td>distort(amount).</td>
-<td>
-Distorsion classique par saturation.<br>
-Paramètres :<br>
-• amount : intensité
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="2">Post</td>
+    <td>postgain()</td>
+    <td>Gain final post-effets.</td>
+    <td>float ≥ 0</td>
+  </tr>
+  <tr>
+    <td>dry()</td>
+    <td>Niveau du signal dry.</td>
+    <td>0 → 1</td>
+  </tr>
 
-<tr>
-<td>tremolo(rate, depth).</td>
-<td>
-Modulation d’amplitude périodique.<br>
-Paramètres :<br>
-• rate : vitesse de modulation<br>
-• depth : profondeur
-</td>
-</tr>
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="3">Delay (Send)</td>
+    <td>delay()</td>
+    <td>Niveau d’envoi vers le delay.</td>
+    <td>0 → 1</td>
+  </tr>
+  <tr>
+    <td>delaytime()</td>
+    <td>Temps de retard.</td>
+    <td>cycles, fractions</td>
+  </tr>
+  <tr>
+    <td>delayfeedback()</td>
+    <td>Feedback du delay.</td>
+    <td>0 → 1</td>
+  </tr>
 
-<tr>
-<td>pan(pos).</td>
-<td>
-Placement stéréo du signal.<br>
-Paramètres :<br>
-• pos : -1 (gauche) à 1 (droite)
-</td>
-</tr>
-
-<tr>
-<td>phaser(rate, depth).</td>
-<td>
-Effet de phase modulée.<br>
-Paramètres :<br>
-• rate : vitesse<br>
-• depth : intensité
-</td>
-</tr>
-
-<tr>
-<td>compressor(threshold, ratio).</td>
-<td>
-Compression dynamique du signal.<br>
-Paramètres :<br>
-• threshold : seuil<br>
-• ratio : taux de compression
-</td>
-</tr>
-
-<tr>
-<td>delay(time, feedback).</td>
-<td>
-Delay synchronisé au cycle.<br>
-Paramètres :<br>
-• time / delaytime : durée du retard<br>
-• feedback / delayfeedback : quantité de réinjection
-</td>
-</tr>
-
-<tr>
-<td>room(size).</td>
-<td>
-Réverbération de type room.<br>
-Paramètres :<br>
-• size : taille de la pièce
-</td>
-</tr>
-
-<tr>
-<td>duck(amount).</td>
-<td>
-Ducking global (sidechain-like).<br>
-Paramètres :<br>
-• amount : intensité du ducking
-</td>
-</tr>
-
+  <!-- ===================== -->
+  <tr>
+    <td rowspan="6">Reverb (Send)</td>
+    <td>room()</td>
+    <td>Niveau d’envoi vers la reverb.</td>
+    <td>0 → 1</td>
+  </tr>
+  <tr>
+    <td>roomsize()</td>
+    <td>Taille de la reverb.</td>
+    <td>0 → 10</td>
+  </tr>
+  <tr>
+    <td>roomlp()</td>
+    <td>Low-pass de la reverb.</td>
+    <td>Hz</td>
+  </tr>
+  <tr>
+    <td>roomdim()</td>
+    <td>Fréquence à −60dB.</td>
+    <td>Hz</td>
+  </tr>
+  <tr>
+    <td>roomfade()</td>
+    <td>Temps de fade.</td>
+    <td>secondes</td>
+  </tr>
+  <tr>
+    <td>ir()</td>
+    <td>Impulse response.</td>
+    <td>sample name</td>
+  </tr>
 </table>
+
 </div>
 
 <!-- ===================================================== -->
