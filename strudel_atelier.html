@@ -65,10 +65,10 @@ table.strudel th {
 <table class="strudel">
 <tr><th>Type</th><th>Identifiant</th><th>Description</th></tr>
 
-<tr><td>Sample</td><td>bd</td><td>Bass drum (kick)</td></tr>
-<tr><td>Sample</td><td>sd</td><td>Snare drum</td></tr>
-<tr><td>Sample</td><td>hh</td><td>Hi-hat fermé</td></tr>
-<tr><td>Sample</td><td>oh</td><td>Hi-hat ouvert</td></tr>
+<tr><td>Sample</td><td>bd</td><td>Bass drum (Grosse Caisse)</td></tr>
+<tr><td>Sample</td><td>sd</td><td>Snare drum (Caisse Claire)</td></tr>
+<tr><td>Sample</td><td>hh</td><td>Hi-hat fermé (Charleston Fermé)</td></tr>
+<tr><td>Sample</td><td>oh</td><td>Hi-hat ouvert (Charleston ouvert)</td></tr>
 <tr><td>Sample</td><td>cp</td><td>Clap</td></tr>
 <tr><td>Sample</td><td>rim</td><td>Rimshot</td></tr>
 <tr><td>Sample</td><td>cr</td><td>Crash</td></tr>
@@ -85,7 +85,7 @@ table.strudel th {
 <tr><td>Synth</td><td>white / pink / brown</td><td>Bruits (noise generators)</td></tr>
 </table>
 </div>
-
+<h2>Tips :  <a href="https://strudel.cc/learn/samples/#sound-banks">Regarder les principes de bank pour les boîtes à rythmes</a></h2>
 <!-- ===================================================== -->
 <div class="section">
 <h2>2) <a href="https://strudel.cc/learn/mini-notation/">Mini-Notation</a></h2>
@@ -398,7 +398,57 @@ table.strudel th {
 <tr><td>hush().</td><td>Muting global du pattern</td></tr>
 </table>
 </div>
+<!-- ===================================================== -->
+<div class="section">
 
+<h2>Fonctions mélodiques</h2>
+<table class="strudel">
+  <tr>
+    <th>Fonction</th>
+    <th>Définition</th>
+    <th>Variables / valeurs possibles</th>
+  </tr>
+
+  <tr>
+    <td>note("").</td>
+    <td>Fonction basique de définitions de notes</td>
+    <td>liste de notes (Numéro MIDI, note en chiffrage américain "c", nombre de 0 à 13, note absolue "c2"</td>
+  </tr>
+
+  <tr>
+    <td>scale(name).</td>
+    <td>Transforme des degrés en notes selon une échelle donnée. Définit aussi l’échelle par défaut pour d’autres opérations tonales.</td>
+    <td>string de forme "<root>:<type>" comme "C:major", "A2:minor", "F#:dorian"</td>
+  </tr>
+
+  <tr>
+    <td>transpose(semitones).</td>
+    <td>Transpose toutes les notes d’un pattern par un nombre de demi‑tons.</td>
+    <td>entier ou pattern d’entiers (ex: 2, -3, "<0 2 -1>")</td>
+  </tr>
+
+  <tr>
+    <td>scaleTranspose(steps).</td>
+    <td>Transpose les notes *à l’intérieur de l’échelle* d’un certain nombre de degrés.</td>
+    <td>entier ou pattern d’entiers</td>
+  </tr>
+
+  <tr>
+    <td>voicings(range?).</td>
+    <td>Convertit des symboles d’accord en voicings (positions de notes), avec un voice leading « smooth ».</td>
+    <td>optionnel : range / dictionnaire voicing (ex: 'lefthand', 'root:g2')</td>
+  </tr>
+
+  <tr>
+    <td>rootNotes(octave = 2).</td>
+    <td>Transforme des symboles d’accord en notes fondamentales dans une octave donnée.</td>
+    <td>octave (entier), pattern de symboles d’accord</td>
+  </tr>
+
+</table>
+
+
+  
 <!-- ===================================================== -->
 <div class="section">
 <h2>6) Tempo et visualisation</h2>
