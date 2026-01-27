@@ -128,13 +128,7 @@ table.strudel th {
 
   <!-- ===================== -->
   <tr>
-    <td rowspan="2">Time / Gain</td>
-    <td>stretch()</td>
-    <td>Time-stretch via phase vocoder.</td>
-    <td>pattern numérique, ratios, mini-notation</td>
-  </tr>
-  <tr>
-    <td>gain()</td>
+    <td>.gain()</td>
     <td>Gain principal du signal audio.</td>
     <td>float ≥ 0, pattern numérique</td>
   </tr>
@@ -142,47 +136,47 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td rowspan="9">Filters</td>
-    <td>lpf()</td>
+    <td>.lpf()</td>
     <td>Filtre passe-bas.</td>
     <td>fréquence Hz, pattern, "freq:q"</td>
   </tr>
   <tr>
-    <td>lpq()</td>
+    <td>.lpq()</td>
     <td>Résonance du filtre passe-bas.</td>
     <td>float ≥ 0</td>
   </tr>
   <tr>
-    <td>hpf()</td>
+    <td>.hpf()</td>
     <td>Filtre passe-haut.</td>
     <td>fréquence Hz, pattern</td>
   </tr>
   <tr>
-    <td>hpq()</td>
+    <td>.hpq()</td>
     <td>Résonance du filtre passe-haut.</td>
     <td>float ≥ 0</td>
   </tr>
   <tr>
-    <td>bpf()</td>
+    <td>.bpf()</td>
     <td>Filtre passe-bande.</td>
     <td>fréquence centrale Hz</td>
   </tr>
   <tr>
-    <td>bpq()</td>
+    <td>.bpq()</td>
     <td>Résonance du filtre passe-bande.</td>
     <td>float ≥ 0</td>
   </tr>
   <tr>
-    <td>ftype()</td>
+    <td>.ftype()</td>
     <td>Type de filtre.</td>
     <td>0 (12db), 1 (ladder), 2 (24db)</td>
   </tr>
   <tr>
-    <td>vowel()</td>
+    <td>.vowel()</td>
     <td>Filtre formant vocal.</td>
     <td>string ("a e i o u"), pattern</td>
   </tr>
   <tr>
-    <td>shape()</td>
+    <td>.shape()</td>
     <td>Waveshaping non-linéaire.</td>
     <td>float ≥ 0</td>
   </tr>
@@ -190,12 +184,12 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td rowspan="2">Resolution</td>
-    <td>coarse()</td>
+    <td>.coarse()</td>
     <td>Réduction du sample rate.</td>
     <td>float ≥ 1</td>
   </tr>
   <tr>
-    <td>crush()</td>
+    <td>.crush()</td>
     <td>Réduction de la résolution (bitcrush).</td>
     <td>float ≥ 0</td>
   </tr>
@@ -203,7 +197,7 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td>Distortion</td>
-    <td>distort()</td>
+    <td>.distort()</td>
     <td>Distorsion audio.</td>
     <td>"distortion:postgain:type"</td>
   </tr>
@@ -211,43 +205,35 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td rowspan="5">Tremolo</td>
-    <td>tremolosync()</td>
+    <td>.tremolosync()</td>
     <td>Synchronisation du tremolo.</td>
     <td>cycles, float</td>
   </tr>
   <tr>
-    <td>tremolodepth()</td>
+    <td>.tremolodepth()</td>
     <td>Profondeur du tremolo.</td>
     <td>0 → 1</td>
   </tr>
   <tr>
-    <td>tremoloskew()</td>
+    <td>.tremoloskew()</td>
     <td>Asymétrie de la forme.</td>
     <td>float</td>
   </tr>
   <tr>
-    <td>tremolophase()</td>
+    <td>.tremolophase()</td>
     <td>Décalage de phase.</td>
     <td>0 → 1</td>
   </tr>
   <tr>
-    <td>tremoloshape()</td>
+    <td>.tremoloshape()</td>
     <td>Forme d’onde.</td>
     <td>0 → 1</td>
   </tr>
 
   <!-- ===================== -->
   <tr>
-    <td>Dynamics</td>
-    <td>compressor()</td>
-    <td>Compresseur dynamique.</td>
-    <td>"threshold:ratio:knee:attack:release"</td>
-  </tr>
-
-  <!-- ===================== -->
-  <tr>
     <td>Stereo</td>
-    <td>pan()</td>
+    <td>.pan()</td>
     <td>Placement stéréo.</td>
     <td>0 (gauche) → 1 (droite)</td>
   </tr>
@@ -255,53 +241,40 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td rowspan="4">Phaser</td>
-    <td>phaser()</td>
+    <td>.phaser()</td>
     <td>Effet phaser.</td>
     <td>float (vitesse)</td>
   </tr>
   <tr>
-    <td>phaserdepth()</td>
+    <td>.phaserdepth()</td>
     <td>Profondeur du phaser.</td>
     <td>0 → 1</td>
   </tr>
   <tr>
-    <td>phasercenter()</td>
+    <td>.phasercenter()</td>
     <td>Fréquence centrale.</td>
     <td>Hz</td>
   </tr>
   <tr>
-    <td>phasersweep()</td>
+    <td>.phasersweep()</td>
     <td>Étendue du balayage.</td>
     <td>Hz / range</td>
   </tr>
 
   <!-- ===================== -->
   <tr>
-    <td rowspan="2">Post</td>
-    <td>postgain()</td>
-    <td>Gain final post-effets.</td>
-    <td>float ≥ 0</td>
-  </tr>
-  <tr>
-    <td>dry()</td>
-    <td>Niveau du signal dry.</td>
-    <td>0 → 1</td>
-  </tr>
-
-  <!-- ===================== -->
-  <tr>
     <td rowspan="3">Delay (Send)</td>
-    <td>delay()</td>
+    <td>.delay()</td>
     <td>Niveau d’envoi vers le delay.</td>
     <td>0 → 1</td>
   </tr>
   <tr>
-    <td>delaytime()</td>
+    <td>.delaytime()</td>
     <td>Temps de retard.</td>
     <td>cycles, fractions</td>
   </tr>
   <tr>
-    <td>delayfeedback()</td>
+    <td>.delayfeedback()</td>
     <td>Feedback du delay.</td>
     <td>0 → 1</td>
   </tr>
@@ -309,32 +282,32 @@ table.strudel th {
   <!-- ===================== -->
   <tr>
     <td rowspan="6">Reverb (Send)</td>
-    <td>room()</td>
+    <td>.room()</td>
     <td>Niveau d’envoi vers la reverb.</td>
     <td>0 → 1</td>
   </tr>
   <tr>
-    <td>roomsize()</td>
+    <td>.roomsize()</td>
     <td>Taille de la reverb.</td>
     <td>0 → 10</td>
   </tr>
   <tr>
-    <td>roomlp()</td>
+    <td>.roomlp()</td>
     <td>Low-pass de la reverb.</td>
     <td>Hz</td>
   </tr>
   <tr>
-    <td>roomdim()</td>
+    <td>.roomdim()</td>
     <td>Fréquence à −60dB.</td>
     <td>Hz</td>
   </tr>
   <tr>
-    <td>roomfade()</td>
+    <td>.roomfade()</td>
     <td>Temps de fade.</td>
     <td>secondes</td>
   </tr>
   <tr>
-    <td>ir()</td>
+    <td>.ir()</td>
     <td>Impulse response.</td>
     <td>sample name</td>
   </tr>
@@ -349,16 +322,16 @@ table.strudel th {
 <table class="strudel">
 <tr><th>Fonction</th><th>Définition </th></tr>
 
-<tr><td>slow(n).</td><td>Multiplie la durée du pattern par n cycles</td></tr>
-<tr><td>fast(n).</td><td>Divise la durée du pattern par n</td></tr>
-<tr><td>rev().</td><td>Inverse l’ordre temporel des événements</td></tr>
-<tr><td>early(n).</td><td>Avance les événements de n cycles</td></tr>
-<tr><td>late(n).</td><td>Retarde les événements de n cycles</td></tr>
-<tr><td>iter(n).</td><td>Fait tourner le pattern sur n itérations</td></tr>
-<tr><td>ply(n).</td><td>Duplique chaque événement n fois</td></tr>
-<tr><td>euclid(p, s).</td><td>Génère un pattern euclidien p pas sur s</td></tr>
-<tr><td>segment(n).</td><td>Découpe le cycle en n segments égaux</td></tr>
-<tr><td>chunk(n, fn).</td><td>Applique fn par blocs de n cycles</td></tr>
+<tr><td>.slow(n)</td><td>Multiplie la durée du pattern par n cycles</td></tr>
+<tr><td>.fast(n)</td><td>Divise la durée du pattern par n</td></tr>
+<tr><td>.rev()</td><td>Inverse l’ordre temporel des événements</td></tr>
+<tr><td>.early(n)</td><td>Avance les événements de n cycles</td></tr>
+<tr><td>.late(n)</td><td>Retarde les événements de n cycles</td></tr>
+<tr><td>.iter(n)</td><td>Fait tourner le pattern sur n itérations</td></tr>
+<tr><td>.ply(n)</td><td>Duplique chaque événement n fois</td></tr>
+<tr><td>.euclid(p, s)</td><td>Génère un pattern euclidien p pas sur s</td></tr>
+<tr><td>.segment(n)</td><td>Découpe le cycle en n segments égaux</td></tr>
+<tr><td>.chunk(n, fn)</td><td>Applique fn par blocs de n cycles</td></tr>
 </table>
 </div>
 
@@ -369,16 +342,16 @@ table.strudel th {
 <table class="strudel">
 <tr><th>Fonction</th><th>Définition </th></tr>
 
-<tr><td>choose(list).</td><td>Sélection uniforme aléatoire par événement</td></tr>
-<tr><td>wchoose(list).</td><td>Sélection pondérée</td></tr>
-<tr><td>degrade().</td><td>Supprime ~50% des événements</td></tr>
-<tr><td>degradeBy(p).</td><td>Supprime avec une probabilité p</td></tr>
-<tr><td>undegrade().</td><td>Inverse l’état degrade</td></tr>
-<tr><td>sometimes(fn).</td><td>Applique fn avec probabilité moyenne</td></tr>
-<tr><td>often(fn).</td><td>Applique fn avec probabilité élevée</td></tr>
-<tr><td>rarely(fn).</td><td>Applique fn avec probabilité faible</td></tr>
-<tr><td>rand().</td><td>Valeur aléatoire continue (0–1)</td></tr>
-<tr><td>irand(n).</td><td>Entier aléatoire de 0 à n-1</td></tr>
+<tr><td>.choose(list)</td><td>Sélection uniforme aléatoire par événement</td></tr>
+<tr><td>.wchoose(list)</td><td>Sélection pondérée</td></tr>
+<tr><td>.degrade()</td><td>Supprime ~50% des événements</td></tr>
+<tr><td>.degradeBy(p)</td><td>Supprime avec une probabilité p</td></tr>
+<tr><td>.undegrade()</td><td>Inverse l’état degrade</td></tr>
+<tr><td>.sometimes(fn)</td><td>Applique fn avec probabilité moyenne</td></tr>
+<tr><td>.often(fn)</td><td>Applique fn avec probabilité élevée</td></tr>
+<tr><td>.rarely(fn)</td><td>Applique fn avec probabilité faible</td></tr>
+<tr><td>.rand()</td><td>Valeur aléatoire continue (0–1)</td></tr>
+<tr><td>.irand(n)</td><td>Entier aléatoire de 0 à n-1</td></tr>
 </table>
 </div>
 
@@ -389,13 +362,13 @@ table.strudel th {
 <table class="strudel">
 <tr><th>Fonction</th><th>Définition </th></tr>
 
-<tr><td>firstOf(n).</td><td>Actif pendant les n premiers cycles</td></tr>
-<tr><td>lastOf(n).</td><td>Actif pendant les n derniers cycles</td></tr>
-<tr><td>when(cond, fn).</td><td>Applique fn si cond est vrai</td></tr>
-<tr><td>mask(pattern).</td><td>Filtre les événements selon un masque</td></tr>
-<tr><td>pick(n).</td><td>Sélectionne l’événement d’index n</td></tr>
-<tr><td>invert().</td><td>Inverse un masque logique</td></tr>
-<tr><td>hush().</td><td>Muting global du pattern</td></tr>
+<tr><td>.firstOf(n)</td><td>Actif pendant les n premiers cycles</td></tr>
+<tr><td>.lastOf(n)</td><td>Actif pendant les n derniers cycles</td></tr>
+<tr><td>.when(cond, fn)</td><td>Applique fn si cond est vrai</td></tr>
+<tr><td>.mask(pattern)</td><td>Filtre les événements selon un masque</td></tr>
+<tr><td>.pick(n)</td><td>Sélectionne l’événement d’index n</td></tr>
+<tr><td>.invert()</td><td>Inverse un masque logique</td></tr>
+<tr><td>.hush()</td><td>Muting global du pattern</td></tr>
 </table>
 </div>
 <!-- ===================================================== -->
@@ -410,37 +383,37 @@ table.strudel th {
   </tr>
 
   <tr>
-    <td>note("").</td>
+    <td>.note("")</td>
     <td>Fonction basique de définitions de notes</td>
     <td>liste de notes (Numéro MIDI, note en chiffrage américain "c", nombre de 0 à 13, note absolue "c2"</td>
   </tr>
 
   <tr>
-    <td>scale(name).</td>
+    <td>.scale(name)</td>
     <td>Transforme des degrés en notes selon une échelle donnée. Définit aussi l’échelle par défaut pour d’autres opérations tonales.</td>
     <td>string de forme "<root>:<type>" comme "C:major", "A2:minor", "F#:dorian"</td>
   </tr>
 
   <tr>
-    <td>transpose(semitones).</td>
+    <td>.transpose(semitones)</td>
     <td>Transpose toutes les notes d’un pattern par un nombre de demi‑tons.</td>
     <td>entier ou pattern d’entiers (ex: 2, -3, "<0 2 -1>")</td>
   </tr>
 
   <tr>
-    <td>scaleTranspose(steps).</td>
+    <td>.scaleTranspose(steps)</td>
     <td>Transpose les notes *à l’intérieur de l’échelle* d’un certain nombre de degrés.</td>
     <td>entier ou pattern d’entiers</td>
   </tr>
 
   <tr>
-    <td>voicings(range?).</td>
+    <td>.voicings(range?)</td>
     <td>Convertit des symboles d’accord en voicings (positions de notes), avec un voice leading « smooth ».</td>
     <td>optionnel : range / dictionnaire voicing (ex: 'lefthand', 'root:g2')</td>
   </tr>
 
   <tr>
-    <td>rootNotes(octave = 2).</td>
+    <td>.rootNotes(octave = 2)</td>
     <td>Transforme des symboles d’accord en notes fondamentales dans une octave donnée.</td>
     <td>octave (entier), pattern de symboles d’accord</td>
   </tr>
@@ -456,12 +429,13 @@ table.strudel th {
 <table class="strudel">
 <tr><th>Fonction</th><th>Rôle</th></tr>
 
-<tr><td>setcpm(x).</td><td>Définit le tempo global en cycles par minute</td></tr>
-<tr><td>pianoroll().</td><td>Affichage des hauteurs dans le temps</td></tr>
-<tr><td>punchcard().</td><td>Visualisation circulaire du pattern</td></tr>
-<tr><td>_pianoroll().</td><td>Visual inline</td></tr>
-<tr><td>_punchcard().</td><td>Visual inline</td></tr>
-<tr><td>slider().</td><td>Contrôle dynamique d’un paramètre</td></tr>
+<tr><td>.setcpm(x)</td><td>Définit le tempo global en cycles par minute</td></tr>
+<tr><td>.pianoroll()</td><td>Affichage des hauteurs dans le temps</td></tr>
+<tr><td>.spiral()</td><td>Visualisation circulaire du pattern</td></tr>
+<tr><td>._pianoroll()</td><td>Visual inline</td></tr>
+<tr><td>._punchcard()</td><td>Visual inline</td></tr>
+<tr><td>._spiral()</td><td>Visual inline</td></tr>
+<tr><td>.slider()</td><td>Contrôle dynamique d’un paramètre</td></tr>
 </table>
 </div>
 
