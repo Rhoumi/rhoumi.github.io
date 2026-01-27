@@ -6,7 +6,7 @@
 
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: VG5000, Helvetica, sans-serif;
   background: #f2f2f2;
   color: #111;
   padding: 24px;
@@ -78,7 +78,7 @@ table.strudel th {
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>2) Mini-Notation (exhaustive)</h2>
+<h2>2) Mini-Notation</h2>
 
 <table class="strudel">
 <tr><th>Syntaxe</th><th>Fonctionnement</th></tr>
@@ -99,6 +99,167 @@ table.strudel th {
 <tr><td>#</td><td>Application de paramètres à un pattern</td></tr>
 <tr><td>a?</td><td>Événement conditionnel probabiliste</td></tr>
 <tr><td>a | b</td><td>Fork logique (alternative structurelle)</td></tr>
+</table>
+</div>
+
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<div class="section">
+<h2>3) Effets audio – Audio Effects</h2>
+
+<table class="strudel">
+<tr><th>Effet</th><th>Définition et paramètres</th></tr>
+
+<tr>
+<td>gain(x).</td>
+<td>
+Contrôle le niveau de sortie.<br>
+Paramètres :<br>
+• x : gain linéaire (1 = niveau original)
+</td>
+</tr>
+
+<tr>
+<td>lpf(freq).</td>
+<td>
+Filtre passe-bas supprimant les hautes fréquences.<br>
+Paramètres :<br>
+• freq : fréquence de coupure (Hz)
+</td>
+</tr>
+
+<tr>
+<td>hpf(freq).</td>
+<td>
+Filtre passe-haut supprimant les basses fréquences.<br>
+Paramètres :<br>
+• freq : fréquence de coupure (Hz)
+</td>
+</tr>
+
+<tr>
+<td>bandpass(freq, q).</td>
+<td>
+Filtre centré sur une bande de fréquences.<br>
+Paramètres :<br>
+• freq : fréquence centrale<br>
+• q : largeur de bande (résonance)
+</td>
+</tr>
+
+<tr>
+<td>vowel(v).</td>
+<td>
+Filtre formant simulant des voyelles.<br>
+Paramètres :<br>
+• v : index ou pattern de voyelles
+</td>
+</tr>
+
+<tr>
+<td>crush(bits).</td>
+<td>
+Bitcrusher réduisant la résolution audio.<br>
+Paramètres :<br>
+• bits : profondeur de bits
+</td>
+</tr>
+
+<tr>
+<td>coarse(rate).</td>
+<td>
+Réduction du sample rate (aliasing).<br>
+Paramètres :<br>
+• rate : facteur de réduction
+</td>
+</tr>
+
+<tr>
+<td>shape(amount).</td>
+<td>
+Distorsion par waveshaping non linéaire.<br>
+Paramètres :<br>
+• amount : intensité
+</td>
+</tr>
+
+<tr>
+<td>distort(amount).</td>
+<td>
+Distorsion classique par saturation.<br>
+Paramètres :<br>
+• amount : intensité
+</td>
+</tr>
+
+<tr>
+<td>tremolo(rate, depth).</td>
+<td>
+Modulation d’amplitude périodique.<br>
+Paramètres :<br>
+• rate : vitesse de modulation<br>
+• depth : profondeur
+</td>
+</tr>
+
+<tr>
+<td>pan(pos).</td>
+<td>
+Placement stéréo du signal.<br>
+Paramètres :<br>
+• pos : -1 (gauche) à 1 (droite)
+</td>
+</tr>
+
+<tr>
+<td>phaser(rate, depth).</td>
+<td>
+Effet de phase modulée.<br>
+Paramètres :<br>
+• rate : vitesse<br>
+• depth : intensité
+</td>
+</tr>
+
+<tr>
+<td>compressor(threshold, ratio).</td>
+<td>
+Compression dynamique du signal.<br>
+Paramètres :<br>
+• threshold : seuil<br>
+• ratio : taux de compression
+</td>
+</tr>
+
+<tr>
+<td>delay(time, feedback).</td>
+<td>
+Delay synchronisé au cycle.<br>
+Paramètres :<br>
+• time / delaytime : durée du retard<br>
+• feedback / delayfeedback : quantité de réinjection
+</td>
+</tr>
+
+<tr>
+<td>room(size).</td>
+<td>
+Réverbération de type room.<br>
+Paramètres :<br>
+• size : taille de la pièce
+</td>
+</tr>
+
+<tr>
+<td>duck(amount).</td>
+<td>
+Ducking global (sidechain-like).<br>
+Paramètres :<br>
+• amount : intensité du ducking
+</td>
+</tr>
+
 </table>
 </div>
 
