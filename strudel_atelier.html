@@ -2,61 +2,61 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Strudel – Cheat Sheet complète</title>
+<title>Strudel – Référence complète</title>
 
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #f4f4f4;
+  background: #f2f2f2;
   color: #111;
-  padding: 20px;
+  padding: 24px;
 }
 
 h1, h2, h3 {
-  margin-top: 40px;
-  border-bottom: 6px ridge #333;
+  margin-top: 48px;
+  border-bottom: 4px ridge #333;
   padding-bottom: 6px;
 }
 
 table.strudel {
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
-  border: 8px ridge #333;
-  margin: 20px 0 40px 0;
+  border: 6px ridge #333;
+  margin: 20px 0 50px 0;
   background: #fff;
 }
 
 table.strudel th,
 table.strudel td {
-  border: 6px ridge #666;
+  border: 4px ridge #666;
   padding: 8px 10px;
   vertical-align: top;
 }
 
 table.strudel th {
-  background: #e0e0e0;
+  background: #e3e3e3;
   font-weight: bold;
 }
 
 .section {
-  margin-bottom: 70px;
+  margin-bottom: 80px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎛️ Strudel – Cheat Sheet (complète)</h1>
+<h1>Strudel – Référence complète</h1>
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>1) Samples & Synths de base</h2>
+<h2>1) Samples et Synths de base</h2>
 
 <table class="strudel">
-<tr><th>Type</th><th>Nom</th><th>Description</th></tr>
+<tr><th>Type</th><th>Identifiant</th><th>Description</th></tr>
 
-<tr><td>Sample</td><td>bd</td><td>Bass drum</td></tr>
-<tr><td>Sample</td><td>sd</td><td>Snare</td></tr>
+<tr><td>Sample</td><td>bd</td><td>Bass drum (kick)</td></tr>
+<tr><td>Sample</td><td>sd</td><td>Snare drum</td></tr>
 <tr><td>Sample</td><td>hh</td><td>Hi-hat fermé</td></tr>
 <tr><td>Sample</td><td>oh</td><td>Hi-hat ouvert</td></tr>
 <tr><td>Sample</td><td>cp</td><td>Clap</td></tr>
@@ -64,137 +64,114 @@ table.strudel th {
 <tr><td>Sample</td><td>cr</td><td>Crash</td></tr>
 <tr><td>Sample</td><td>rd</td><td>Ride</td></tr>
 <tr><td>Sample</td><td>sh</td><td>Shaker</td></tr>
-<tr><td>Sample</td><td>lt / mt / ht</td><td>Toms</td></tr>
+<tr><td>Sample</td><td>lt / mt / ht</td><td>Toms bas / moyen / haut</td></tr>
 <tr><td>Sample</td><td>cb</td><td>Cowbell</td></tr>
-<tr><td>Sample</td><td>perc</td><td>Percussions diverses</td></tr>
+<tr><td>Sample</td><td>perc</td><td>Percussions génériques</td></tr>
 
-<tr><td>Synth</td><td>sine</td><td>Onde sinusoïdale</td></tr>
+<tr><td>Synth</td><td>sine</td><td>Onde sinusoïdale pure</td></tr>
 <tr><td>Synth</td><td>square</td><td>Onde carrée</td></tr>
-<tr><td>Synth</td><td>sawtooth</td><td>Dent de scie</td></tr>
-<tr><td>Synth</td><td>triangle</td><td>Triangle</td></tr>
-<tr><td>Synth</td><td>white / pink / brown</td><td>Bruits</td></tr>
+<tr><td>Synth</td><td>sawtooth</td><td>Onde dent de scie</td></tr>
+<tr><td>Synth</td><td>triangle</td><td>Onde triangle</td></tr>
+<tr><td>Synth</td><td>white / pink / brown</td><td>Bruits (noise generators)</td></tr>
 </table>
 </div>
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>2) Effets audio</h2>
+<h2>2) Mini-Notation (exhaustive)</h2>
 
 <table class="strudel">
-<tr><th>Effet</th><th>Fonction</th></tr>
+<tr><th>Syntaxe</th><th>Fonctionnement</th></tr>
 
-<tr><td>stretch</td><td>Time stretch</td></tr>
-<tr><td>gain</td><td>Volume</td></tr>
-<tr><td>lpf</td><td>Low-pass filter</td></tr>
-<tr><td>hpf</td><td>High-pass filter</td></tr>
-<tr><td>bandpass</td><td>Passe-bande</td></tr>
-<tr><td>vowel</td><td>Formant vocal</td></tr>
-<tr><td>coarse</td><td>Sample rate reduction</td></tr>
-<tr><td>crush</td><td>Bitcrusher</td></tr>
-<tr><td>shape</td><td>Wave shaping</td></tr>
-<tr><td>distort</td><td>Distorsion</td></tr>
-<tr><td>tremolo</td><td>Amplitude modulation</td></tr>
-<tr><td>compressor</td><td>Compression</td></tr>
-<tr><td>pan</td><td>Stéréo pan</td></tr>
-<tr><td>phaser</td><td>Phaser</td></tr>
-<tr><td>post</td><td>Post-gain</td></tr>
-<tr><td>delay</td><td>Delay send</td></tr>
-<tr><td>room</td><td>Reverb send</td></tr>
-<tr><td>duck</td><td>Ducking</td></tr>
+<tr><td>a b c</td><td>Séquence linéaire d'événements dans un cycle</td></tr>
+<tr><td>[a b c]</td><td>Subdivision temporelle interne au pas courant</td></tr>
+<tr><td>a,b</td><td>Superposition parallèle (stacking)</td></tr>
+<tr><td>&lt;a b&gt;</td><td>Alternance d’un élément par cycle</td></tr>
+<tr><td>a* n</td><td>Compression temporelle (lecture plus rapide)</td></tr>
+<tr><td>a/ n</td><td>Dilatation temporelle (lecture plus lente)</td></tr>
+<tr><td>a!</td><td>Répétition immédiate de l’événement</td></tr>
+<tr><td>a@n</td><td>Étend la durée de a sur n pas</td></tr>
+<tr><td>~</td><td>Silence explicite</td></tr>
+<tr><td>_</td><td>Maintien de l’événement précédent</td></tr>
+<tr><td>()</td><td>Priorité syntaxique / regroupement logique</td></tr>
+<tr><td>{a b}</td><td>Polymètre indépendant du cycle principal</td></tr>
+<tr><td>a:b</td><td>Indexation ou variation d’un échantillon</td></tr>
+<tr><td>#</td><td>Application de paramètres à un pattern</td></tr>
+<tr><td>a?</td><td>Événement conditionnel probabiliste</td></tr>
+<tr><td>a | b</td><td>Fork logique (alternative structurelle)</td></tr>
 </table>
 </div>
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>3) Mini-Notation (COMPLÈTE)</h2>
+<h2>3) Modifiers – Time</h2>
 
 <table class="strudel">
-<tr><th>Syntaxe</th><th>Signification</th></tr>
+<tr><th>Fonction</th><th>Définition détaillée</th></tr>
 
-<tr><td>val1 val2</td><td>Séquence</td></tr>
-<tr><td>[]</td><td>Groupement</td></tr>
-<tr><td>[a b c]</td><td>Subdivision interne</td></tr>
-<tr><td>&lt;a b&gt;</td><td>Alternance par cycle</td></tr>
-<tr><td>a,b</td><td>Parallèle / stacking</td></tr>
-<tr><td>* n</td><td>Accélération</td></tr>
-<tr><td>/ n</td><td>Ralentissement</td></tr>
-<tr><td>!</td><td>Répétition</td></tr>
-<tr><td>@</td><td>Durée étendue</td></tr>
-<tr><td>~</td><td>Silence</td></tr>
-<tr><td>_</td><td>Hold / sustain</td></tr>
-<tr><td>()</td><td>Priorité syntaxique</td></tr>
-<tr><td>{}</td><td>Polymètre</td></tr>
-<tr><td>#</td><td>Application paramètre</td></tr>
-<tr><td>:</td><td>Index / variation</td></tr>
-<tr><td>?</td><td>Condition probabiliste</td></tr>
-<tr><td>|</td><td>Fork / alternative</td></tr>
+<tr><td>slow(n).</td><td>Multiplie la durée du pattern par n cycles</td></tr>
+<tr><td>fast(n).</td><td>Divise la durée du pattern par n</td></tr>
+<tr><td>rev().</td><td>Inverse l’ordre temporel des événements</td></tr>
+<tr><td>early(n).</td><td>Avance les événements de n cycles</td></tr>
+<tr><td>late(n).</td><td>Retarde les événements de n cycles</td></tr>
+<tr><td>iter(n).</td><td>Fait tourner le pattern sur n itérations</td></tr>
+<tr><td>ply(n).</td><td>Duplique chaque événement n fois</td></tr>
+<tr><td>euclid(p, s).</td><td>Génère un pattern euclidien p pas sur s</td></tr>
+<tr><td>segment(n).</td><td>Découpe le cycle en n segments égaux</td></tr>
+<tr><td>chunk(n, fn).</td><td>Applique fn par blocs de n cycles</td></tr>
 </table>
 </div>
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>4) Modifiers (INTÉGRAUX)</h2>
+<h2>4) Modifiers – Random</h2>
 
-<h3>⏱ Time modifiers</h3>
 <table class="strudel">
-<tr><th>Modifier</th><th>Action</th></tr>
+<tr><th>Fonction</th><th>Définition détaillée</th></tr>
 
-<tr><td>slow(n)</td><td>Ralentit</td></tr>
-<tr><td>fast(n)</td><td>Accélère</td></tr>
-<tr><td>rev</td><td>Inverse</td></tr>
-<tr><td>early</td><td>Décale tôt</td></tr>
-<tr><td>late</td><td>Décale tard</td></tr>
-<tr><td>iter(n)</td><td>Rotation</td></tr>
-<tr><td>ply(n)</td><td>Répétition events</td></tr>
-<tr><td>euclid(p,s)</td><td>Euclidien</td></tr>
-<tr><td>segment(n)</td><td>Découpe temporelle</td></tr>
-<tr><td>chunk(n, fn)</td><td>Bloc + modif</td></tr>
-</table>
-
-<h3>🎲 Random modifiers</h3>
-<table class="strudel">
-<tr><th>Modifier</th><th>Action</th></tr>
-
-<tr><td>choose</td><td>Choix aléatoire</td></tr>
-<tr><td>wchoose</td><td>Choix pondéré</td></tr>
-<tr><td>degrade</td><td>~50% supprimé</td></tr>
-<tr><td>degradeBy(p)</td><td>Probabilité</td></tr>
-<tr><td>undegrade</td><td>Inverse degrade</td></tr>
-<tr><td>sometimes</td><td>Probabilité moyenne</td></tr>
-<tr><td>often</td><td>Probabilité élevée</td></tr>
-<tr><td>rarely</td><td>Probabilité faible</td></tr>
-<tr><td>rand</td><td>Valeur random continue</td></tr>
-<tr><td>irand</td><td>Random entier</td></tr>
-</table>
-
-<h3>🎛 Conditional modifiers</h3>
-<table class="strudel">
-<tr><th>Modifier</th><th>Action</th></tr>
-
-<tr><td>firstOf(n)</td><td>Premiers cycles</td></tr>
-<tr><td>lastOf(n)</td><td>Derniers cycles</td></tr>
-<tr><td>when(cond, fn)</td><td>Condition</td></tr>
-<tr><td>hush</td><td>Mute</td></tr>
-<tr><td>mute</td><td>Mute pattern</td></tr>
-<tr><td>invert</td><td>Inverse logique</td></tr>
-<tr><td>mask</td><td>Masque pattern</td></tr>
-<tr><td>pick(n)</td><td>Sélection index</td></tr>
+<tr><td>choose(list).</td><td>Sélection uniforme aléatoire par événement</td></tr>
+<tr><td>wchoose(list).</td><td>Sélection pondérée</td></tr>
+<tr><td>degrade().</td><td>Supprime ~50% des événements</td></tr>
+<tr><td>degradeBy(p).</td><td>Supprime avec une probabilité p</td></tr>
+<tr><td>undegrade().</td><td>Inverse l’état degrade</td></tr>
+<tr><td>sometimes(fn).</td><td>Applique fn avec probabilité moyenne</td></tr>
+<tr><td>often(fn).</td><td>Applique fn avec probabilité élevée</td></tr>
+<tr><td>rarely(fn).</td><td>Applique fn avec probabilité faible</td></tr>
+<tr><td>rand().</td><td>Valeur aléatoire continue (0–1)</td></tr>
+<tr><td>irand(n).</td><td>Entier aléatoire de 0 à n-1</td></tr>
 </table>
 </div>
 
 <!-- ===================================================== -->
 <div class="section">
-<h2>5) Tempo & Visual feedback</h2>
+<h2>5) Modifiers – Conditional</h2>
 
 <table class="strudel">
-<tr><th>Fonction</th><th>Usage</th></tr>
+<tr><th>Fonction</th><th>Définition détaillée</th></tr>
 
-<tr><td>setcpm(x)</td><td>Tempo global</td></tr>
-<tr><td>pianoroll</td><td>Vue notes</td></tr>
-<tr><td>punchcard</td><td>Timeline circulaire</td></tr>
-<tr><td>_pianoroll</td><td>Inline visual</td></tr>
-<tr><td>_punchcard</td><td>Inline visual</td></tr>
-<tr><td>sliders</td><td>Contrôles UI</td></tr>
+<tr><td>firstOf(n).</td><td>Actif pendant les n premiers cycles</td></tr>
+<tr><td>lastOf(n).</td><td>Actif pendant les n derniers cycles</td></tr>
+<tr><td>when(cond, fn).</td><td>Applique fn si cond est vrai</td></tr>
+<tr><td>mask(pattern).</td><td>Filtre les événements selon un masque</td></tr>
+<tr><td>pick(n).</td><td>Sélectionne l’événement d’index n</td></tr>
+<tr><td>invert().</td><td>Inverse un masque logique</td></tr>
+<tr><td>hush().</td><td>Muting global du pattern</td></tr>
+</table>
+</div>
+
+<!-- ===================================================== -->
+<div class="section">
+<h2>6) Tempo et visualisation</h2>
+
+<table class="strudel">
+<tr><th>Fonction</th><th>Rôle</th></tr>
+
+<tr><td>setcpm(x).</td><td>Définit le tempo global en cycles par minute</td></tr>
+<tr><td>pianoroll().</td><td>Affichage des hauteurs dans le temps</td></tr>
+<tr><td>punchcard().</td><td>Visualisation circulaire du pattern</td></tr>
+<tr><td>_pianoroll().</td><td>Visual inline</td></tr>
+<tr><td>_punchcard().</td><td>Visual inline</td></tr>
+<tr><td>slider().</td><td>Contrôle dynamique d’un paramètre</td></tr>
 </table>
 </div>
 
