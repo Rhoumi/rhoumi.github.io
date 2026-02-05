@@ -410,6 +410,47 @@ p.legende2 {
 
 }
 
+.cv-remi-georges {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+.cv-header h1 {
+  margin-bottom: 0.2em;
+}
+
+.cv-subtitle {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.cv-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em 0 1.5em;
+}
+
+.cv-contact li {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+section {
+  margin-bottom: 2em;
+}
+
+h2 {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2em;
+}
+
+article {
+  margin-bottom: 1.2em;
+}
+
+
+
 /* Le footer */
 
 .footer {
@@ -423,3 +464,4 @@ p.legende2 {
    opacity: 0.75;
    font-size: small;
 }
+
