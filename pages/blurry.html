@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blurry_studies</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #000000;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(211, 211, 211, 1) 50%, rgba(255, 250, 240, 1) 100%);
+  min-height: 100vh;
+}
+
+body.colorized {
+  background: linear-gradient(180deg,
+    hsl(var(--theme-h), 80%, 20%) 0%,
+    hsl(var(--theme-h), 70%, 45%) 50%,
+    hsl(var(--theme-h), 60%, 78%) 100%);
+}
+
+.colorized path {
+  fill: hsl(var(--theme-h), 80%, 40%);
+}
+
+#content, #teapot-container {
+  filter: var(--body-blur, ) var(--body-saturate, ) var(--body-invert, );
+}
+
+body.blurry {
+  --body-blur: blur(8.5px);
+}
+
+body.saturate {
+  --body-saturate: saturate(64);
+}
+
+body.invert {
+  --body-invert: invert(1);
+}
+
+.blurry path {
+  filter: blur(7.5px);
+}
+
+.saturate path {
+  filter: saturate(64);
+}
+
+.invert path {
+  filter: invert(1);
+  stroke-width: 70;
+}
+
+#fish {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3500 / 800;
+  min-height: 40vw;
+}
+
+@media (max-width: 600px) {
+  .invert path { stroke-width: 30; }
+}
+
+
+/* Le footer */
+
+@font-face {
+  font-family: 'VG5000';
+ src: url(https://remigeorges.fr/styles/VG5000/VG5000-Regular.otf) format("opentype"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.eot),     
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff2) format("woff2"), 
+       url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.woff) format("woff"), 
+        url(https://remigeorges.fr/styles/VG5000/VG5000-Regular_web.otf) format("opentype");
+  
+}
+
+.footer {
+   filter: none;
+   font-family: VG5000;
+   text-align: center;
+   position:fixed;
+   background-color: WhiteSmoke;
+   height:20px;
+   bottom:0;
+   left:0;
+   right:0;
+   opacity: 0.75;
+   font-size: small;
+}
+
+
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<div id="content">
+<svg stroke="FloralWhite" stroke-width="1" id="fish" viewBox="0 0 3500 800" preserveAspectRatio="xMidYMid meet"></svg>
+</div>
+
+<div id="teapot-container" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:100; pointer-events:auto;">
+  <canvas id="teapot-canvas" style="display:block;"></canvas>
+</div>
+
+<script>
+
+const fish = "M 600 600 L 500 600 L 500 400 L 600 400 L 600 200 L 700 200 L 700 0 L 800 0 L 800 200 L 900 200 L 900 400 L 1000 400 L 1000 600 L 900 600 L 900 400 L 800 400 L 800 200 L 700 200 L 700 400 L 600 400 L 600 600 Z M 1000 300 L 1000 200 L 1300 200 L 1300 800 L 1000 800 L 1000 700 L 1200 700 L 1200 300 L 1000 300 Z M 1500 300 L 1500 200 L 1800 200 L 1800 800 L 1500 800 L 1500 700 L 1700 700 L 1700 300 L 1500 300 Z M 2000 300 L 2000 200 L 2300 200 L 2300 800 L 2000 800 L 2000 700 L 2200 700 L 2200 300 L 2000 300 Z M 100 600 L 0 600 L 0 400 L 100 400 L 100 300 L 300 300 L 300 200 L 500 200 L 500 300 L 300 300 L 300 400 L 100 400 L 100 600 Z M 2900 600 L 2900 400 L 2700 400 L 2700 300 L 2500 300 L 2500 200 L 2700 200 L 2700 300 L 2900 300 L 2900 400 L 3000 400 L 3000 600 L 2900 600 Z M 3100 600 L 3300 600 L 3300 700 L 3500 700 L 3500 800 L 3300 800 L 3300 700 L 3100 700 L 3100 600 Z M 300 600 L 300 700 L 100 700 L 100 600 L 300 600 Z M 300 700 L 500 700 L 500 800 L 300 800 L 300 700 Z M 3000 600 L 3000 400 L 3100 400 L 3100 600 L 3000 600 Z M 2700 600 L 2900 600 L 2900 700 L 2700 700 L 2700 600 Z M 2700 700 L 2700 800 L 2500 800 L 2500 700 L 2700 700 Z M 3100 400 L 3100 300 L 3300 300 L 3300 400 L 3100 400 Z M 3300 300 L 3300 200 L 3500 200 L 3500 300 L 3300 300 Z";
+const fish2 = "M 2600 600 L 2500 600 L 2500 400 L 2600 400 L 2600 200 L 2700 200 L 2700 0 L 2800 0 L 2800 200 L 2900 200 L 2900 400 L 3000 400 L 3000 600 L 2900 600 L 2900 400 L 2800 400 L 2800 200 L 2700 200 L 2700 400 L 2600 400 L 2600 600 Z M 1500 300 L 1300 300 L 1300 700 L 1500 700 L 1500 800 L 1200 800 L 1200 200 L 1500 200 L 1500 300 Z M 2000 300 L 1800 300 L 1800 700 L 2000 700 L 2000 800 L 1700 800 L 1700 200 L 2000 200 L 2000 300 Z M 2500 300 L 2300 300 L 2300 700 L 2500 700 L 2500 800 L 2200 800 L 2200 200 L 2500 200 L 2500 300 Z M 400 600 L 400 400 L 200 400 L 200 300 L 0 300 L 0 200 L 200 200 L 200 300 L 400 300 L 400 400 L 500 400 L 500 600 L 400 600 Z M 3400 600 L 3400 400 L 3200 400 L 3200 300 L 3000 300 L 3000 200 L 3200 200 L 3200 300 L 3400 300 L 3400 400 L 3500 400 L 3500 600 L 3400 600 Z M 600 600 L 800 600 L 800 700 L 1000 700 L 1000 800 L 800 800 L 800 700 L 600 700 L 600 600 Z M 500 600 L 500 400 L 600 400 L 600 600 L 500 600 Z M 200 600 L 400 600 L 400 700 L 200 700 L 200 600 Z M 200 700 L 200 800 L 0 800 L 0 700 L 200 700 Z M 600 400 L 600 300 L 800 300 L 800 400 L 600 400 Z M 800 300 L 800 200 L 1000 200 L 1000 300 L 800 300 Z M 3200 600 L 3400 600 L 3400 700 L 3200 700 L 3200 600 Z M 3200 700 L 3200 800 L 3000 800 L 3000 700 L 3200 700 Z";
+let surprisemusicale = 0;
+
+
+
+const paths = [fish, fish2];
+let clickCount = 0;
+let isAnimating = false;
+
+function applyRandomColor() {
+  const hue = Math.floor(Math.random() * 360);
+  document.documentElement.style.setProperty('--theme-h', hue);
+  svgs.forEach(svg => svg.classList.add('colorized'));
+  document.body.classList.add('colorized');
+}
+
+const svgs = document.querySelectorAll('svg');
+
+const svgEl = document.getElementById('fish');
+const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+shape.setAttribute('d', fish);
+shape.setAttribute('fill', 'RoyalBlue');
+shape.style.cursor = 'pointer';
+svgEl.appendChild(shape);
+
+shape.addEventListener('click', () => {
+  if (isAnimating) return;
+  isAnimating = true;
+  clickCount++;
+
+  const nextPath = paths[clickCount % paths.length];
+
+  anime({
+    targets: shape,
+    d: [{ value: nextPath }],
+    duration: 1000,
+    easing: 'easeInOutQuad',
+    complete: () => {
+      isAnimating = false;
+
+      if (clickCount === 2) {
+        svgs.forEach(svg => svg.classList.add('invert'));
+        document.body.classList.add('invert');
+        synth(0.001, 0.95, 0.95);
+      }
+
+      if (clickCount === 4) {
+        applyRandomColor();
+        synth(0.01, 0.5, 0.4);
+      }
+
+      if (clickCount === 6) {
+        svgs.forEach(svg => svg.classList.add('saturate'));
+        document.body.classList.add('saturate');
+        synth(0.1, 0.2, 0.5);
+      }
+
+      if (clickCount === 8) {
+        applyRandomColor();
+        synth(0.2, 0.35, 0.6);
+      }
+
+      if (clickCount === 10) {
+        svgs.forEach(svg => svg.classList.add('blurry'));
+        document.body.classList.add('blurry');
+        synth(0.35, 0.45, 0.75);
+      }
+
+      if (clickCount === 12) {
+      applyRandomColor();
+      synth(0.45, 0.5, 0.85);
+      }
+
+      if (clickCount === 14) {
+      applyRandomColor();
+      synth(0.55, 0.85, 0.25);
+
+      }
+
+      if (clickCount === 16) {
+      applyRandomColor();
+      synth(0.65, 0.95, 0.15);
+
+      }
+
+      if (clickCount === 18) {
+      applyRandomColor();
+      synth(0.75, 0.5, 0.05);
+
+      }
+
+      if (clickCount === 20) {
+      applyRandomColor();
+      synth(0.15, 0.15, 0.05);
+
+      }
+
+      if (clickCount === 22) {
+      applyRandomColor();
+      synth(0.35, 0.25, 0.5);
+
+      }
+
+      if (clickCount === 24) {
+        if (window.initTeapot) window.initTeapot();
+        applyRandomColor();
+      }
+
+
+    }
+  });
+});
+
+
+// code du buchla
+
+function makeWavefolderCurve(drive) {
+  const n = 1024;
+  const curve = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    let x = ((i / (n - 1)) * 2 - 1) * drive;
+    let y = ((x + 1) % 4 + 4) % 4;
+    curve[i] = Math.max(-1, Math.min(1, y > 2 ? 3 - y : y - 1));
+  }
+  return curve;
+}
+
+let buchlaCtx = null;
+let buchlaVoices = [];
+let buchlaActive = false;
+
+// simplification sur trois param
+function synth(complexite, filtre, delaytime) {
+  if (buchlaActive) {
+    buchlaActive = false;
+    buchlaVoices.forEach(v => { try { v.carrier.stop(); v.mod.stop(); } catch(e) {} });
+    buchlaVoices = [];
+  }
+  if (buchlaCtx) { buchlaCtx.close(); buchlaCtx = null; }
+  if (complexite === undefined) return;
+
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  buchlaCtx = new AudioCtx();
+  buchlaActive = true;
+  const ctx = buchlaCtx;
+
+  const numVoices = 1 + Math.floor(complexite * 4);
+  const foldDrive = 1.2 + complexite * 4.8;
+  const cutoff    = 180 + filtre * 7820;
+  const delayTime = 0.07 + delaytime * 0.93;
+  const baseTempo = 0.06 + (1 - complexite) * 0.44;
+
+  const master = ctx.createGain();
+  master.gain.value = 0.6 / numVoices;
+  master.connect(ctx.destination);
+
+  const folder = ctx.createWaveShaper();
+  folder.curve = makeWavefolderCurve(foldDrive);
+  folder.oversample = '4x';
+
+  const lpg = ctx.createBiquadFilter();
+  lpg.type = 'lowpass';
+  lpg.frequency.value = cutoff;
+  lpg.Q.value = 1 + filtre * 12;
+  folder.connect(lpg);
+
+  const dry = ctx.createGain();
+  dry.gain.value = 0.65;
+  lpg.connect(dry);
+  dry.connect(master);
+
+
+  // le delay
+  const dlyL = ctx.createDelay(2.0);
+  const dlyR = ctx.createDelay(2.0);
+  dlyL.delayTime.value = delayTime;
+  dlyR.delayTime.value = delayTime * 1.5;
+
+  const fbL = ctx.createGain();  fbL.gain.value = 0.42;
+  const fbR = ctx.createGain();  fbR.gain.value = 0.42;
+  const panL = ctx.createStereoPanner(); panL.pan.value = -1;
+  const panR = ctx.createStereoPanner(); panR.pan.value =  1;
+
+  dlyL.connect(panL);  panL.connect(master);
+  dlyL.connect(fbL);   fbL.connect(dlyR);
+  dlyR.connect(panR);  panR.connect(master);
+  dlyR.connect(fbR);   fbR.connect(dlyL);
+
+  const wet = ctx.createGain();
+  wet.gain.value = 0.5;
+  lpg.connect(wet);
+  wet.connect(dlyL);
+
+  //microtons scale stylé 
+  const freqPool = [55, 73.4, 82.5, 110, 130.8, 146.8, 165, 196, 220, 261.6];
+
+  for (let v = 0; v < numVoices; v++) {
+    const baseFreq = freqPool[Math.floor(Math.random() * freqPool.length)];
+    const modRatios = [0.5, 1, 1.5, 2, 2.5, 3, 4];
+    const modRatio  = modRatios[Math.floor(Math.random() * modRatios.length)];
+
+    const carrier = ctx.createOscillator();
+    carrier.type = 'sine';
+    carrier.frequency.value = baseFreq;
+
+    const modOsc = ctx.createOscillator();
+    modOsc.type = 'sine';
+    modOsc.frequency.value = baseFreq * modRatio;
+
+    const modDepth = ctx.createGain();
+    modDepth.gain.value = baseFreq * (0.5 + complexite * 3);
+
+    const vca = ctx.createGain();
+    vca.gain.value = 0;
+
+    modOsc.connect(modDepth);
+    modDepth.connect(carrier.frequency);
+    carrier.connect(vca);
+    vca.connect(folder);
+
+    carrier.start();
+    modOsc.start();
+    buchlaVoices.push({ carrier, mod: modOsc });
+
+    let drift = 0.5;
+
+    //pulse rhythm randomizer
+    function scheduleGate(t) {
+      if (!buchlaActive) return;
+
+      drift = Math.max(0.15, Math.min(0.9, drift + (Math.random() - 0.5) * 0.28));
+
+      if (Math.random() < drift) {
+        const att  = 0.003 + Math.random() * 0.025;
+        const hold = 0.04  + Math.random() * (0.12 + complexite * 0.45);
+        const rel  = 0.06  + Math.random() * 0.35;
+        const vel  = 0.25  + Math.random() * 0.75;
+
+        vca.gain.cancelScheduledValues(t);
+        vca.gain.setValueAtTime(vca.gain.value, t);
+        vca.gain.linearRampToValueAtTime(vel, t + att);
+        vca.gain.setValueAtTime(vel, t + att + hold);
+        vca.gain.exponentialRampToValueAtTime(0.0001, t + att + hold + rel);
+
+        carrier.frequency.setValueAtTime(carrier.frequency.value, t);
+        carrier.frequency.linearRampToValueAtTime(
+          baseFreq * (0.97 + Math.random() * 0.06), t + att + hold
+        );
+      }
+
+    const interval = baseTempo * (0.4 + Math.random() * 1.8);
+    const next = t + interval;
+    setTimeout(() => scheduleGate(next), Math.max(0, (next - ctx.currentTime) * 1000 - 20));
+    }
+
+    scheduleGate(ctx.currentTime + (v / numVoices) * baseTempo * 3);
+  }
+}
+
+
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { TeapotGeometry } from 'three/addons/geometries/TeapotGeometry.js';
+
+let teapotRenderer, teapotScene, teapotCamera, teapotMesh;
+let targetRotX = 0, targetRotY = 0;
+
+window.initTeapot = function () {
+  document.getElementById('fish').style.display = 'none';
+
+  const container = document.getElementById('teapot-container');
+  container.style.display = 'block';
+
+  const canvas = document.getElementById('teapot-canvas');
+
+  teapotRenderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  teapotRenderer.setSize(window.innerWidth, window.innerHeight);
+  teapotRenderer.setPixelRatio(devicePixelRatio);
+  teapotRenderer.setClearColor(0x000000, 0);
+
+  teapotScene = new THREE.Scene();
+
+  teapotCamera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+  teapotCamera.position.z = 5;
+
+  const geo = new TeapotGeometry(1, 15);
+  const mat = new THREE.MeshPhongMaterial({
+    color: 0x99bbff,
+    specular: 0xffffff,
+    shininess: 130,
+  });
+  teapotMesh = new THREE.Mesh(geo, mat);
+  teapotScene.add(teapotMesh);
+
+  const ambLight = new THREE.AmbientLight(0x222244);
+  teapotScene.add(ambLight);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(3, 5, 5);
+  teapotScene.add(dirLight);
+
+  const fillLight = new THREE.DirectionalLight(0x4466ff, 0.5);
+  fillLight.position.set(-5, -2, 3);
+  teapotScene.add(fillLight);
+
+  function applyPointer(x, y) {
+    targetRotY = (x / window.innerWidth - 0.5) * Math.PI * 2;
+    targetRotX = (y / window.innerHeight - 0.5) * Math.PI;
+  }
+
+  document.addEventListener('mousemove', (e) => applyPointer(e.clientX, e.clientY));
+
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    applyPointer(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: false });
+
+  function randomTeapotColor() {
+    teapotMesh.material.color.setHSL(Math.random(), 0.7 + Math.random() * 0.3, 0.5 + Math.random() * 0.2);
+  }
+
+  canvas.addEventListener('touchend', () => {
+    window.synth(Math.random(), Math.random(), Math.random());
+    applyRandomColor();
+    randomTeapotColor();
+  });
+
+  canvas.addEventListener('click', () => {
+    window.synth(Math.random(), Math.random(), Math.random());
+    applyRandomColor();
+    randomTeapotColor();
+  });
+
+  window.addEventListener('resize', () => {
+    teapotCamera.aspect = window.innerWidth / window.innerHeight;
+    teapotCamera.updateProjectionMatrix();
+    teapotRenderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  (function animate() {
+    requestAnimationFrame(animate);
+    teapotMesh.rotation.y += (targetRotY - teapotMesh.rotation.y) * 0.06;
+    teapotMesh.rotation.x += (targetRotX - teapotMesh.rotation.x) * 0.06;
+    teapotRenderer.render(teapotScene, teapotCamera);
+  })();
+};
+</script>
+
+<div class="footer">@2026    <a href="https://remigeorges.fr">@Rémi_Georges</a>    <a href="mailto:remi.georges@protonmail.com">Contact</a></div>
+
+</body>
+</html>
