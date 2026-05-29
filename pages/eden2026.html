@@ -231,7 +231,7 @@ let masterGain = null;
 
 function toggleFM() {
   if (fmOn) {
-    // Fade out + stop
+    // on-off togglr
     masterGain.gain.linearRampToValueAtTime(0, Ctx.currentTime + 3);
     setTimeout(() => { Ctx.close(); Ctx = null; fmOn = false; }, 3100);
     return;
@@ -244,7 +244,7 @@ function toggleFM() {
   // Carrier 
   const carrier = Ctx.createOscillator();
   carrier.type = 'sine';
-  carrier.frequency.setValueAtTime(261.63, Ctx.currentTime); // A2, chaud et grave
+  carrier.frequency.setValueAtTime(261.63, Ctx.currentTime); 
   carrier.frequency.linearRampToValueAtTime(130.81, Ctx.currentTime + 24);
 
   // modulateur 
