@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>mon eden, joyeux anniversaire, je t'aime</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+body {
+background: #000000;
+background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(211, 211, 211, 1) 50%, rgba(255, 250, 240, 1) 100%);
+}
+
+body.rouge {
+  background: linear-gradient(180deg, rgb(180, 1, 1) 0%, rgb(231, 62, 62) 50%, rgb(255, 162, 162) 100%);
+}
+
+.rouge path {
+  fill: red;
+}
+
+body.purple {
+  background: linear-gradient(180deg, rgb(144, 1, 180) 0%, rgb(200, 62, 231) 50%, rgb(212, 162, 255) 100%);
+}
+
+.purple path {
+  fill: purple;
+}
+
+body {
+  filter: var(--body-blur, ) var(--body-saturate, ) var(--body-invert, );
+}
+
+body.blurry {
+  --body-blur: blur(8.5px);
+}
+
+body.saturate {
+  --body-saturate: saturate(64);
+}
+
+body.invert {
+  --body-invert: invert(1);
+}
+
+.blurry path {
+  filter: blur(7.5px);
+}
+
+.saturate path {
+  filter: saturate(64);
+}
+
+.invert path {
+  filter: invert(1);
+  stroke-width: 10;
+}
+
+
+.vitesse {
+  scrollAmount:26;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+
+<marquee behavior="alternate" scrollAmount="12">
+<svg stroke="black" stroke-width="1" id="EDEN" width="100%" height="250px"></svg>
+</marquee>
+
+<marquee behavior="alternate" scrollAmount="8">
+<svg stroke="Grey" stroke-width="1" id="EDEN2" width="100%" height="250px"></svg>
+</marquee>
+
+<marquee behavior="alternate" scrollAmount="6">
+<svg stroke="white" stroke-width="1" id="EDEN3" width="100%" height="250px"></svg>
+</marquee>
+
+<marquee behavior="alternate" scrollAmount="4">
+<svg stroke="GhostWhite" stroke-width="1" id="EDEN4" width="100%" height="250px"></svg>
+</marquee>
+
+<marquee behavior="alternate" scrollAmount="2">
+<svg stroke="FloralWhite" stroke-width="1" id="EDEN5" width="100%" height="250px"></svg>
+</marquee>
+
+<script>
+  
+  // 5 eden
+  const s = Snap("#EDEN");
+  const s2 = Snap("#EDEN2");
+  const s3 = Snap("#EDEN3");
+  const s4 = Snap("#EDEN4");
+  const s5 = Snap("#EDEN5");
+
+  //les query des trucs 
+
+  const svgs = document.querySelectorAll('svg');
+  const marquees = document.querySelectorAll('marquee');
+  let surprisemusicale = 0;
+
+ 
+  // Paths 
+  const EdenPath = "M 0 175 L 0 0 L 100 0 L 100 25 L 25 25 L 25 75 L 75 75 L 75 100 L 25 100 L 25 150 L 100 150 L 100 175 L 0 175 Z M 375 175 L 375 75 L 400 75 L 400 50 L 450 50 L 450 75 L 475 75 L 475 175 L 450 175 L 450 75 L 400 75 L 400 175 L 375 175 Z M 200 150 L 200 175 L 150 175 L 150 150 L 125 150 L 125 75 L 150 75 L 150 50 L 200 50 L 200 0 L 225 0 L 225 150 L 200 150 Z M 200 75 L 150 75 L 150 150 L 200 150 L 200 75 Z M 275 75 L 275 50 L 325 50 L 325 75 L 350 75 L 350 125 L 275 125 L 275 150 L 250 150 L 250 75 L 275 75 Z M 325 75 L 275 75 L 275 100 L 325 100 L 325 75 Z M 275 150 L 325 150 L 325 175 L 275 175 L 275 150 Z";
+  const heartPath = "M 0 150 L 0 0 L 50 0 L 50 50 L 75 50 L 75 0 L 125 0 L 125 150 L 100 150 L 100 200 L 75 200 L 75 250 L 50 250 L 50 200 L 25 200 L 25 150 L 0 150 Z M 250 150 L 250 0 L 300 0 L 300 50 L 325 50 L 325 0 L 375 0 L 375 150 L 350 150 L 350 200 L 325 200 L 325 250 L 300 250 L 300 200 L 275 200 L 275 150 L 250 150 Z M 500 150 L 500 0 L 550 0 L 550 50 L 575 50 L 575 0 L 625 0 L 625 150 L 600 150 L 600 200 L 575 200 L 575 250 L 550 250 L 550 200 L 525 200 L 525 150 L 500 150 Z M 750 150 L 750 0 L 800 0 L 800 50 L 825 50 L 825 0 L 875 0 L 875 150 L 850 150 L 850 200 L 825 200 L 825 250 L 800 250 L 800 200 L 775 200 L 775 150 L 750 150 Z M 1000 150 L 1000 0 L 1050 0 L 1050 50 L 1075 50 L 1075 0 L 1125 0 L 1125 150 L 1100 150 L 1100 200 L 1075 200 L 1075 250 L 1050 250 L 1050 200 L 1025 200 L 1025 150 L 1000 150 Z M 1250 150 L 1250 0 L 1300 0 L 1300 50 L 1325 50 L 1325 0 L 1375 0 L 1375 150 L 1350 150 L 1350 200 L 1325 200 L 1325 250 L 1300 250 L 1300 200 L 1275 200 L 1275 150 L 1250 150 Z";
+  const jetaimePath = "M 375 175 L 375 25 L 400 25 L 400 75 L 450 75 L 450 100 L 400 100 L 400 175 L 450 175 L 450 150 L 475 150 L 475 175 L 450 175 L 450 200 L 400 200 L 400 175 L 375 175 Z M 900 200 L 875 200 L 875 75 L 900 75 L 900 100 L 950 100 L 950 75 L 975 75 L 975 200 L 950 200 L 950 125 L 900 125 L 900 200 Z M 150 100 L 150 75 L 200 75 L 200 100 L 225 100 L 225 150 L 150 150 L 150 175 L 125 175 L 125 100 L 150 100 Z M 200 100 L 150 100 L 150 125 L 200 125 L 200 100 Z M 650 175 L 625 175 L 625 150 L 650 150 L 650 125 L 700 125 L 700 100 L 725 100 L 725 175 L 700 175 L 700 200 L 650 200 L 650 175 Z M 650 150 L 650 175 L 700 175 L 700 150 L 650 150 Z M 1025 100 L 1025 75 L 1075 75 L 1075 100 L 1100 100 L 1100 150 L 1025 150 L 1025 175 L 1000 175 L 1000 100 L 1025 100 Z M 1075 100 L 1025 100 L 1025 125 L 1075 125 L 1075 100 Z M 75 200 L 75 75 L 100 75 L 100 200 L 75 200 Z M 550 75 L 525 75 L 525 50 L 550 50 L 550 25 L 575 25 L 575 0 L 600 0 L 600 25 L 575 25 L 575 50 L 550 50 L 550 75 Z M 825 200 L 800 200 L 800 75 L 825 75 L 825 200 Z M 75 225 L 25 225 L 25 200 L 75 200 L 75 225 Z M 150 175 L 200 175 L 200 200 L 150 200 L 150 175 Z M 700 100 L 650 100 L 650 75 L 700 75 L 700 100 Z M 1025 175 L 1075 175 L 1075 200 L 1025 200 L 1025 175 Z M 25 200 L 0 200 L 0 175 L 25 175 L 25 200 Z M 100 50 L 75 50 L 75 25 L 100 25 L 100 50 Z M 825 50 L 800 50 L 800 25 L 825 25 L 825 50 Z";
+  const passionPath = "M 325 200 L 250 200 L 250 175 L 325 175 L 325 150 L 275 150 L 275 125 L 250 125 L 250 100 L 275 100 L 275 75 L 350 75 L 350 100 L 275 100 L 275 125 L 325 125 L 325 150 L 350 150 L 350 175 L 325 175 L 325 200 Z M 450 200 L 375 200 L 375 175 L 450 175 L 450 150 L 400 150 L 400 125 L 375 125 L 375 100 L 400 100 L 400 75 L 475 75 L 475 100 L 400 100 L 400 125 L 450 125 L 450 150 L 475 150 L 475 175 L 450 175 L 450 200 Z M 1500 175 L 1500 25 L 1525 25 L 1525 75 L 1575 75 L 1575 100 L 1525 100 L 1525 175 L 1575 175 L 1575 150 L 1600 150 L 1600 175 L 1575 175 L 1575 200 L 1525 200 L 1525 175 L 1500 175 Z M 750 200 L 750 100 L 775 100 L 775 75 L 825 75 L 825 100 L 850 100 L 850 200 L 825 200 L 825 100 L 775 100 L 775 200 L 750 200 Z M 875 200 L 875 100 L 900 100 L 900 75 L 950 75 L 950 100 L 975 100 L 975 200 L 950 200 L 950 100 L 900 100 L 900 200 L 875 200 Z M 1150 200 L 1125 200 L 1125 75 L 1150 75 L 1150 100 L 1200 100 L 1200 75 L 1225 75 L 1225 200 L 1200 200 L 1200 125 L 1150 125 L 1150 200 Z M 1375 200 L 1375 100 L 1400 100 L 1400 75 L 1450 75 L 1450 100 L 1475 100 L 1475 200 L 1450 200 L 1450 100 L 1400 100 L 1400 200 L 1375 200 Z M 75 150 L 75 175 L 25 175 L 25 225 L 0 225 L 0 100 L 25 100 L 25 75 L 75 75 L 75 100 L 100 100 L 100 150 L 75 150 Z M 25 150 L 75 150 L 75 100 L 25 100 L 25 150 Z M 650 175 L 625 175 L 625 100 L 650 100 L 650 75 L 700 75 L 700 100 L 725 100 L 725 175 L 700 175 L 700 200 L 650 200 L 650 175 Z M 650 100 L 650 175 L 700 175 L 700 100 L 650 100 Z M 150 175 L 125 175 L 125 150 L 150 150 L 150 125 L 200 125 L 200 100 L 225 100 L 225 175 L 200 175 L 200 200 L 150 200 L 150 175 Z M 150 150 L 150 175 L 200 175 L 200 150 L 150 150 Z M 1025 100 L 1025 75 L 1075 75 L 1075 100 L 1100 100 L 1100 150 L 1025 150 L 1025 175 L 1000 175 L 1000 100 L 1025 100 Z M 1075 100 L 1025 100 L 1025 125 L 1075 125 L 1075 100 Z M 1275 100 L 1275 75 L 1325 75 L 1325 100 L 1350 100 L 1350 150 L 1275 150 L 1275 175 L 1250 175 L 1250 100 L 1275 100 Z M 1325 100 L 1275 100 L 1275 125 L 1325 125 L 1325 100 Z M 575 200 L 550 200 L 550 75 L 575 75 L 575 200 Z M 1050 50 L 1025 50 L 1025 25 L 1050 25 L 1050 0 L 1075 0 L 1075 25 L 1050 25 L 1050 50 Z M 200 100 L 150 100 L 150 75 L 200 75 L 200 100 Z M 1025 175 L 1075 175 L 1075 200 L 1025 200 L 1025 175 Z M 1275 175 L 1325 175 L 1325 200 L 1275 200 L 1275 175 Z M 575 50 L 550 50 L 550 25 L 575 25 L 575 50 Z";
+  const hatePath = "M 650 200 L 625 200 L 625 25 L 650 25 L 650 75 L 700 75 L 700 100 L 725 100 L 725 200 L 700 200 L 700 100 L 650 100 L 650 200 Z M 875 175 L 875 25 L 900 25 L 900 75 L 950 75 L 950 100 L 900 100 L 900 175 L 950 175 L 950 150 L 975 150 L 975 175 L 950 175 L 950 200 L 900 200 L 900 175 L 875 175 Z M 275 175 L 250 175 L 250 150 L 275 150 L 275 125 L 325 125 L 325 100 L 350 100 L 350 175 L 325 175 L 325 200 L 275 200 L 275 175 Z M 275 150 L 275 175 L 325 175 L 325 150 L 275 150 Z M 775 175 L 750 175 L 750 150 L 775 150 L 775 125 L 825 125 L 825 100 L 850 100 L 850 175 L 825 175 L 825 200 L 775 200 L 775 175 Z M 775 150 L 775 175 L 825 175 L 825 150 L 775 150 Z M 1025 100 L 1025 75 L 1075 75 L 1075 100 L 1100 100 L 1100 150 L 1025 150 L 1025 175 L 1000 175 L 1000 100 L 1025 100 Z M 1075 100 L 1025 100 L 1025 125 L 1075 125 L 1075 100 Z M 75 200 L 75 75 L 100 75 L 100 200 L 75 200 Z M 175 75 L 150 75 L 150 50 L 175 50 L 175 25 L 200 25 L 200 0 L 225 0 L 225 25 L 200 25 L 200 50 L 175 50 L 175 75 Z M 450 200 L 425 200 L 425 75 L 450 75 L 450 200 Z M 75 225 L 25 225 L 25 200 L 75 200 L 75 225 Z M 325 100 L 275 100 L 275 75 L 325 75 L 325 100 Z M 775 0 L 825 0 L 825 25 L 775 25 L 775 0 Z M 825 100 L 775 100 L 775 75 L 825 75 L 825 100 Z M 1025 175 L 1075 175 L 1075 200 L 1025 200 L 1025 175 Z M 25 200 L 0 200 L 0 175 L 25 175 L 25 200 Z M 450 50 L 425 50 L 425 25 L 450 25 L 450 50 Z M 100 50 L 100 25 L 75 25 L 75 50 L 100 50 Z M 775 25 L 775 50 L 750 50 L 750 25 L 775 25 Z M 825 25 L 850 25 L 850 50 L 825 50 L 825 25 Z";
+  const futurPath = "M 400 175 L 375 175 L 375 25 L 400 25 L 400 0 L 450 0 L 450 25 L 475 25 L 475 50 L 450 50 L 450 25 L 400 25 L 400 75 L 450 75 L 450 100 L 400 100 L 400 175 Z M 625 150 L 625 0 L 650 0 L 650 50 L 700 50 L 700 75 L 650 75 L 650 150 L 700 150 L 700 125 L 725 125 L 725 150 L 700 150 L 700 175 L 650 175 L 650 150 L 625 150 Z M 125 150 L 125 50 L 150 50 L 150 150 L 200 150 L 200 50 L 225 50 L 225 150 L 200 150 L 200 175 L 150 175 L 150 150 L 125 150 Z M 500 150 L 500 50 L 525 50 L 525 150 L 575 150 L 575 50 L 600 50 L 600 150 L 575 150 L 575 175 L 525 175 L 525 150 L 500 150 Z M 750 150 L 750 50 L 775 50 L 775 150 L 825 150 L 825 50 L 850 50 L 850 150 L 825 150 L 825 175 L 775 175 L 775 150 L 750 150 Z M 75 150 L 75 175 L 25 175 L 25 150 L 0 150 L 0 75 L 25 75 L 25 50 L 75 50 L 75 0 L 100 0 L 100 150 L 75 150 Z M 75 75 L 25 75 L 25 150 L 75 150 L 75 75 Z M 900 175 L 875 175 L 875 75 L 900 75 L 900 50 L 950 50 L 950 75 L 975 75 L 975 100 L 950 100 L 950 75 L 900 75 L 900 175 Z";
+  const cotesPath = "M 575 200 L 500 200 L 500 175 L 575 175 L 575 150 L 525 150 L 525 125 L 500 125 L 500 100 L 525 100 L 525 75 L 600 75 L 600 100 L 525 100 L 525 125 L 575 125 L 575 150 L 600 150 L 600 175 L 575 175 L 575 200 Z M 1325 200 L 1250 200 L 1250 175 L 1325 175 L 1325 150 L 1275 150 L 1275 125 L 1250 125 L 1250 100 L 1275 100 L 1275 75 L 1350 75 L 1350 100 L 1275 100 L 1275 125 L 1325 125 L 1325 150 L 1350 150 L 1350 175 L 1325 175 L 1325 200 Z M 250 175 L 250 25 L 275 25 L 275 75 L 325 75 L 325 100 L 275 100 L 275 175 L 325 175 L 325 150 L 350 150 L 350 175 L 325 175 L 325 200 L 275 200 L 275 175 L 250 175 Z M 1000 175 L 1000 25 L 1025 25 L 1025 75 L 1075 75 L 1075 100 L 1025 100 L 1025 175 L 1075 175 L 1075 150 L 1100 150 L 1100 175 L 1075 175 L 1075 200 L 1025 200 L 1025 175 L 1000 175 Z M 775 175 L 750 175 L 750 100 L 775 100 L 775 75 L 825 75 L 825 100 L 850 100 L 850 125 L 825 125 L 825 100 L 775 100 L 775 175 Z M 900 175 L 875 175 L 875 100 L 900 100 L 900 75 L 950 75 L 950 100 L 975 100 L 975 175 L 950 175 L 950 200 L 900 200 L 900 175 Z M 900 100 L 900 175 L 950 175 L 950 100 L 900 100 Z M 25 175 L 0 175 L 0 150 L 25 150 L 25 125 L 75 125 L 75 100 L 100 100 L 100 175 L 75 175 L 75 200 L 25 200 L 25 175 Z M 25 150 L 25 175 L 75 175 L 75 150 L 25 150 Z M 400 100 L 400 75 L 450 75 L 450 100 L 475 100 L 475 150 L 400 150 L 400 175 L 375 175 L 375 100 L 400 100 Z M 450 100 L 400 100 L 400 125 L 450 125 L 450 100 Z M 1150 100 L 1150 75 L 1200 75 L 1200 100 L 1225 100 L 1225 150 L 1150 150 L 1150 175 L 1125 175 L 1125 100 L 1150 100 Z M 1200 100 L 1150 100 L 1150 125 L 1200 125 L 1200 100 Z M 875 25 L 900 25 L 900 0 L 950 0 L 950 25 L 975 25 L 975 50 L 950 50 L 950 25 L 900 25 L 900 50 L 875 50 L 875 25 Z M 825 175 L 775 175 L 775 200 L 825 200 L 825 175 Z M 50 0 L 50 25 L 75 25 L 75 50 L 50 50 L 50 25 L 25 25 L 25 0 L 50 0 Z M 1175 50 L 1150 50 L 1150 25 L 1175 25 L 1175 0 L 1200 0 L 1200 25 L 1175 25 L 1175 50 Z M 75 100 L 25 100 L 25 75 L 75 75 L 75 100 Z M 400 175 L 450 175 L 450 200 L 400 200 L 400 175 Z M 1150 175 L 1200 175 L 1200 200 L 1150 200 L 1150 175 Z M 825 150 L 850 150 L 850 175 L 825 175 L 825 150 Z";
+  const eyesPath = "M 125 25 L 150 25 L 150 0 L 225 0 L 225 25 L 250 25 L 250 125 L 175 125 L 175 50 L 225 50 L 225 25 L 150 25 L 150 150 L 125 150 L 125 125 L 75 125 L 75 100 L 25 100 L 25 125 L 75 125 L 75 150 L 125 150 L 125 25 Z M 200 75 L 200 100 L 225 100 L 225 75 L 200 75 Z M 625 25 L 650 25 L 650 0 L 725 0 L 725 25 L 750 25 L 750 125 L 675 125 L 675 50 L 725 50 L 725 25 L 650 25 L 650 150 L 625 150 L 625 125 L 575 125 L 575 100 L 525 100 L 525 125 L 575 125 L 575 150 L 625 150 L 625 25 Z M 700 75 L 700 100 L 725 100 L 725 75 L 700 75 Z M 1125 25 L 1150 25 L 1150 0 L 1225 0 L 1225 25 L 1250 25 L 1250 125 L 1175 125 L 1175 50 L 1225 50 L 1225 25 L 1150 25 L 1150 150 L 1125 150 L 1125 125 L 1075 125 L 1075 100 L 1025 100 L 1025 125 L 1075 125 L 1075 150 L 1125 150 L 1125 25 Z M 1200 75 L 1200 100 L 1225 100 L 1225 75 L 1200 75 Z M 300 100 L 350 100 L 350 50 L 300 50 L 300 25 L 250 25 L 250 0 L 300 0 L 300 25 L 350 25 L 350 50 L 375 50 L 375 100 L 350 100 L 300 100 L 300 125 L 250 125 L 250 150 L 300 150 L 300 125 L 350 125 L 350 100 M 800 100 L 850 100 L 850 50 L 800 50 L 800 25 L 750 25 L 750 0 L 800 0 L 800 25 L 850 25 L 850 50 L 875 50 L 875 100 L 850 100 L 800 100 L 800 125 L 750 125 L 750 150 L 800 150 L 800 125 L 850 125 L 850 100 M 1300 100 L 1350 100 L 1350 50 L 1300 50 L 1300 25 L 1250 25 L 1250 0 L 1300 0 L 1300 25 L 1350 25 L 1350 50 L 1375 50 L 1375 100 L 1350 100 L 1300 100 L 1300 125 L 1250 125 L 1250 150 L 1300 150 L 1300 125 L 1350 125 L 1350 100 M 25 100 L 0 100 L 0 50 L 25 50 L 25 25 L 75 25 L 75 0 L 125 0 L 125 25 L 75 25 L 75 50 L 25 50 L 25 100 Z M 525 100 L 500 100 L 500 50 L 525 50 L 525 25 L 575 25 L 575 0 L 625 0 L 625 25 L 575 25 L 575 50 L 525 50 L 525 100 Z M 1025 100 L 1000 100 L 1000 50 L 1025 50 L 1025 25 L 1075 25 L 1075 0 L 1125 0 L 1125 25 L 1075 25 L 1075 50 L 1025 50 L 1025 100 Z M 150 150 L 225 150 L 225 175 L 150 175 L 150 150 Z M 650 150 L 725 150 L 725 175 L 650 175 L 650 150 Z M 1150 150 L 1225 150 L 1225 175 L 1150 175 L 1150 150 Z";
+  const joyeuxPath = "M 250 100 L 250 50 L 275 50 L 275 100 L 325 100 L 325 50 L 350 50 L 350 175 L 325 175 L 325 200 L 275 200 L 275 175 L 250 175 L 250 150 L 275 150 L 275 175 L 325 175 L 325 125 L 275 125 L 275 100 L 250 100 Z M 650 175 L 625 175 L 625 125 L 650 125 L 650 100 L 625 100 L 625 50 L 650 50 L 650 100 L 700 100 L 700 50 L 725 50 L 725 100 L 700 100 L 700 125 L 725 125 L 725 175 L 700 175 L 700 125 L 650 125 L 650 175 Z M 500 150 L 500 50 L 525 50 L 525 150 L 575 150 L 575 50 L 600 50 L 600 150 L 575 150 L 575 175 L 525 175 L 525 150 L 500 150 Z M 150 150 L 125 150 L 125 75 L 150 75 L 150 50 L 200 50 L 200 75 L 225 75 L 225 150 L 200 150 L 200 175 L 150 175 L 150 150 Z M 150 75 L 150 150 L 200 150 L 200 75 L 150 75 Z M 400 75 L 400 50 L 450 50 L 450 75 L 475 75 L 475 125 L 400 125 L 400 150 L 375 150 L 375 75 L 400 75 Z M 450 75 L 400 75 L 400 100 L 450 100 L 450 75 Z M 75 175 L 75 50 L 100 50 L 100 175 L 75 175 Z M 75 200 L 25 200 L 25 175 L 75 175 L 75 200 Z M 400 150 L 450 150 L 450 175 L 400 175 L 400 150 Z M 25 175 L 0 175 L 0 150 L 25 150 L 25 175 Z M 100 25 L 75 25 L 75 0 L 100 0 L 100 25 Z";
+  const annivPath = "M 950 175 L 875 175 L 875 150 L 950 150 L 950 125 L 900 125 L 900 100 L 875 100 L 875 75 L 900 75 L 900 50 L 975 50 L 975 75 L 900 75 L 900 100 L 950 100 L 950 125 L 975 125 L 975 150 L 950 150 L 950 175 Z M 125 175 L 125 75 L 150 75 L 150 50 L 200 50 L 200 75 L 225 75 L 225 175 L 200 175 L 200 75 L 150 75 L 150 175 L 125 175 Z M 250 175 L 250 75 L 275 75 L 275 50 L 325 50 L 325 75 L 350 75 L 350 175 L 325 175 L 325 75 L 275 75 L 275 175 L 250 175 Z M 500 125 L 500 50 L 525 50 L 525 125 L 575 125 L 575 50 L 600 50 L 600 125 L 575 125 L 575 175 L 525 175 L 525 125 L 500 125 Z M 775 175 L 750 175 L 750 75 L 775 75 L 775 50 L 825 50 L 825 75 L 850 75 L 850 100 L 825 100 L 825 75 L 775 75 L 775 175 Z M 1275 175 L 1250 175 L 1250 75 L 1275 75 L 1275 50 L 1325 50 L 1325 75 L 1350 75 L 1350 100 L 1325 100 L 1325 75 L 1275 75 L 1275 175 Z M 25 150 L 0 150 L 0 125 L 25 125 L 25 100 L 75 100 L 75 75 L 100 75 L 100 150 L 75 150 L 75 175 L 25 175 L 25 150 Z M 25 125 L 25 150 L 75 150 L 75 125 L 25 125 Z M 650 75 L 650 50 L 700 50 L 700 75 L 725 75 L 725 125 L 650 125 L 650 150 L 625 150 L 625 75 L 650 75 Z M 700 75 L 650 75 L 650 100 L 700 100 L 700 75 Z M 1025 150 L 1000 150 L 1000 125 L 1025 125 L 1025 100 L 1075 100 L 1075 75 L 1100 75 L 1100 150 L 1075 150 L 1075 175 L 1025 175 L 1025 150 Z M 1025 125 L 1025 150 L 1075 150 L 1075 125 L 1025 125 Z M 1400 75 L 1400 50 L 1450 50 L 1450 75 L 1475 75 L 1475 125 L 1400 125 L 1400 150 L 1375 150 L 1375 75 L 1400 75 Z M 1450 75 L 1400 75 L 1400 100 L 1450 100 L 1450 75 Z M 450 175 L 425 175 L 425 50 L 450 50 L 450 175 Z M 1200 175 L 1175 175 L 1175 50 L 1200 50 L 1200 175 Z M 75 75 L 25 75 L 25 50 L 75 50 L 75 75 Z M 650 150 L 700 150 L 700 175 L 650 175 L 650 150 Z M 1075 75 L 1025 75 L 1025 50 L 1075 50 L 1075 75 Z M 1400 150 L 1450 150 L 1450 175 L 1400 175 L 1400 150 Z M 450 25 L 425 25 L 425 0 L 450 0 L 450 25 Z M 1200 25 L 1175 25 L 1175 0 L 1200 0 L 1200 25 Z";
+
+  const paths = [EdenPath, joyeuxPath, jetaimePath];
+  let state = 0;
+
+  const paths2= [EdenPath, annivPath, passionPath];
+  let state2 = 0;
+
+  const paths3= [EdenPath, hatePath, heartPath];
+  let state3 = 0;
+
+  const paths4= [EdenPath, futurPath, heartPath];
+  let state4 = 0;
+
+  const paths5= [EdenPath, cotesPath, eyesPath];
+  let state5 = 0;
+
+  const shape = s.path(EdenPath).attr({ fill: "FloralWhite" });
+
+  const shape2 = s2.path(EdenPath).attr({ fill: "GhostWhite" });
+
+  const shape3 = s3.path(EdenPath).attr({ fill: "LightGrey" });
+
+  const shape4 = s4.path(EdenPath).attr({ fill: "Grey" });
+
+  const shape5 = s5.path(EdenPath).attr({ fill: "black" });
+
+
+  shape.click(() => {
+    const prevState = state;
+    state = (state + 1) % paths.length;
+    shape.animate({ d: paths[state] }, 1000, mina.easeinout);
+    if (prevState === paths .length - 1 && state === 0) {
+      svgs.forEach(svg => svg.classList.add('invert'));
+      document.body.classList.add('invert');
+      addSurprise();
+    } else { 
+      document.body.classList.remove('invert');
+      svgs.forEach(svg => svg.classList.remove('invert'));
+    }
+  });
+
+
+  shape2.click(() => {
+    const prevState2 = state2;
+    state2 = (state2 + 1) % paths2.length;
+    shape2.animate({ d: paths2[state2] }, 1000, mina.easeinout);
+    if (prevState2 === paths2.length - 1 && state2 === 0) {
+      svgs.forEach(svg => svg.classList.add('saturate'));
+      document.body.classList.add('saturate');
+      addSurprise();
+    } else { 
+      document.body.classList.remove('saturate');
+      svgs.forEach(svg => svg.classList.remove('saturate'));
+    }
+  });
+
+  shape3.click(() => {
+    const prevState3 = state3;
+    state3 = (state3 + 1) % paths3.length;
+    shape3.animate({ d: paths3[state3] }, 2000, mina.easeinout);
+    if (prevState3 === paths3.length - 1 && state3 === 0) {
+      svgs.forEach(svg => svg.classList.add('blurry'));
+      document.body.classList.add('blurry');
+      addSurprise();
+    } else { 
+      document.body.classList.remove('blurry');
+      svgs.forEach(svg => svg.classList.remove('blurry'));
+    }
+  });
+
+  shape4.click(() => {
+    const prevState4 = state4;
+    state4 = (state4 + 1) % paths4.length;
+    shape4.animate({ d: paths4[state4] }, 4000, mina.easeinout);
+    if (prevState4 === paths4.length - 1 && state4 === 0) {
+      svgs.forEach(svg => svg.classList.add('purple'));
+      document.body.classList.add('purple');
+      addSurprise();
+    } else { 
+      document.body.classList.remove('purple');
+      svgs.forEach(svg => svg.classList.remove('purple'));
+    }
+  });
+
+  shape5.click(() => {
+    const prevState5 = state5;
+    state5 = (state5 + 1) % paths5.length;
+    shape5.animate({ d: paths5[state5] }, 8000, mina.easeinout);
+    if (prevState5 === paths5.length - 1 && state5 === 0) {
+      svgs.forEach(svg => svg.classList.add('rouge'));
+      document.body.classList.add('rouge');
+      marquees.forEach(marquee => { 
+        marquee.stop();
+        marquee.scrollAmount = Math.floor(Math.random() * 35) + 20;
+        marquee.start();     
+      });
+      addSurprise();
+      } else { 
+      document.body.classList.remove('rouge');
+      svgs.forEach(svg => svg.classList.remove('rouge'));
+    };
+  });
+
+function addSurprise() {
+  surprisemusicale += 1;
+  if (surprisemusicale >= 10) toggleFM();
+}
+
+// --- Web Audio --
+let Ctx = null;
+let fmOn = false;
+let masterGain = null;
+
+function toggleFM() {
+  if (fmOn) {
+    // Fade out + stop
+    masterGain.gain.linearRampToValueAtTime(0, Ctx.currentTime + 3);
+    setTimeout(() => { Ctx.close(); Ctx = null; fmOn = false; }, 3100);
+    return;
+  }
+
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  Ctx = new AudioContext();
+  fmOn = true;
+
+  // Carrier 
+  const carrier = Ctx.createOscillator();
+  carrier.type = 'sine';
+  carrier.frequency.setValueAtTime(261.63, Ctx.currentTime); // A2, chaud et grave
+  carrier.frequency.linearRampToValueAtTime(130.81, Ctx.currentTime + 24);
+
+  // modulateur 
+  const modulateur = Ctx.createOscillator();
+  modulateur.type = 'sine';
+  modulateur.frequency.setValueAtTime(0.001, Ctx.currentTime);
+  modulateur.frequency.linearRampToValueAtTime(195, Ctx.currentTime + 26);
+
+  // depth
+  const depth = Ctx.createGain();
+  depth.gain.value = 65; 
+
+  //gain
+  masterGain = Ctx.createGain();
+  masterGain.gain.setValueAtTime(0, Ctx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.55, Ctx.currentTime + 4);
+
+
+  const feedbackGain = Ctx.createGain();
+  feedbackGain.gain.value = 0.0155;
+
+  modulateur.connect(depth);
+  depth.connect(carrier.frequency);
+  carrier.connect(masterGain);
+  masterGain.connect(Ctx.destination);
+
+
+  modulateur.start();
+  carrier.start();
+  };
+
+
+
+</script>
+
+
+</body>
+</html>
