@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Strudel</title>
+<style>
+
+@font-face {
+  font-family: 'BBBReadMe';
+  font-weight: 400;
+  font-style: normal;
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Regular.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'BBBReadMe';
+  font-weight: 400;
+  font-style: italic;
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Italic.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'BBBReadMe';
+  font-weight: 600;
+  font-style: normal;
+  src: url('bbb-readme-main/webfonts/BBBReadMe-SemiBold.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-SemiBold.woff') format('woff');
+}
+@font-face {
+  font-family: 'BBBReadMe';
+  font-weight: 700;
+  font-style: normal;
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Bold.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'BBBReadMe';
+  font-weight: 900;
+  font-style: normal;
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Black.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Black.woff') format('woff');
+}
+
+html { scroll-behavior: smooth; zoom: 1.7; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'BBBReadMe', Helvetica, sans-serif;
+  background: #f2f2f2;
+  color: #111;
+  font-size: 15px;
+  line-height: 1.7;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+header {
+  padding: 20px 24px 16px;
+  border-bottom: 4px ridge #333;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+header a {
+  font-size: 0.85rem;
+  color: #111;
+  margin-left: auto;
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+}
+
+aside {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 24px 16px;
+  border-right: 4px ridge #333;
+}
+
+.nav-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+  margin-bottom: 6px;
+  margin-top: 20px;
+}
+
+.nav-label:first-child { margin-top: 0; }
+
+.nav-item {
+  display: block;
+  padding: 2px 0;
+  font-size: 0.875rem;
+  color: #555;
+  text-decoration: none;
+  user-select: none;
+}
+
+.nav-item:hover { color: #111; }
+
+.nav-item.current {
+  color: #111;
+  font-weight: bold;
+}
+
+.nav-item.current::before {
+  content: '--> ';
+  font-size: 0.65rem;
+}
+
+main {
+  flex: 1;
+  padding: 24px 40px 60px;
+  max-width: 800px;
+}
+
+section { scroll-margin-top: 24px; }
+
+section + section {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 6px ridge #333;
+}
+
+section > h2:first-child { margin-top: 0; }
+
+h2 {
+  margin-top: 48px;
+  border-bottom: 4px ridge #333;
+  padding-bottom: 6px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  margin-top: 28px;
+  border-bottom: 2px ridge #666;
+  padding-bottom: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+p { margin: 12px 0; }
+
+a { color: #111; }
+
+ul, ol { padding-left: 20px; margin: 10px 0; }
+li { margin-bottom: 4px; }
+
+code {
+  font-family: 'BBBReadMe', monospace;
+  background: #e3e3e3;
+  padding: 0 4px;
+  border: 1px solid #ccc;
+  font-size: 0.875em;
+}
+
+kbd {
+  font-family: 'BBBReadMe', monospace;
+  background: #e3e3e3;
+  border: 2px ridge #666;
+  padding: 0 5px;
+  font-size: 0.85em;
+}
+
+hr {
+  border: none;
+  border-top: 2px ridge #aaa;
+  margin: 32px 0;
+}
+
+table.strudel {
+  width: 100%;
+  border-collapse: collapse;
+  border: 6px ridge #333;
+  margin: 16px 0 40px;
+  background: #fff;
+}
+
+table.strudel th,
+table.strudel td {
+  border: 4px ridge #666;
+  padding: 6px 10px;
+  vertical-align: top;
+  font-size: 0.875rem;
+}
+
+table.strudel th {
+  background: #e3e3e3;
+  font-weight: bold;
+}
+
+a.repl-link {
+  display: block;
+  border: 6px ridge #333;
+  background: #fff;
+  padding: 14px 18px;
+  margin: 16px 0 32px;
+  text-decoration: none;
+  color: #111;
+  font-weight: bold;
+}
+
+a.repl-link:hover { background: #eee; }
+
+.callout {
+  border: 4px ridge #666;
+  background: #fff;
+  padding: 10px 14px;
+  margin: 14px 0;
+  font-size: 0.875rem;
+}
+
+a.next-card {
+  display: flex;
+  border: 6px ridge #333;
+  background: #fff;
+  padding: 14px 18px;
+  margin-top: 32px;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #111;
+}
+
+a.next-card:hover { background: #eee; }
+
+.nc-label { font-size: 0.75rem; color: #555; }
+.nc-title { font-size: 1rem; font-weight: bold; margin-top: 4px; }
+.nc-arrow { font-size: 1.4rem; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Atelier Strudel par <a href ="https://ralt144mi.remigeorges.fr">Ralt144MI</a></h1>
+  <a href="https://strudel.cc" target="_blank" rel="noopener">strudel.cc </a>
+</header>
+
+<div class="layout">
+
+  <aside>
+    <div class="nav-label">Atelier</div>
+    <a href="#demarrage" class="nav-item current">Démarrage</a>
+    <a href="#des-rythmes" class="nav-item">Des rythmes</a>
+    <a href="#des-notes" class="nav-item">Des notes</a>
+    <a href="#des-effets" class="nav-item">Des effets audio</a>
+    <a href="#effets-de-pattern" class="nav-item">Effets de Pattern, algorythmie</a>
+    <a href="#recap" class="nav-item">Récap'</a>
+    <a href="#aller-plus-loin" class="nav-item">Aller plus loin</a>
+  </aside>
+
+  <main>
+
+    <section id="demarrage">
+
+      <h2>Atelier Strudel</h2>
+    <p>
+      Cet atelier a pour but de vous guider pas à pas dans la création
+      de musique algorithmique en temps réel, directement dans le navigateur au travers de l'outil Strudel.
+    </p>
+    <p>L'atelier est ouvert à tous·tes, pas besoin de connaissances en programmation pour devenir des livecodeur·euses.</p>
+    <p>
+       Pas installation nécessaire. Tapez du code et appuyez sur
+      <kbd>Ctrl+Entrée</kbd> pour jouer, et <kbd>Ctrl+.</kbd> pour arrêter.
+    </p>
+      <h2>Qu'est-ce que Strudel ?</h2>
+      <p>
+        Strudel est une implémentation JavaScript du langage de patterns musicaux
+        <a href="https://tidalcycles.org" target="_blank" rel="noopener">Tidal Cycles</a>,
+        créé en 2022 par <a href="https://slab.org"><strong>Alex McLean</strong></a> et <a href="https://froos.cc/"><strong>Felix Roos</strong></a>.
+      </p>
+      <p>
+        Contrairement à Tidal Cycles (language écrit en Haskell qui nécessite le moteur audio <a href="https://supercollider.github.io/">SuperCollider</a>),
+        Strudel fonctionne directement dans le navigateur sans aucune installation.
+      </p>
+
+      <h2>Exemple</h2>
+      <p>
+        Voici un exemple complet combinant des rythmes, basses et mélodies.
+      </p>
+
+      <a class="repl-link" href="https://strudel.cc/#Ci8vZXhlbXBsZSBjb21wbGV0IE1pbmkgdHJhY2sKc3RhY2soCiAgcygiYmQsW34gPHNkITMgc2QoMyw0LDIpPl0saGgqOCIpCiAgICAuc3BlZWQocGVybGluLnJhbmdlKC43LCAxKSkKICAgIC5kZWNheSguMSkuc3VzdGFpbigwKQogICAgLnJhcmVseShmYXN0KCIyIikpCiAgICAuYWxtb3N0TmV2ZXIoanV4KHJldikpLAogIG5vdGUoImQyIFtmIzIgYTFdIGMjMiBbZiMyIGEyXSIpCiAgICAucygnc2F3dG9vdGgnKQogICAgLmN1dG9mZihzaW5lLnJhbmdlKDEwMCwzNTAwKS5zbG93KDgpKQogICAgLmxwcSgwLjk1KQogICAgLmdhaW4oLjUpCiAgICAuanV4KHJldikKICAgIC5zb21ldGltZXMoeD0%2BeC5vY3RhdmUoIjIiKSkKICAgIC5yYXJlbHkoeD0%2BeC5vY3RhdmUoIjMiKSksCiAgYW5jaG9yKCI8ZDUgYTQgZiM1IGE1PiIpCiAgICAuY2hvcmQoIkQiKQogICAgLmRlY2F5KDEpLnJvb20oMC45NSkub3JiaXQoMikKICAgIC5zKCJzYXgiKS5wbHkoIjw4IDE2IDQgMj4iKQogICAgLmxwZihzbGlkZXIoMTA5LDEwMCwyNTAwLDEpKS5scHEoMC45OCkKICAgIC52b2ljaW5nKCkKICAgIC5nYWluKC4zKQop" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Présentation de l'interface et essayons ensemble de décortiquer ce code</h3>
+
+      <h2>Votre premier pattern</h2>
+
+      <a class="repl-link" href="https://strudel.cc/#CnNvdW5kKCJiZCBoaCBzZCBoaCIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <p>
+        Essayer de remplacer <code>"bd"</code>, <code>"sd"</code> et <code>"hh"</code> par d'autres parties de la batterie</code>
+      </p>
+
+      <img src="https://strudel.cc/img/drumset.png" alt="Schéma d'une batterie" style="max-width:100%;margin:16px 0;">
+      
+      <h2>Raccourcis clavier</h2>
+      <table class="strudel">
+        <tr><th>Raccourci</th><th>Action</th></tr>
+        <tr><td><kbd>Ctrl+Entrée</kbd></td><td>Jouer / Relancer le pattern</td></tr>
+        <tr><td><kbd>Ctrl+.</kbd></td><td>Arrêter</td></tr>
+        <tr><td><kbd>Ctrl+Z</kbd></td><td>Annuler la dernière modification</td></tr>
+      </table>
+      
+      <a href="#des-rythmes" class="next-card">
+        <div>
+          <div class="nc-label">Section suivante</div>
+          <div class="nc-title">Des Rythmes</div>
+        </div>
+        <div class="nc-arrow">→</div>
+      </a>
+
+    </section>
+
+    <section id="des-rythmes">
+
+      <h2>Des Rythmes</h2>
+      <p>
+        La fonction <code>sound()</code> joue des échantillons audio, des samples, par leur nom.
+        Strudel dispose d'une large bibliothèque de sons : <code>casio</code>, <code>piano</code>,
+        <code>gtr</code>, <code>jazz</code>, <code>metal</code>, <code>crow</code> et bien évidemment des percussions…
+      </p>
+
+      <h2>Percussions</h2>
+
+      <table class="strudel">
+        <tr><th>Abréviation</th><th>Son</th></tr>
+        <tr><td><code>bd</code></td><td>Grosse caisse (bass drum)</td></tr>
+        <tr><td><code>sd</code></td><td>Caisse claire (snare drum)</td></tr>
+        <tr><td><code>hh</code></td><td>Hi-hat fermé</td></tr>
+        <tr><td><code>oh</code></td><td>Hi-hat ouvert</td></tr>
+        <tr><td><code>rim</code></td><td>Rimshot</td></tr>
+        <tr><td><code>lt</code> / <code>mt</code> / <code>ht</code></td><td>Toms bas / médium / aigu</td></tr>
+        <tr><td><code>rd</code></td><td>Ride</td></tr>
+        <tr><td><code>cr</code></td><td>Crash</td></tr>
+      </table>
+
+      <p>Utilisez <code>:n</code> pour choisir une variante d'un même son. (Chaque sample est en réalité un dossier de samples et non un sample unique)</p>
+      <a class="repl-link" href="https://strudel.cc/#CnNvdW5kKCJiZDoyIHNkOjQgaGg6OCBzZDoxIik%3D">--&gt; Ouvrir dans Strudel</a>
+
+      <h3>Changer de boîte à rythmes</h3>
+
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuYmFuaygiUm9sYW5kVFI5MDkiKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <p>Autres kits : <code>RolandTR808</code>, <code>AkaiLinn</code>, <code>RhythmAce</code>.</p>
+
+      <h2>Mini-notation</h2>
+
+      <h3>Silences — ~</h3>
+      <p><code>~</code> insère un silence à la place d'un événement :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIH4gc2QgfiIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Sous-séquences — [ ]</h3>
+      <p><code>[a b c]</code> regroupe plusieurs événements dans le même espace qu'un seul pas :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIFtoaCBoaF0gc2QgW2hoIHJpbV0iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Multiplication — *</h3>
+      <p><code>a*n</code> répète l'événement <code>n</code> fois dans l'espace d'un seul pas :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkKjIgaGgqNCIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Patterns parallèles — ,</h3>
+      <p><code>a, b</code> joue deux patterns simultanément dans le même cycle :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkKjIsIGhoKjQiKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Alternance cyclique — &lt; &gt;</h3>
+      <p><code>&lt;a b&gt;</code> joue une valeur différente à chaque cycle, en alternant :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIDxzZCByaW0+IGhoIDxvaCBoaD4iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Répétition immédiate — !</h3>
+      <p><code>a!</code> répète l'événement une fois de plus dans le même espace (équivalent à <code>a!2</code>) :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkISBzZCBoaCBzZCIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Rythme euclidien — (x,y)</h3>
+      <p><code>a(x,y)</code> répartit <code>x</code> coups le plus uniformément possible sur <code>y</code> pas :</p>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkKDMsOCkgaGgoNSw4KSBzZCgyLDgpIik=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h2>Durées et rythmes</h2>
+
+      <h3>Division / — étire la séquence</h3>
+      <p><code>[a b c]/n</code> distribue la sous-séquence sur <code>n</code> cycles, jouant un élément par cycle :</p>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiW2MgZSBnIGIgYzVdLzQiKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Chevrons — une note par cycle</h3>
+      <p><code>&lt;a b c&gt;</code> produit une note différente à chaque cycle, en parcourant la liste une valeur à la fois :</p>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiPGMgZSBnIGI+Iikuc291bmQoInBpYW5vIik=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Élongation @</h3>
+      <p><code>a@n</code> étire l'événement pour qu'il occupe <code>n</code> parts du cycle, au lieu d'une :</p>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiY0AzIGUgZyBiITIiKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h2>Patterns simultanés</h2>
+      <p>Le préfixe <code>$:</code> lance plusieurs patterns en même temps :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#JDogbm90ZSgiYzIgZWIyIGYyIGcyIikuc291bmQoInNhd3Rvb3RoIikuZ2FpbigwLjYpCiQ6IG5vdGUoImM0IGViNCBnNCBiYjQiKS5zb3VuZCgicGlhbm8iKS5nYWluKDAuNCk=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <div class="callout">
+        Ajoutez un underscore <code>_$:</code> pour mettre un pattern en sourdine sans le supprimer.
+      </div>
+
+
+      <h2>Tempo</h2>
+      <p><code>setcpm()</code> définit la vitesse en cycles par minute (défaut : 30) :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#c2V0Y3BtKDQ1KQpzb3VuZCgiYmQgc2QgaGggc2QiKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <div class="callout">
+        À 120 BPM en 4/4, le tempo Strudel équivalent est <code>setcpm(30)</code> — 1 cycle = 1 mesure de 4 temps.
+      </div>
+
+      <a href="#des-notes" class="next-card">
+        <div>
+          <div class="nc-label">Section suivante</div>
+          <div class="nc-title">Premières Notes</div>
+        </div>
+        <div class="nc-arrow">→</div>
+      </a>
+
+    </section>
+
+    <section id="des-notes">
+
+      <h2>Premières Notes</h2>
+      <p>Strudel permet de jouer des <strong>notes précises</strong> en plus des échantillons percussifs.</p>
+
+      <h3>Notes avec des nombres (MIDI)</h3>
+      <p><code>note()</code> accepte des numéros MIDI (0–127). Le Do central = 60 :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiNDggNTIgNTUgNTkiKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Notes avec des lettres</h3>
+      <p>Notation anglaise : <code>c d e f g a b</code> :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYyBlIGcgYiIpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Dièses, bémols et octaves</h3>
+      <p><code>#</code> = dièse, <code>b</code> = bémol, chiffre = octave (4 = centrale) :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYzIgZWIzIGc0IGJiNSIpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h2>Jouer sur des gammes</h2>
+      <p>Combinez <code>n()</code> et <code>scale()</code> — n'importe quel numéro sonne juste :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAyIDQgNiA3IDkiKS5zY2FsZSgiQzptYWpvciIpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <p>Essayez : <code>A:minor</code>, <code>D:pentatonic</code>, <code>G:blues</code>, <code>F:dorian</code>.</p>
+
+      <h2>Jouer des accords</h2>
+
+      <h3>Méthode 1 — superposer des notes à la main</h3>
+      <p>Dans la mini-notation, <code>[a,b,c]</code> (virgule sans espace) joue plusieurs notes simultanément dans le même pas :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiW2M0LGU0LGc0XSBbZDQsZjQsYTRdIFtlNCxnNCxiNF0gW2M0LGU0LGc0XSIpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Méthode 2 — chord() et voicing()</h3>
+      <p><code>chord()</code> interprète le nom de l'accord (ex. <code>C</code>, <code>Am</code>, <code>F7</code>…) et <code>voicing()</code> répartit les notes dans un registre naturel :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiPEMgQW0gRiBHPiIpLmNob3JkKCkudm9pY2luZygpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <div class="callout">
+        <strong>Bonus — renverser un accord avec anchor()</strong><br>
+        <code>anchor("note")</code> force la note la plus basse du voicing. Pratique pour obtenir des renversements :
+      </div>
+
+      <a class="repl-link" href="https://strudel.cc/#YW5jaG9yKCJlNCIpLm5vdGUoIjxDIEFtIEYgRz4iKS5jaG9yZCgpLnZvaWNpbmcoKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <a href="#des-effets" class="next-card">
+        <div>
+          <div class="nc-label">Section suivante</div>
+          <div class="nc-title">Premiers Effets</div>
+        </div>
+        <div class="nc-arrow">→</div>
+      </a>
+
+    </section>
+
+    <section id="des-effets">
+
+      <h2>Premiers Effets</h2>
+      <p>Les effets s'appliquent par chaînage avec un point <code>.</code>.</p>
+
+      <h3>Filtre passe-bas — lpf</h3>
+      <p>Contrôle la brillance (200 = sourd, 5000 = vif) :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYzMgZTMgZzMgYjMiKS5zb3VuZCgic2F3dG9vdGgiKS5scGYoODAwKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Effet voyelle — vowel</h3>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikudm93ZWwoImEgZSBpIG8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Volume — gain</h3>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYzMgZTMgZzMgYjMiKS5zb3VuZCgicGlhbm8iKS5nYWluKCIxIDAuNSAwLjggMC4zIik=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Écho — delay</h3>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImhoKjIiKS5kZWxheSgwLjgpLmRlbGF5dGltZSgwLjI1KS5kZWxheWZlZWRiYWNrKDAuNCk=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Réverbération — room</h3>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYzMgZTMgZzMgYjMiKS5zb3VuZCgicGlhbm8iKS5yb29tKDAuOCk=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Panoramique — pan</h3>
+      <p>0 = gauche, 0.5 = centre, 1 = droite :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikucGFuKCIwIDAuNzUgMSAwLjI1Iik=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Vitesse de lecture — speed</h3>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImNhc2lvOjEgY2FzaW86MiBjYXNpbzozIGNhc2lvOjEiKS5zcGVlZCgiMSAwLjUgMiAxLjUiKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Enveloppe ADSR</h3>
+      <table class="strudel">
+        <tr><th>Paramètre</th><th>Rôle</th></tr>
+        <tr><td><code>attack</code></td><td>Temps de montée (secondes)</td></tr>
+        <tr><td><code>decay</code></td><td>Descente vers le niveau de sustain</td></tr>
+        <tr><td><code>sustain</code></td><td>Niveau maintenu (0–1)</td></tr>
+        <tr><td><code>release</code></td><td>Extinction après relâchement</td></tr>
+      </table>
+
+      <a class="repl-link" href="https://strudel.cc/#Cm5vdGUoImMzIGUzIGczIGIzIikuc291bmQoInBpYW5vIikKICAuYXR0YWNrKDAuMDUpLmRlY2F5KDAuMSkuc3VzdGFpbigwLjUpLnJlbGVhc2UoMC40KQogIC8vLmFkc3IoIjAuMDU6MC4xOjAuNTowLjQiKQ%3D%3D" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h2>Signaux modulants</h2>
+      <p>Des formes d'onde font varier un paramètre dans le temps :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYzMgZTMgZzMgYjMiKS5zb3VuZCgic2F3dG9vdGgiKQogIC5scGYoc2luZS5yYW5nZSgyMDAsIDMwMDApKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <p>Signaux disponibles : <code>sine</code>, <code>saw</code>, <code>square</code>, <code>tri</code>, <code>rand</code>, <code>perlin</code>.</p>
+
+      <h2>Filtres</h2>
+      <p><code>lpf</code> est déjà présenté ci-dessus. Voici les autres filtres disponibles :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>lpq(n)</code></td><td>Résonance du filtre passe-bas</td><td>float ≥ 0</td></tr>
+        <tr><td><code>hpf(n)</code></td><td>Filtre passe-haut</td><td>fréquence Hz</td></tr>
+        <tr><td><code>hpq(n)</code></td><td>Résonance du filtre passe-haut</td><td>float ≥ 0</td></tr>
+        <tr><td><code>bpf(n)</code></td><td>Filtre passe-bande</td><td>fréquence centrale Hz</td></tr>
+        <tr><td><code>bpq(n)</code></td><td>Résonance du filtre passe-bande</td><td>float ≥ 0</td></tr>
+        <tr><td><code>ftype(n)</code></td><td>Type de filtre</td><td>0 = 12 dB, 1 = ladder, 2 = 24 dB</td></tr>
+        <tr><td><code>shape(n)</code></td><td>Waveshaping non-linéaire (saturation douce)</td><td>float ≥ 0</td></tr>
+      </table>
+
+      <h2>Résolution &amp; Distorsion</h2>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>coarse(n)</code></td><td>Réduction du sample rate (aliasing)</td><td>float ≥ 1</td></tr>
+        <tr><td><code>crush(n)</code></td><td>Réduction de la résolution — bitcrush</td><td>float ≥ 0</td></tr>
+        <tr><td><code>distort(n)</code></td><td>Distorsion audio</td><td><code>"distortion:postgain:type"</code></td></tr>
+      </table>
+
+      <h2>Tremolo</h2>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>tremolosync(n)</code></td><td>Synchronisation du tremolo au tempo</td><td>cycles / float</td></tr>
+        <tr><td><code>tremolodepth(n)</code></td><td>Profondeur de la modulation de volume</td><td>0 → 1</td></tr>
+        <tr><td><code>tremoloskew(n)</code></td><td>Asymétrie de la forme d'onde</td><td>float</td></tr>
+        <tr><td><code>tremolophase(n)</code></td><td>Décalage de phase</td><td>0 → 1</td></tr>
+        <tr><td><code>tremoloshape(n)</code></td><td>Forme d'onde du tremolo</td><td>0 → 1</td></tr>
+      </table>
+
+      <h2>Phaser</h2>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>phaser(n)</code></td><td>Effet phaser — vitesse de balayage</td><td>float</td></tr>
+        <tr><td><code>phaserdepth(n)</code></td><td>Profondeur du phaser</td><td>0 → 1</td></tr>
+        <tr><td><code>phasercenter(n)</code></td><td>Fréquence centrale du balayage</td><td>Hz</td></tr>
+        <tr><td><code>phasersweep(n)</code></td><td>Étendue du balayage</td><td>Hz</td></tr>
+      </table>
+
+      <h2>Réverbération avancée</h2>
+      <p><code>room</code> est déjà présenté ci-dessus. Paramètres complémentaires :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>roomsize(n)</code></td><td>Taille de la salle</td><td>0 → 10</td></tr>
+        <tr><td><code>roomlp(n)</code></td><td>Filtre passe-bas sur la reverb</td><td>Hz</td></tr>
+        <tr><td><code>roomdim(n)</code></td><td>Fréquence à −60 dB (absorption)</td><td>Hz</td></tr>
+        <tr><td><code>roomfade(n)</code></td><td>Temps de fondu de la reverb</td><td>secondes</td></tr>
+        <tr><td><code>ir(name)</code></td><td>Convolution par une réponse impulsionnelle</td><td>nom de sample</td></tr>
+      </table>
+
+      <a href="#effets-de-pattern" class="next-card">
+        <div>
+          <div class="nc-label">Section suivante</div>
+          <div class="nc-title">Effets de Pattern</div>
+        </div>
+        <div class="nc-arrow">→</div>
+      </a>
+
+    </section>
+
+    <section id="effets-de-pattern">
+
+      <h2>Effets de Pattern</h2>
+      <p>Ces fonctions modifient la <strong>structure temporelle</strong> du pattern.</p>
+
+      <h3>fast / slow</h3>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuZmFzdCgyKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Inverser — rev</h3>
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAxIDIgMyA0IDUgNiA3Iikuc2NhbGUoIkM6bWFqb3IiKS5zb3VuZCgicGlhbm8iKS5yZXYoKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Décalage stéréo — jux</h3>
+      <p>Pattern original à gauche, version transformée à droite :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAxIFs0IDNdIDIiKS5zY2FsZSgiQzptYWpvciIpLnNvdW5kKCJwaWFubyIpLmp1eChyZXYp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Transposer — add</h3>
+      <a class="repl-link" href="https://strudel.cc/#Cm5vdGUoImMyIFtlYjMsZzNdIi5hZGQoIjwwIDw0IC00Pj4iKSk%3D" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Multiplier les événements — ply</h3>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikucGx5KCI8MSAyIDM+Iik=" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h3>Copies décalées — off</h3>
+      <p><code>off(t, fn)</code> crée une copie décalée de <code>t</code> cycles, transformée par <code>fn</code> :</p>
+
+      <a class="repl-link" href="https://strudel.cc/#bigiMCBbNCAzXSAyIFt%2BIDFdIikuc2NhbGUoIkM6bWlub3IiKS5zb3VuZCgicGlhbm8iKQogIC5vZmYoMS84LCB4ID0%2BIHguYWRkKDcpKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <h2>Modifiers Temporels</h2>
+      <p><code>fast</code>, <code>slow</code> et <code>rev</code> sont déjà présentés ci-dessus. Autres transformations temporelles :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>early(n)</code></td><td>Avance les événements de <code>n</code> cycles</td></tr>
+        <tr><td><code>late(n)</code></td><td>Retarde les événements de <code>n</code> cycles</td></tr>
+        <tr><td><code>iter(n)</code></td><td>Décale le point de départ d'un pas à chaque cycle — effet de rotation</td></tr>
+        <tr><td><code>segment(n)</code></td><td>Découpe le cycle en <code>n</code> segments réguliers</td></tr>
+        <tr><td><code>chunk(n, fn)</code></td><td>Applique <code>fn</code> sur un bloc différent du pattern à chaque cycle</td></tr>
+      </table>
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAxIDIgMyIpLnNjYWxlKCJDOm1ham9yIikuc291bmQoInBpYW5vIikuaXRlcig0KQ==" target="_blank" rel="noopener">--&gt; iter — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuZWFybHkoIjAgMC4yNSAwIDAiKQ==" target="_blank" rel="noopener">--&gt; early — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuY2h1bmsoNCwgeCA9PiB4LmZhc3QoMikp" target="_blank" rel="noopener">--&gt; chunk — Ouvrir dans Strudel </a>
+
+      <h2>Modifiers Aléatoires</h2>
+      <p>Ces fonctions introduisent du hasard dans le pattern :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>degrade()</code></td><td>Supprime aléatoirement ~50 % des événements</td></tr>
+        <tr><td><code>degradeBy(p)</code></td><td>Supprime chaque événement avec une probabilité <code>p</code></td></tr>
+        <tr><td><code>undegrade()</code></td><td>Inverse de <code>degrade</code> — garde les événements supprimés</td></tr>
+        <tr><td><code>sometimes(fn)</code></td><td>Applique <code>fn</code> environ une fois sur deux</td></tr>
+        <tr><td><code>often(fn)</code></td><td>Applique <code>fn</code> avec probabilité élevée (~75 %)</td></tr>
+        <tr><td><code>rarely(fn)</code></td><td>Applique <code>fn</code> avec probabilité faible (~25 %)</td></tr>
+        <tr><td><code>almostNever(fn)</code></td><td>Applique <code>fn</code> très rarement</td></tr>
+        <tr><td><code>almostAlways(fn)</code></td><td>Applique <code>fn</code> presque toujours</td></tr>
+        <tr><td><code>choose([a,b,c])</code></td><td>Sélection aléatoire uniforme dans une liste</td></tr>
+        <tr><td><code>wchoose([[a,w],…])</code></td><td>Sélection pondérée selon les poids</td></tr>
+        <tr><td><code>rand</code></td><td>Signal continu aléatoire (0–1)</td></tr>
+        <tr><td><code>irand(n)</code></td><td>Entier aléatoire de 0 à n−1</td></tr>
+      </table>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImhoIGhoIGhoIGhoIGhoIGhoIGhoIGhoIikuZGVncmFkZUJ5KDAuNSk=" target="_blank" rel="noopener">--&gt; degradeBy — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuc29tZXRpbWVzKHggPT4geC5mYXN0KDIpKQ==" target="_blank" rel="noopener">--&gt; sometimes — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikucmFyZWx5KHggPT4geC5zcGVlZCgwLjUpKS5vZnRlbih4ID0+IHguZ2FpbigwLjgpKQ==" target="_blank" rel="noopener">--&gt; rarely + often — Ouvrir dans Strudel </a>
+
+      <h2>Modifiers Conditionnels</h2>
+      <p>Ces fonctions appliquent une transformation selon une condition ou un masque :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>firstOf(n, fn)</code></td><td>Applique <code>fn</code> sur le premier cycle parmi <code>n</code></td></tr>
+        <tr><td><code>lastOf(n, fn)</code></td><td>Applique <code>fn</code> sur le dernier cycle parmi <code>n</code></td></tr>
+        <tr><td><code>every(n, fn)</code></td><td>Applique <code>fn</code> tous les <code>n</code> cycles</td></tr>
+        <tr><td><code>when(cond, fn)</code></td><td>Applique <code>fn</code> quand le signal <code>cond</code> est vrai</td></tr>
+        <tr><td><code>mask(pattern)</code></td><td>Filtre les événements selon un masque binaire (0/1)</td></tr>
+        <tr><td><code>pick(n)</code></td><td>Sélectionne l'événement à l'index <code>n</code></td></tr>
+      </table>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuZmlyc3RPZig0LCB4ID0+IHguc3BlZWQoMikp" target="_blank" rel="noopener">--&gt; firstOf — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikubWFzaygiPDEgMCAxIDE+Iik=" target="_blank" rel="noopener">--&gt; mask — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikud2hlbigiPDEgMD4iLCB4ID0+IHguc3BlZWQoMikp" target="_blank" rel="noopener">--&gt; when — Ouvrir dans Strudel </a>
+
+      <h2>Fonctions Mélodiques</h2>
+      <p>Ces fonctions transforment les hauteurs de notes :</p>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>transpose(n)</code></td><td>Transpose toutes les notes de <code>n</code> demi-tons</td></tr>
+        <tr><td><code>scaleTranspose(n)</code></td><td>Transpose de <code>n</code> degrés à l'intérieur de la gamme courante</td></tr>
+        <tr><td><code>voicings(range?)</code></td><td>Convertit des symboles d'accord en voicings avec voice-leading fluide</td></tr>
+        <tr><td><code>rootNotes(oct?)</code></td><td>Transforme des symboles d'accord en notes fondamentales dans une octave donnée</td></tr>
+      </table>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiYyBlIGcgYiIpLnRyYW5zcG9zZSgiPDAgMiA0PiIpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; transpose — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAxIDIgMyIpLnNjYWxlKCJDOm1ham9yIikuc2NhbGVUcmFuc3Bvc2UoIjwwIDEgMj4iKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; scaleTranspose — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiPEMgQW0gRiBHPiIpLnZvaWNpbmdzKCkuc291bmQoInBpYW5vIik=" target="_blank" rel="noopener">--&gt; voicings — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiPEMgQW0gRiBHPiIpLnJvb3ROb3RlcygyKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; rootNotes — Ouvrir dans Strudel </a>
+
+      <h2>Combiner les effets</h2>
+
+      <a class="repl-link" href="https://strudel.cc/#bigiMCAxIDIgMyIpLnNjYWxlKCJBOm1pbm9yIikuc291bmQoInBpYW5vIikKICAuanV4KHJldikub2ZmKDEvNCwgeCA9PiB4LmFkZCg3KS5nYWluKDAuNSkp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+      <a href="#recap" class="next-card">
+        <div>
+          <div class="nc-label">Section suivante</div>
+          <div class="nc-title">Récapitulatif</div>
+        </div>
+        <div class="nc-arrow">→</div>
+      </a>
+
+    </section>
+
+    <section id="recap">
+
+      <h2>Récapitulatif</h2>
+      <p>Résumé de toutes les fonctions et notations vues dans cet atelier.</p>
+
+      <h3>Mini-notation</h3>
+      <table class="strudel">
+        <tr><th>Syntaxe</th><th>Description</th><th>Exemple</th></tr>
+        <tr><td><code>a b c</code></td><td>Séquence</td><td><code>sound("bd sd hh")</code></td></tr>
+        <tr><td><code>:n</code></td><td>Variante</td><td><code>sound("casio:2")</code></td></tr>
+        <tr><td><code>~</code></td><td>Silence</td><td><code>sound("bd ~ sd ~")</code></td></tr>
+        <tr><td><code>[a b]</code></td><td>Sous-séquence</td><td><code>sound("bd [hh hh] sd")</code></td></tr>
+        <tr><td><code>a*n</code></td><td>Multiplication</td><td><code>sound("hh*4")</code></td></tr>
+        <tr><td><code>a,b</code></td><td>Parallèle</td><td><code>sound("bd*2, hh*4")</code></td></tr>
+        <tr><td><code>&lt;a b&gt;</code></td><td>Alternance cyclique</td><td><code>sound("&lt;bd rim&gt;")</code></td></tr>
+        <tr><td><code>/n</code></td><td>Division</td><td><code>note("[c e g]/3")</code></td></tr>
+        <tr><td><code>a@n</code></td><td>Élongation</td><td><code>note("c@3 e g")</code></td></tr>
+        <tr><td><code>a!n</code></td><td>Réplication</td><td><code>note("c!2 e g")</code></td></tr>
+        <tr><td><code>a!</code></td><td>Répétition immédiate</td><td><code>sound("bd! sd hh sd")</code></td></tr>
+        <tr><td><code>a(x,y)</code></td><td>Rythme euclidien (x coups sur y pas)</td><td><code>sound("bd(3,8)")</code></td></tr>
+        <tr><td><code>_</code></td><td>Maintien de l'événement précédent</td><td><code>note("c _ e _")</code></td></tr>
+        <tr><td><code>{a b}</code></td><td>Polymètre indépendant du cycle</td><td><code>sound("{bd hh sd}%4")</code></td></tr>
+        <tr><td><code>a?</code></td><td>Événement probabiliste (~50 % de chance)</td><td><code>sound("bd? sd hh?")</code></td></tr>
+        <tr><td><code>a | b</code></td><td>Alternative structurelle aléatoire</td><td><code>sound("bd | sd")</code></td></tr>
+      </table>
+
+      <h3>Sons</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>sound("bd")</code></td><td>Joue un son nommé</td></tr>
+        <tr><td><code>bank("RolandTR909")</code></td><td>Sélectionne un kit de batterie</td></tr>
+        <tr><td><code>n("0 1 2")</code></td><td>Numéros d'échantillons</td></tr>
+        <tr><td><code>setcpm(40)</code></td><td>Tempo en cycles par minute</td></tr>
+      </table>
+
+      <h3>Notes</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>note("c e g")</code></td><td>Notes par lettres</td></tr>
+        <tr><td><code>note("60 64 67")</code></td><td>Notes MIDI (0–127)</td></tr>
+        <tr><td><code>n("0 2 4").scale("C:major")</code></td><td>Notes dans une gamme</td></tr>
+        <tr><td><code>$: pattern</code></td><td>Patterns simultanés</td></tr>
+        <tr><td><code>_$: pattern</code></td><td>Pattern en sourdine</td></tr>
+      </table>
+
+      <h3>Effets audio</h3>
+      <table class="strudel">
+        <tr><th>Catégorie</th><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td>Volume</td><td><code>gain(n)</code></td><td>Volume du signal</td><td>float ≥ 0</td></tr>
+        <tr><td>Stéréo</td><td><code>pan(n)</code></td><td>Panoramique stéréo</td><td>0 (gauche) → 1 (droite)</td></tr>
+        <tr><td>Lecture</td><td><code>speed(n)</code></td><td>Vitesse de lecture du sample</td><td>float (−n = lecture inversée)</td></tr>
+        <tr><td rowspan="7">Filtres</td><td><code>lpf(n)</code></td><td>Filtre passe-bas</td><td>Hz</td></tr>
+        <tr><td><code>lpq(n)</code></td><td>Résonance passe-bas</td><td>float ≥ 0</td></tr>
+        <tr><td><code>hpf(n)</code></td><td>Filtre passe-haut</td><td>Hz</td></tr>
+        <tr><td><code>hpq(n)</code></td><td>Résonance passe-haut</td><td>float ≥ 0</td></tr>
+        <tr><td><code>bpf(n)</code></td><td>Filtre passe-bande</td><td>Hz central</td></tr>
+        <tr><td><code>bpq(n)</code></td><td>Résonance passe-bande</td><td>float ≥ 0</td></tr>
+        <tr><td><code>vowel(s)</code></td><td>Filtre formant vocal</td><td>"a e i o u"</td></tr>
+        <tr><td>Saturation</td><td><code>shape(n)</code></td><td>Waveshaping / saturation douce</td><td>float ≥ 0</td></tr>
+        <tr><td>Distorsion</td><td><code>distort(n)</code></td><td>Distorsion audio</td><td>"distortion:postgain:type"</td></tr>
+        <tr><td rowspan="2">Résolution</td><td><code>coarse(n)</code></td><td>Réduction du sample rate</td><td>float ≥ 1</td></tr>
+        <tr><td><code>crush(n)</code></td><td>Bitcrush</td><td>float ≥ 0</td></tr>
+        <tr><td rowspan="4">Enveloppe</td><td><code>attack(n)</code></td><td>Temps de montée</td><td>secondes</td></tr>
+        <tr><td><code>decay(n)</code></td><td>Descente vers le sustain</td><td>secondes</td></tr>
+        <tr><td><code>sustain(n)</code></td><td>Niveau maintenu</td><td>0 → 1</td></tr>
+        <tr><td><code>release(n)</code></td><td>Extinction après relâchement</td><td>secondes</td></tr>
+        <tr><td rowspan="5">Tremolo</td><td><code>tremolosync(n)</code></td><td>Synchro tremolo au tempo</td><td>cycles</td></tr>
+        <tr><td><code>tremolodepth(n)</code></td><td>Profondeur du tremolo</td><td>0 → 1</td></tr>
+        <tr><td><code>tremoloskew(n)</code></td><td>Asymétrie de la forme</td><td>float</td></tr>
+        <tr><td><code>tremolophase(n)</code></td><td>Décalage de phase</td><td>0 → 1</td></tr>
+        <tr><td><code>tremoloshape(n)</code></td><td>Forme d'onde</td><td>0 → 1</td></tr>
+        <tr><td rowspan="4">Phaser</td><td><code>phaser(n)</code></td><td>Vitesse du phaser</td><td>float</td></tr>
+        <tr><td><code>phaserdepth(n)</code></td><td>Profondeur</td><td>0 → 1</td></tr>
+        <tr><td><code>phasercenter(n)</code></td><td>Fréquence centrale</td><td>Hz</td></tr>
+        <tr><td><code>phasersweep(n)</code></td><td>Étendue du balayage</td><td>Hz</td></tr>
+        <tr><td rowspan="3">Delay</td><td><code>delay(n)</code></td><td>Niveau d'envoi vers le delay</td><td>0 → 1</td></tr>
+        <tr><td><code>delaytime(n)</code></td><td>Temps de retard</td><td>cycles / fractions</td></tr>
+        <tr><td><code>delayfeedback(n)</code></td><td>Feedback</td><td>0 → 1</td></tr>
+        <tr><td rowspan="6">Reverb</td><td><code>room(n)</code></td><td>Niveau d'envoi vers la reverb</td><td>0 → 1</td></tr>
+        <tr><td><code>roomsize(n)</code></td><td>Taille de la salle</td><td>0 → 10</td></tr>
+        <tr><td><code>roomlp(n)</code></td><td>Filtre passe-bas de la reverb</td><td>Hz</td></tr>
+        <tr><td><code>roomdim(n)</code></td><td>Fréquence à −60 dB</td><td>Hz</td></tr>
+        <tr><td><code>roomfade(n)</code></td><td>Temps de fondu</td><td>secondes</td></tr>
+        <tr><td><code>ir(name)</code></td><td>Convolution par réponse impulsionnelle</td><td>nom de sample</td></tr>
+        <tr><td>Modulation</td><td><code>sine.range(a,b)</code></td><td>Signal oscillant pour moduler un paramètre</td><td>voir signaux : sine, saw, square, tri, rand, perlin</td></tr>
+      </table>
+
+      <h3>Effets de pattern — Temporels</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>fast(n)</code></td><td>Accélère le pattern (×n)</td></tr>
+        <tr><td><code>slow(n)</code></td><td>Ralentit le pattern (÷n)</td></tr>
+        <tr><td><code>rev()</code></td><td>Inverse l'ordre des événements</td></tr>
+        <tr><td><code>early(n)</code></td><td>Avance les événements de n cycles</td></tr>
+        <tr><td><code>late(n)</code></td><td>Retarde les événements de n cycles</td></tr>
+        <tr><td><code>iter(n)</code></td><td>Rotation du point de départ à chaque cycle</td></tr>
+        <tr><td><code>segment(n)</code></td><td>Découpe le cycle en n segments réguliers</td></tr>
+        <tr><td><code>ply(n)</code></td><td>Répète chaque événement n fois dans son espace</td></tr>
+        <tr><td><code>chunk(n, fn)</code></td><td>Applique fn sur un bloc différent à chaque cycle</td></tr>
+        <tr><td><code>jux(fn)</code></td><td>Original à gauche, version transformée à droite</td></tr>
+        <tr><td><code>off(t, fn)</code></td><td>Copie décalée de t cycles, transformée par fn</td></tr>
+        <tr><td><code>add(n)</code></td><td>Ajoute n à chaque valeur (transpose, décale…)</td></tr>
+      </table>
+
+      <h3>Effets de pattern — Aléatoires</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>degrade()</code></td><td>Supprime ~50 % des événements aléatoirement</td></tr>
+        <tr><td><code>degradeBy(p)</code></td><td>Supprime avec probabilité p</td></tr>
+        <tr><td><code>undegrade()</code></td><td>Garde les événements que degrade supprimerait</td></tr>
+        <tr><td><code>sometimes(fn)</code></td><td>Applique fn environ une fois sur deux</td></tr>
+        <tr><td><code>often(fn)</code></td><td>Applique fn ~75 % du temps</td></tr>
+        <tr><td><code>rarely(fn)</code></td><td>Applique fn ~25 % du temps</td></tr>
+        <tr><td><code>almostNever(fn)</code></td><td>Applique fn très rarement</td></tr>
+        <tr><td><code>almostAlways(fn)</code></td><td>Applique fn presque toujours</td></tr>
+        <tr><td><code>choose([a,b,c])</code></td><td>Sélection aléatoire uniforme dans une liste</td></tr>
+        <tr><td><code>wchoose([[a,w],…])</code></td><td>Sélection pondérée</td></tr>
+        <tr><td><code>rand</code></td><td>Signal continu aléatoire (0–1)</td></tr>
+        <tr><td><code>irand(n)</code></td><td>Entier aléatoire de 0 à n−1</td></tr>
+      </table>
+
+      <h3>Effets de pattern — Conditionnels</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>firstOf(n, fn)</code></td><td>Applique fn sur le 1er cycle parmi n</td></tr>
+        <tr><td><code>lastOf(n, fn)</code></td><td>Applique fn sur le dernier cycle parmi n</td></tr>
+        <tr><td><code>every(n, fn)</code></td><td>Applique fn tous les n cycles</td></tr>
+        <tr><td><code>when(cond, fn)</code></td><td>Applique fn quand le signal cond est vrai</td></tr>
+        <tr><td><code>mask(pattern)</code></td><td>Filtre les événements selon un masque binaire</td></tr>
+        <tr><td><code>pick(n)</code></td><td>Sélectionne l'événement à l'index n</td></tr>
+      </table>
+
+      <h3>Fonctions Mélodiques</h3>
+      <table class="strudel">
+        <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>scale(name)</code></td><td>Définit la gamme (ex. "C:major", "A:minor")</td></tr>
+        <tr><td><code>transpose(n)</code></td><td>Transpose toutes les notes de n demi-tons</td></tr>
+        <tr><td><code>scaleTranspose(n)</code></td><td>Transpose de n degrés dans la gamme courante</td></tr>
+        <tr><td><code>chord()</code></td><td>Interprète le nom d'un accord (C, Am, F7…)</td></tr>
+        <tr><td><code>voicing()</code></td><td>Répartit l'accord dans un registre naturel</td></tr>
+        <tr><td><code>voicings(range?)</code></td><td>Version avancée avec voice-leading fluide</td></tr>
+        <tr><td><code>anchor(note)</code></td><td>Force la note la plus basse du voicing (renversement)</td></tr>
+        <tr><td><code>rootNotes(oct?)</code></td><td>Extrait la fondamentale d'un accord dans l'octave donnée</td></tr>
+      </table>
+
+      <h2>Exemple final</h2>
+
+      <a class="repl-link" href="https://strudel.cc/#JDogc291bmQoImJkKjIsIFt%2BIHNkXSoyLCBoaCo4IikKICAgIC5iYW5rKCJSb2xhbmRUUjkwOSIpCgokOiBuKCIwIFsyIDRdIDMgW34gMV0iKS5zY2FsZSgiQTptaW5vciIpCiAgICAuc291bmQoInBpYW5vIikucm9vbSgwLjQpLmdhaW4oMC42KQogICAgLm9mZigxLzgsIHggPT4geC5hZGQoNykuZ2FpbigwLjQpKQoKJDogbm90ZSgiYTEgYzIgZTIgZzIiKS5zb3VuZCgic2F3dG9vdGgiKQogICAgLmxwZihwZXJsaW4ucmFuZ2UoMzAwLCAyMDAwKSkuZ2FpbigwLjQp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+
+    </section>
+
+    <section id="aller-plus-loin">
+
+      <h2>Aller plus loin</h2>
+
+      <p>La documentation officielle de Strudel est disponible sur <a href="https://strudel.cc/learn/" target="_blank" rel="noopener">strudel.cc/learn</a>.</p>
+
+      <h3>Visualisations et interfaces graphiques</h3>
+
+      <p>Strudel propose plusieurs visualisations qui s'attachent à un pattern pour en afficher le contenu en temps réel.</p>
+
+      <table class="strudel">
+        <tr>
+          <th>Fonction</th>
+          <th>Description</th>
+        </tr>
+        <tr><td><code>.slider()</code></td><td>Crée un curseur pour contrôler dynamiquement la valeur d'un paramètre</td></tr>
+        <tr><td><code>.pianoroll()</code></td><td>Piano roll flottant : affiche les hauteurs dans le temps dans une fenêtre séparée</td></tr>
+        <tr><td><code>.spiral()</code></td><td>Visualisation circulaire du pattern dans une fenêtre séparée</td></tr>
+        <tr><td><code>.scope()</code></td><td>Visualisation oscilloscope</td></tr>
+        <tr><td><code>._pianoroll()</code></td><td>Piano roll inline, directement dans l'éditeur</td></tr>
+        <tr><td><code>._punchcard()</code></td><td>Grille rythmique inline (punch card)</td></tr>
+        <tr><td><code>._spiral()</code></td><td>Spirale inline, directement dans l'éditeur</td></tr>
+        <tr><td><code>._scope()</code></td><td>Visualisation oscilloscope inline, directement dans l'éditeur</td></tr>
+      </table>
+
+      <pre><code>// Piano roll flottant
+note("c3 e3 g3 b3").pianoroll()
+
+// Spirale inline
+note("c3 [e3 g3] b3")._spiral()
+
+// Slider pour contrôler le gain en direct
+sound("bd sd").gain(slider(0.8, 0, 1))</code></pre>
+        <br>
+
+      <h4>Souris</h4>
+
+      <p>Strudel expose deux fonctions pour utiliser la position de la souris comme source de contrôle :</p>
+
+      <table class="strudel">
+        <tr>
+          <th>Fonction</th>
+          <th>Description</th>
+        </tr>
+        <tr><td><code>mousex</code></td><td>Position horizontale de la souris (valeur entre 0 et 1)</td></tr>
+        <tr><td><code>mousey</code></td><td>Position verticale de la souris (valeur entre 0 et 1)</td></tr>
+      </table>
+
+      <pre><code>// Le cutoff du filtre suit la position horizontale de la souris
+sound("bd*4 sd*2").cutoff(mousex.range(200, 4000))
+
+// Le gain suit la position verticale (haut = fort)
+note("c3 e3 g3").gain(mousey)</code></pre>
+        <br>
+
+      <h3>Ajouter des packs de samples</h3>
+
+      <p>
+        Strudel permet d'utiliser des samples hébergés sur GitHub directement dans tes patterns.
+        Utilise <a href="https://strudel.tidalcycles.org/samples" target="_blank" rel="noopener">strudel samples</a>
+        pour explorer et prévisualiser les packs disponibles.
+      </p>
+
+      <p>Pour charger un pack, utilise <code>samples()</code> avec le raccourci GitHub en début de pattern :</p>
+
+      <pre><code>await samples('github:tidalcycles/Dirt-Samples')
+sound("bd sd hh")</code></pre>
+
+      <table class="strudel">
+        <tr>
+          <th>Pack</th>
+          <th>Raccourci GitHub</th>
+          <th>Source</th>
+        </tr>
+        <tr><td>algorave-dave/samples</td><td><code>github:algorave-dave/samples</code></td><td><a href="https://github.com/algorave-dave/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>AuditeMarlow/samples</td><td><code>github:AuditeMarlow/samples</code></td><td><a href="https://github.com/AuditeMarlow/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>AustinOliverHaskell/ms-teams-sounds-strudel</td><td><code>github:AustinOliverHaskell/ms-teams-sounds-strudel</code></td><td><a href="https://github.com/AustinOliverHaskell/ms-teams-sounds-strudel" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>bruveping/RepositorioDesonidosParaExperimentar02</td><td><code>github:bruveping/RepositorioDesonidosParaExperimentar02</code></td><td><a href="https://github.com/bruveping/RepositorioDesonidosParaExperimentar02" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>Bubobubobubobubo/Dough-Amen</td><td><code>github:Bubobubobubobubo/Dough-Amen</code></td><td><a href="https://github.com/Bubobubobubobubo/Dough-Amen" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>Bubobubobubobubo/Dough-Juj</td><td><code>github:Bubobubobubobubo/Dough-Juj</code></td><td><a href="https://github.com/Bubobubobubobubo/Dough-Juj" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>eddyflux/crate</td><td><code>github:eddyflux/crate</code></td><td><a href="https://github.com/eddyflux/crate" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>EloMorelo/samples</td><td><code>github:EloMorelo/samples</code></td><td><a href="https://github.com/EloMorelo/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>emrexdeger/strudelSamples</td><td><code>github:emrexdeger/strudelSamples</code></td><td><a href="https://github.com/emrexdeger/strudelSamples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>fjpolo/fjpolo-Strudel</td><td><code>github:fjpolo/fjpolo-Strudel</code></td><td><a href="https://github.com/fjpolo/fjpolo-Strudel" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>fstiffo/polifonia-samples</td><td><code>github:fstiffo/polifonia-samples</code></td><td><a href="https://github.com/fstiffo/polifonia-samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>hvillase/cavlp-25p</td><td><code>github:hvillase/cavlp-25p</code></td><td><a href="https://github.com/hvillase/cavlp-25p" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>k09/samples</td><td><code>github:k09/samples</code></td><td><a href="https://github.com/k09/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>kaiye10/strudelSamples</td><td><code>github:kaiye10/strudelSamples</code></td><td><a href="https://github.com/kaiye10/strudelSamples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>mot4i/garden</td><td><code>github:mot4i/garden</code></td><td><a href="https://github.com/mot4i/garden" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>mysinglelise/msl-strudel-samples</td><td><code>github:mysinglelise/msl-strudel-samples</code></td><td><a href="https://github.com/mysinglelise/msl-strudel-samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>Nikeryms/Samples</td><td><code>github:Nikeryms/Samples</code></td><td><a href="https://github.com/Nikeryms/Samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>prismograph/departure</td><td><code>github:prismograph/departure</code></td><td><a href="https://github.com/prismograph/departure" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>QuantumVillage/quantum-music</td><td><code>github:QuantumVillage/quantum-music</code></td><td><a href="https://github.com/QuantumVillage/quantum-music" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>RikyBac15/samples</td><td><code>github:RikyBac15/samples</code></td><td><a href="https://github.com/RikyBac15/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>salsicha/capoeira_strudel</td><td><code>github:salsicha/capoeira_strudel</code></td><td><a href="https://github.com/salsicha/capoeira_strudel" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>sonidosingapura/rochormatic</td><td><code>github:sonidosingapura/rochormatic</code></td><td><a href="https://github.com/sonidosingapura/rochormatic" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>terrorhank/samples</td><td><code>github:terrorhank/samples</code></td><td><a href="https://github.com/terrorhank/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>tesspilot/samples</td><td><code>github:tesspilot/samples</code></td><td><a href="https://github.com/tesspilot/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>tidalcycles/Dirt-Samples</td><td><code>github:tidalcycles/Dirt-Samples</code></td><td><a href="https://github.com/tidalcycles/Dirt-Samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>TodePond/samples</td><td><code>github:TodePond/samples</code></td><td><a href="https://github.com/TodePond/samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>TristanCacqueray/mirus</td><td><code>github:TristanCacqueray/mirus</code></td><td><a href="https://github.com/TristanCacqueray/mirus" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>Veikkosuhonen/graffathon25-demo</td><td><code>github:Veikkosuhonen/graffathon25-demo</code></td><td><a href="https://github.com/Veikkosuhonen/graffathon25-demo" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>wyan/livecoding-samples</td><td><code>github:wyan/livecoding-samples</code></td><td><a href="https://github.com/wyan/livecoding-samples" target="_blank" rel="noopener"></a></td></tr>
+        <tr><td>yaxu/clean-breaks</td><td><code>github:yaxu/clean-breaks</code></td><td><a href="https://github.com/yaxu/clean-breaks" target="_blank" rel="noopener"></a></td></tr>
+      </table>
+
+      <h3>Live coding visuel</h3>
+
+      <p><a href="https://hydra.ojack.xyz" target="_blank" rel="noopener">Hydra</a> est un environnement de live coding visuel qui génère des visuels en temps réel directement dans le navigateur, conçu pour être utilisé en performance aux côtés d'outils comme Strudel.</p>
+
+      <p><a href="https://www.teddavis.org/p5live/" target="_blank" rel="noopener">p5LIVE</a> est un éditeur de live coding basé sur p5.js pour créer des visuels génératifs en temps réel.</p>
+
+      <h3>Communauté &amp; ressources</h3>
+      <ul>
+        <li><a href="https://flok.cc" target="_blank" rel="noopener">Flok</a> — live coder à plusieurs</li>
+        <li><a href="https://livecoding.fr" target="_blank" rel="noopener">livecoding.fr</a> </li>
+        <li><a href="https://cookie.paris" target="_blank" rel="noopener">La Cookie Collective</a> </li>
+        <li><a href="https://toplap.org" target="_blank" rel="noopener">TOPLAP</a></li>
+        <li><a href="https://discord.gg/t4564PA9qA" target="_blank" rel="noopener">Discord de Strudel</a> </li>
+        <li><a href="https://codeberg.org/uzu/strudel" target="_blank" rel="noopener">Codeberg de Strudel</a> </li>
+      </ul>
+
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('current', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '0px 0px -60% 0px', threshold: 0.05 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
