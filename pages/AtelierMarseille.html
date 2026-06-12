@@ -1066,23 +1066,5 @@ sound("bd sd hh")</code></pre>
 
   </main>
 </div>
-
-<script>
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-item[href^="#"]');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.toggle('current', link.getAttribute('href') === '#' + id);
-        });
-      }
-    });
-  }, { rootMargin: '0px 0px -60% 0px', threshold: 0.05 });
-
-  sections.forEach(s => observer.observe(s));
-</script>
 </body>
 </html>
