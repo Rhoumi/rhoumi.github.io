@@ -473,14 +473,14 @@ a.next-card:hover { background: #eee; }
       <h3>Méthode 2 — chord() et voicing()</h3>
       <p><code>chord()</code> interprète le nom de l'accord (ex. <code>C</code>, <code>Am</code>, <code>F7</code>…) et <code>voicing()</code> répartit les notes dans un registre naturel :</p>
 
-      <a class="repl-link" href="https://strudel.cc/#bm90ZSgiPEMgQW0gRiBHPiIpLmNob3JkKCkudm9pY2luZygpLnNvdW5kKCJwaWFubyIp" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#CmNob3JkKCI8QW0gQyBEIEYgQW0gRSBBbSBFPiIpLnZvaWNpbmcoKS5zb3VuZCgicGlhbm8iKQ%3D%3D" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
 
       <div class="callout">
         <strong>Bonus — renverser un accord avec anchor()</strong><br>
         <code>anchor("note")</code> force la note la plus basse du voicing. Pratique pour obtenir des renversements :
       </div>
 
-      <a class="repl-link" href="https://strudel.cc/#YW5jaG9yKCJlNCIpLm5vdGUoIjxDIEFtIEYgRz4iKS5jaG9yZCgpLnZvaWNpbmcoKS5zb3VuZCgicGlhbm8iKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#CmFuY2hvcigiZTQiKS5jaG9yZCgiPEMgQW0gRiBHPiIpLnZvaWNpbmcoKS5zb3VuZCgicGlhbm8iKQ%3D%3D" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
 
       <a href="#des-effets" class="next-card">
         <div>
@@ -662,7 +662,7 @@ a.next-card:hover { background: #eee; }
         <tr><td><code>irand(n)</code></td><td>Entier aléatoire de 0 à n−1</td></tr>
       </table>
       <a class="repl-link" href="https://strudel.cc/#c291bmQoImhoIGhoIGhoIGhoIGhoIGhoIGhoIGhoIikuZGVncmFkZUJ5KDAuNSk=" target="_blank" rel="noopener">--&gt; degradeBy — Ouvrir dans Strudel </a>
-      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuc29tZXRpbWVzKHggPT4geC5mYXN0KDIpKQ==" target="_blank" rel="noopener">--&gt; sometimes — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#CnNvdW5kKCJiZCBzZCBoaCBzZCIpLnNvbWV0aW1lcyhmYXN0KDIpKQ%3D%3D" target="_blank" rel="noopener">--&gt; sometimes — Ouvrir dans Strudel </a>
       <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikucmFyZWx5KHggPT4geC5zcGVlZCgwLjUpKS5vZnRlbih4ID0+IHguZ2FpbigwLjgpKQ==" target="_blank" rel="noopener">--&gt; rarely + often — Ouvrir dans Strudel </a>
 
       <h2>Modifiers Conditionnels</h2>
@@ -862,6 +862,87 @@ a.next-card:hover { background: #eee; }
     <section id="aller-plus-loin">
 
       <h2>Aller plus loin</h2>
+
+      <h2>Mon setup de live</h2>
+
+      <h3>livecoding</h3>
+      <table class="strudel">
+        <tr><th>Outil</th><th>Description</th></tr>
+        <tr><td><a href="https://cagire.raphaelforment.fr" target="_blank" rel="noopener"><code>Cagire</code></a></td><td>Live coding en Forth dans un moteur audio en Rust.</td></tr>
+        <tr><td><a href="https://sardine.raphaelforment.fr" target="_blank" rel="noopener"><code>Sardine</code></a></td><td>Live coding en Python accompagné de mon setup SuperCollider ou de synthétiseurs.</td></tr>
+      </table>
+
+      <h3>des petits synthétiseurs hardware open-source</h3>
+      <table class="strudel">
+        <tr><th>Synthétiseur</th><th>Description</th></tr>
+        <tr><td><code>Plinky</code></td><td>Synthétiseur capacitif et qui réagit aux mouvements</td></tr>
+        <tr><td><code>Touch2</code></td><td>Contrôleur et synthétiseur tactile que je peux reprogrammer avec mes codes</td></tr>
+        <tr><td><code>Zeptocore</code></td><td>Machine à breakcore</td></tr>
+      </table>
+
+      <h2>Synthèse audio</h2>
+      <p>Strudel peut jouer des oscillateurs et synthétiseurs directement dans le navigateur, en plus des samples.</p>
+
+      <h3>Formes d'onde de base</h3>
+      <p>Sélectionnées via <code>sound()</code>. Si une note est définie sans son spécifié, <code>triangle</code> est utilisé par défaut.</p>
+      <table class="strudel">
+        <tr><th>Synthé</th><th>Description</th></tr>
+        <tr><td><code>sine</code></td><td>Onde sinusoïdale — son pur, sans harmoniques</td></tr>
+        <tr><td><code>sawtooth</code></td><td>Onde en dents de scie — riche en harmoniques</td></tr>
+        <tr><td><code>square</code></td><td>Onde carrée — son creux et nasal</td></tr>
+        <tr><td><code>triangle</code></td><td>Onde triangulaire — son doux (par défaut)</td></tr>
+      </table>
+
+      <h3>Bruit</h3>
+      <table class="strudel">
+        <tr><th>Synthé / Paramètre</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>white</code></td><td>Bruit blanc — le plus dur et brillant</td><td>—</td></tr>
+        <tr><td><code>pink</code></td><td>Bruit rose — intermédiaire</td><td>—</td></tr>
+        <tr><td><code>brown</code></td><td>Bruit brun — le plus doux et grave</td><td>—</td></tr>
+        <tr><td><code>noise(n)</code></td><td>Ajoute du bruit rose à n'importe quel oscillateur</td><td>0 → 1</td></tr>
+        <tr><td><code>crackle()</code></td><td>Bruit avec craquèlements subtils</td><td>—</td></tr>
+        <tr><td><code>density(n)</code></td><td>Quantité de craquèlement (avec <code>crackle</code>)</td><td>0.01 → 0.5</td></tr>
+      </table>
+
+      <h3>Vibrato</h3>
+      <table class="strudel">
+        <tr><th>Paramètre</th><th>Synonymes</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>vib(n)</code></td><td><code>vibrato</code>, <code>v</code></td><td>Fréquence du vibrato</td><td>Hz</td></tr>
+        <tr><td><code>vibmod(n)</code></td><td><code>vmod</code></td><td>Profondeur du vibrato</td><td>demi-tons</td></tr>
+      </table>
+
+      <h3>Synthèse FM</h3>
+      <p><code>fmh</code> contrôle la couleur sonore : valeurs entières = sonorité naturelle, valeurs décimales = sonorité métallique.</p>
+      <table class="strudel">
+        <tr><th>Paramètre</th><th>Synonymes</th><th>Description</th></tr>
+        <tr><td><code>fmh(n)</code></td><td>—</td><td>Rapport d'harmonicité — couleur du son FM</td></tr>
+        <tr><td><code>fmattack(n)</code></td><td><code>fmatt</code></td><td>Temps d'attaque de l'enveloppe FM</td></tr>
+        <tr><td><code>fmdecay(n)</code></td><td><code>fmdec</code></td><td>Temps de déclin jusqu'au sustain FM</td></tr>
+        <tr><td><code>fmsustain(n)</code></td><td><code>fmsus</code></td><td>Niveau de modulation après déclin</td></tr>
+        <tr><td><code>fmenv(s)</code></td><td><code>fme</code></td><td>Type de courbe d'enveloppe (<code>lin</code> ou <code>exp</code>)</td></tr>
+      </table>
+
+      <h3>Synthèse Wavetable</h3>
+      <p>Charge des formes d'onde personnalisées via le préfixe <code>wt_</code>.</p>
+      <table class="strudel">
+        <tr><th>Paramètre</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>loopBegin(n)</code></td><td>Point de départ du scan dans la wavetable</td><td>0 → 1</td></tr>
+        <tr><td><code>loopEnd(n)</code></td><td>Point de fin du scan dans la wavetable</td><td>0 → 1</td></tr>
+      </table>
+
+      <h3>ZZFX</h3>
+      <p>Moteur de synthèse intégré, orienté effets et distorsion.</p>
+      <table class="strudel">
+        <tr><th>Paramètre</th><th>Description</th></tr>
+        <tr><td><code>curve</code></td><td>Courbe de forme de l'oscillateur</td></tr>
+        <tr><td><code>slide</code></td><td>Glissement de fréquence (pitch slide)</td></tr>
+        <tr><td><code>zmod</code></td><td>Modulation de fréquence interne</td></tr>
+        <tr><td><code>zcrush</code></td><td>Bitcrusher intégré</td></tr>
+        <tr><td><code>zdelay</code></td><td>Délai intégré</td></tr>
+        <tr><td><code>pitchJump</code></td><td>Saut de hauteur en cours de note</td></tr>
+        <tr><td><code>lfo</code></td><td>LFO intégré</td></tr>
+        <tr><td><code>tremolo</code></td><td>Tremolo intégré</td></tr>
+      </table>
 
       <p>La documentation officielle de Strudel est disponible sur <a href="https://strudel.cc/learn/" target="_blank" rel="noopener">strudel.cc/learn</a>.</p>
 
