@@ -10,36 +10,36 @@
   font-family: 'BBBReadMe';
   font-weight: 400;
   font-style: normal;
-  src: url('bbb-readme-main/BBBReadMe-Regular.woff2') format('woff2'),
-       url('bbb-readme-main/BBBReadMe-Regular.woff') format('woff');
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Regular.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Regular.woff') format('woff');
 }
 @font-face {
   font-family: 'BBBReadMe';
   font-weight: 400;
   font-style: italic;
-  src: url('bbb-readme-main/BBBReadMe-Italic.woff2') format('woff2'),
-       url('bbb-readme-main/BBBReadMe-Italic.woff') format('woff');
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Italic.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Italic.woff') format('woff');
 }
 @font-face {
   font-family: 'BBBReadMe';
   font-weight: 600;
   font-style: normal;
-  src: url('bbb-readme-main/BBBReadMe-SemiBold.woff2') format('woff2'),
-       url('bbb-readme-main/BBBReadMe-SemiBold.woff') format('woff');
+  src: url('bbb-readme-main/webfonts/BBBReadMe-SemiBold.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-SemiBold.woff') format('woff');
 }
 @font-face {
   font-family: 'BBBReadMe';
   font-weight: 700;
   font-style: normal;
-  src: url('bbb-readme-main/BBBReadMe-Bold.woff2') format('woff2'),
-       url('bbb-readme-main/BBBReadMe-Bold.woff') format('woff');
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Bold.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Bold.woff') format('woff');
 }
 @font-face {
   font-family: 'BBBReadMe';
   font-weight: 900;
   font-style: normal;
-  src: url('bbb-readme-main/BBBReadMe-Black.woff2') format('woff2'),
-       url('bbb-readme-main/BBBReadMe-Black.woff') format('woff');
+  src: url('bbb-readme-main/webfonts/BBBReadMe-Black.woff2') format('woff2'),
+       url('bbb-readme-main/webfonts/BBBReadMe-Black.woff') format('woff');
 }
 
 html { scroll-behavior: smooth; zoom: 1.7; }
@@ -541,9 +541,9 @@ a.next-card:hover { background: #eee; }
       <p>Signaux disponibles : <code>sine</code>, <code>saw</code>, <code>square</code>, <code>tri</code>, <code>rand</code>, <code>perlin</code>.</p>
 
       <h2>Filtres</h2>
-      <p><code>lpf</code> est déjà présenté ci-dessus. Voici les autres filtres disponibles :</p>
       <table class="strudel">
         <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>lpf(n)</code></td><td>Filtre passe-bas</td><td>fréquence Hz</td></tr>
         <tr><td><code>lpq(n)</code></td><td>Résonance du filtre passe-bas</td><td>float ≥ 0</td></tr>
         <tr><td><code>hpf(n)</code></td><td>Filtre passe-haut</td><td>fréquence Hz</td></tr>
         <tr><td><code>hpq(n)</code></td><td>Résonance du filtre passe-haut</td><td>float ≥ 0</td></tr>
@@ -581,9 +581,9 @@ a.next-card:hover { background: #eee; }
       </table>
 
       <h2>Réverbération avancée</h2>
-      <p><code>room</code> est déjà présenté ci-dessus. Paramètres complémentaires :</p>
       <table class="strudel">
         <tr><th>Fonction</th><th>Description</th><th>Valeurs</th></tr>
+        <tr><td><code>room(n)</code></td><td>Niveau d'envoi vers la reverb</td><td>0 → 1</td></tr>
         <tr><td><code>roomsize(n)</code></td><td>Taille de la salle</td><td>0 → 10</td></tr>
         <tr><td><code>roomlp(n)</code></td><td>Filtre passe-bas sur la reverb</td><td>Hz</td></tr>
         <tr><td><code>roomdim(n)</code></td><td>Fréquence à −60 dB (absorption)</td><td>Hz</td></tr>
@@ -629,9 +629,11 @@ a.next-card:hover { background: #eee; }
       <a class="repl-link" href="https://strudel.cc/#bigiMCBbNCAzXSAyIFt%2BIDFdIikuc2NhbGUoIkM6bWlub3IiKS5zb3VuZCgicGlhbm8iKQogIC5vZmYoMS84LCB4ID0%2BIHguYWRkKDcpKQ==" target="_blank" rel="noopener">--&gt; Ouvrir dans Strudel </a>
 
       <h2>Modifiers Temporels</h2>
-      <p><code>fast</code>, <code>slow</code> et <code>rev</code> sont déjà présentés ci-dessus. Autres transformations temporelles :</p>
       <table class="strudel">
         <tr><th>Fonction</th><th>Description</th></tr>
+        <tr><td><code>fast(n)</code></td><td>Accélère le pattern (×n)</td></tr>
+        <tr><td><code>slow(n)</code></td><td>Ralentit le pattern (÷n)</td></tr>
+        <tr><td><code>rev()</code></td><td>Inverse l'ordre des événements</td></tr>
         <tr><td><code>early(n)</code></td><td>Avance les événements de <code>n</code> cycles</td></tr>
         <tr><td><code>late(n)</code></td><td>Retarde les événements de <code>n</code> cycles</td></tr>
         <tr><td><code>iter(n)</code></td><td>Décale le point de départ d'un pas à chaque cycle — effet de rotation</td></tr>
@@ -639,7 +641,7 @@ a.next-card:hover { background: #eee; }
         <tr><td><code>chunk(n, fn)</code></td><td>Applique <code>fn</code> sur un bloc différent du pattern à chaque cycle</td></tr>
       </table>
       <a class="repl-link" href="https://strudel.cc/#bigiMCAxIDIgMyIpLnNjYWxlKCJDOm1ham9yIikuc291bmQoInBpYW5vIikuaXRlcig0KQ==" target="_blank" rel="noopener">--&gt; iter — Ouvrir dans Strudel </a>
-      <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuZWFybHkoIjAgMC4yNSAwIDAiKQ==" target="_blank" rel="noopener">--&gt; early — Ouvrir dans Strudel </a>
+      <a class="repl-link" href="https://strudel.cc/#CnNvdW5kKCJiZCB%2BIi5zdGFjaygiaGggfiIuZWFybHkoLjEpKSk%3D" target="_blank" rel="noopener">--&gt; early — Ouvrir dans Strudel </a>
       <a class="repl-link" href="https://strudel.cc/#c291bmQoImJkIHNkIGhoIHNkIikuY2h1bmsoNCwgeCA9PiB4LmZhc3QoMikp" target="_blank" rel="noopener">--&gt; chunk — Ouvrir dans Strudel </a>
 
       <h2>Modifiers Aléatoires</h2>
