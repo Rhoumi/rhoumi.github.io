@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Interlope";
+  src: url("fonts/Interlope-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Resistance";
+  src: url("fonts/ResistanceGenerale.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-titre: "Interlope", serif;
+  --font-titre-2: "Resistance", sans-serif;
+  /* Décalage d'Interlope vers le bas-droite, comme une ombre de Resistance */
+  --ombre-titre: 0.3em;
+}
+
+.funky{
+  font-family: var(--font-titre);
+}
+
+html, body {
+
+}
+
+body {
+
+}
+
+h1 {
+  font-family: var(--font-titre);
+}
+
+/* Titres : deux fonts superposées, inversion là où elles se chevauchent.
+   Le texte du calque est copié dans data-text par le script en bas de index.html. */
+h1 {
+  position: relative;
+  color: #000;
+  background: #fff;
+  isolation: isolate;
+}
+
+h1::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-titre-2);
+  color: #fff;
+  /* Resistance remonte vers le haut-gauche : Interlope apparaît décalée en bas-droite */
+  transform: translate(calc(1 * var(--ombre-titre)), calc(-1 * var(--ombre-titre)));
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+h2 {
+  font-family: var(--font-titre-2);
+}
+
+a {  }
+
+code {
+
+}
+
+pre {
+
+}
+
+pre code {}
+
+blockquote {
+
+}
+
+table { }
+th, td { }
