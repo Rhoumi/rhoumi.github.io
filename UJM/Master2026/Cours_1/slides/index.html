@@ -1,693 +1,358 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Meetup Python</title>
+	<title>Master 2026 · Slides</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
-	<link rel="stylesheet" href="dist/theme/night.css">
-
-	<!-- Theme used for syntax highlighted code -->
-	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+	<link rel="stylesheet" href="../../style.css">
 	<style>
-		.container {
-			display: flex;
-		}
+		body { background: #fff; }
+		.reveal { font: 400 32px/1.4 "IBM Plex Sans", sans-serif; color: #202122; }
+		.reveal a { color: #0645ad; text-decoration: none; }
+		.reveal a:hover { text-decoration: underline; }
+		.reveal .controls, .reveal .progress { color: #202122; }
+		.reveal .slide-number { background: transparent; color: #54595d; font-family: "IBM Plex Sans", sans-serif; }
 
-		.col {
-			flex: 1;
-		}
+		/* Titres en gros */
+		.reveal h1, .reveal h2, .reveal h3 { margin: 0; line-height: 1.1; }
+		.reveal h1 { font-size: 3.4em; font-weight: normal; }
+		/* Doubles polices : le calque Resistance est décalé de --ombre-titre vers le haut-droite,
+		   on agrandit la zone blanche du h1 pour qu'il ne sorte pas du fond (sinon blanc sur blanc) */
+		.reveal h1, .reveal h1::after { padding: calc(var(--ombre-titre) + .15em) calc(var(--ombre-titre) + .1em) .15em; }
+		.reveal h2 { font-size: 2.6em; font-weight: normal; }
+		.reveal h3 { font-size: 2em; }
 
-		blockquote {
-			text-align: justify;
-			padding: 10px;
-			width: 1400px;
-		}
+		/* Images */
+		.reveal .images { display: flex; gap: 1em; justify-content: center; align-items: flex-start; }
+		.reveal figure.image { flex: 1 1 0; margin: 0; padding: .3em; border: 2px dashed #a2a9b1; }
+		.reveal figure.image img { display: block; width: 100%; max-height: 600px; object-fit: contain; margin: 0; }
+		.reveal .images.trio figure.image img { max-height: 520px; }
+		.reveal figure.image figcaption { margin-top: .4em; font-size: .45em; line-height: 1.3; color: #54595d; text-align: left; }
 
-		blockquote:before {
-			position: absolute;
-			margin-left: -10px;
-			content: open-quote;
-			quotes: "\201C" "\201D" "\2018" "\2019";
-		}
-
-		blockquote:after {
-			position: absolute;
-			content: close-quote;
-			quotes: "\201C" "\201D" "\2018" "\2019";
-		}
+		/* Citations */
+		.reveal figure.citation { margin: 0 auto; max-width: 90%; border-left: 3px solid #a2a9b1; padding-left: 1em; text-align: left; }
+		.reveal figure.citation blockquote { margin: 0; font-style: italic; font-size: 1.1em; }
+		.reveal figure.citation.long blockquote { font-size: .72em; }
+		.reveal figure.citation figcaption { margin-top: .8em; font-size: .55em; color: #54595d; }
+		.reveal figure.citation figcaption::before { content: "— "; }
 	</style>
 </head>
 
-<body data-background-color="black">
+<body>
 	<div class="reveal">
 		<div class="slides">
-			<!-- SLIDE 1 -->
+
+			<!-- ============ SOUND ART ============ -->
 
 			<section>
-				<h2>Le live coding avec Sardine</h2>
-				<h3>Pourquoi/Comment programmer de la musique en live</h3>
-				<img src="images/sardine.gif" height="400" style="filter: invert(1);">
-			</section>
-
-			<!-- SLIDE 2 -->
-
-			<section>
-				<br>
-				<h4 data-markdown>
-					- Eden Malhis (eidamned)
-					- Rémi Georges (Ralt144MI)
-				</h4>
-				<section>
-					<!-- Empty section -->
-				</section>
-
-				<!-- DES LIENS VERS NOUS <3 -->
-				<!-- C'est Des sous-Slides-->
-
-				<!-- EDEN -->
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://eidamned.fr"></embed>
-				</section>
-
-
-				<!-- REMI -->
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://remigeorges.fr"></embed>
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://cookie.paris"></embed>
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600'
-						src="https://www.grrrndzero.org/index.php/2773-sam-02-05-algorave"></embed>
-				</section>
-
-			</section>
-
-			<!-- SLIDE 3 -->
-			<section>
-				<h1>Plan</h1>
-
-				<ul>
-					<li> C'est quoi le live coding ? Pourquoi on fait ça en fait ?
-					<li> D'où ça vient et bref aperçu d'outils
-					<li> SARDINE <marquee scrollamount="10"><code data-trim data-noescape
-								class="plain-text"> <^[[[>< </code></marquee>
-					<li> Demo :0
-				</ul>
-			</section>
-
-			<!-- SLIDE 4 -->
-			<section>
-				<h4>Live Coding</h4>
-				<section>
-					<!-- Empty section -->
-				</section>
-
-				<!-- UNE VIDEO DEMO ICI ???  parler de considerer la programmation comme acte performatif au meme titre qu'un musicien avec un instrument-->
-				<section>
-					<br>
-					<br>
-					<br>
-					<h4><a href="https://www.youtube.com/watch?v=LmefLTpN5Hc">Vidéo Algorave</a></h4>
-				</section>
-
-
-				<section>
-					<h4>Acte performatif</h4>
-					<ul>
-						<li>Programmation en temps-réel</li>
-						<li>Improvisation</li>
-					</ul>
-					<br>
-					<br>
-					<br>
-				</section>
-
-				<section>
-					<h4>Pratique engagée</h4>
-					<ul>
-						<li>F/LOSS art</li>
-						<li>Transparence, Éthique</li>
-						<li>Culture hacker, lien avec les hackerspaces</li>
-					</ul>
-					<br>
-					<br>
-					<br>
-				</section>
-
-			</section>
-
-
-			<section>
-				<h4>Historique et bref aperçu de différents environnement </h4>
-				<section>
-					<!-- Empty section -->
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://toplap.org/"></embed>
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://toplap.org/wiki/ManifestoDraft"></embed>
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://algorave.com/"></embed>
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://supercollider.github.io/"></embed>
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://tidalcycles.org"></embed>
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://sonic-pi.net"></embed>
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://foxdot681713046.wordpress.com/"></embed>
-				</section>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://hundredrabbits.github.io/Orca/"></embed>
-				</section>
-
+				<h1>Sound Art / Art Sonore / Installation Sonore</h1>
 			</section>
 
 			<section>
-				<h1>Citations</h1>
 				<section>
-					<!-- Empty section -->
+					<h2>Origine Art Sonore : Ma selecta d'oeuvres 50-90</h2>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify;">
-						&nbsp We are witnessing the formation of a new type of oral culture (or rather aural culture),
-						with improvisation and live coding on new instruments, one that is established through
-						electronic media of audiovisual documentation. This is a culture where the text, picture, video,
-						tweet, Snapchatc pic, Insta- gram (what an appropriate name !) is speedily disseminated, but
-						without being carefully composed, thoughtfully consumed, or achieved.
-					</blockquote>
-					Thor Magnuson - <i>Sonic Writing</i>, p. 180.
+					<h3>Avant Fluxus : l'école expérimentale de New York</h3>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify;">
-						&nbsp Ron Kuivila programmed an Apple II computer onstage to create dense, whirling, metric
-						sounds that layered in and folded over each other. Considering the equipment used, the sounds
-						were often surprisingly gigantic in scale. Kuivila had trouble con- trolling the piece due to
-						system problems. . . . The reality is that personalized home- grown hardware and software, for
-						all the freedom of expression they can afford, are especially subject to flakiness.
-					</blockquote>
-					Curtis Roads - <i>Computer Music Journal 10</i>, no. 2 (1986): 44–50.
-
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify;">
-						&nbsp I use the UNIX shell because I think in text. It’s fast, there’s a
-						beautiful relationship between data and code, and it’s easy to recall and
-						modify past actions – you don’t have to repeat yourself all the time like
-						with GUIs. When interactive commandline shells were first developed
-						they were called “conversational languages,” part of a field of research
-						called “conversational computing.” It’s a shame that this terminology
-						fell out of use.
-					</blockquote>
-					Alex McLean - Neural Magazine (Issue 27 - June 2007)
+					<h3>Écrire, interpréter... ou laisser jouer.</h3>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify;">
-						&nbsp Live coding is not about tools. Algorithms are thoughts. Chainsaws are tools. That's why
-						algorithms are sometimes harder to notice
-						than chainsaws.
-					</blockquote>
-					<blockquote style="align:justify;">
-						&nbsp For a long time computer scientists have been erasing time from programming, and we're now
-						putting it back in. For a long time computer musicians have been trying to hide the computation
-						in their music, and we're celebrating it.
-					</blockquote>
-					TOPLAP Slogans
-				</section>
-
-
-				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify;">
-						&nbsp The boundary between a piece and an instrument is deliberately vague, and it can
-						fluctuate. [...] The instru- ment incorporates notational elements, but conversely the
-						notational is becoming increasingly instrumental and systematic15. 
-					</blockquote>
-					Thor Magnusson - <i>Sonic Writing</i>, p. 181.
+					<figure class="citation">
+						<blockquote>“Où que nous soyons, ce que nous entendons est essentiellement du bruit. Quand nous l'ignorons, il nous dérange. Quand nous l'écoutons, nous le trouvons fascinant.”</blockquote>
+						<figcaption>John Cage, <cite>“The Future of Music: Credo”</cite> (1937), dans <cite>Silence: Lectures and Writings</cite>, Wesleyan University Press, 1961. Traduction libre.</figcaption>
+					</figure>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					<blockquote style="align:justify; font-size: 28pt">
-						&nbsp Il se dessine alors une pratique musicale du futur qui n’attend plus le développement
-						d’instruments de musique d’un type nouveau, mais s’empare d’instruments qui n’ont pas été
-						spécialement construits pour la musique. Et c’est justement à cause de leur utilisation musicale
-						limitée, idéologiquement restreinte, qu’ils deviennent pertinents pour la musique - ainsi que
-						les disques, magnétophones, radios et autres appareils de valeur apparemment uniquement
-						technique, qui ne font que reproduire des sons.
-					</blockquote>
-					Edgard Varèse - Rückblick auf die Zukunft, 1983
-				</section>
-
-			</section>
-
-			<!-- SLIDE Blague -->
-			<section>
-				<h2>Sardine</h2>
-
-				<img style="border-style: ridge; border-color: royalblue; border-width: 15px;" src="images/sardine.jpeg"
-					height="400">
-			</section>
-
-
-			<section>
-				<h3>Raphaël Forment</h3>
-
-				<img style="border-style: ridge; border-color: darkolivegreen; border-width: 15px;"
-					src="https://raphaelforment.fr/images/bubo_fatigue.JPG" height="400">
-			</section>
-
-
-			<!-- SLIDE DEMO -->
-			<section>
-				<h3> Comment Sardiner ?</h3>
-
-				<section>
-					<br>
-					<br>
-					<br>
-					<embed width='1200' height='600' src="https://sardine.raphaelforment.fr"></embed>
+					<h3>Un vivier d'influences entre Fluxus et les débuts de la musique électro-acoustique</h3>
 				</section>
 
 				<section>
-					<ul>
-						<li><b>Sardine</b> est la lib/API principale contenant différents mini langages pour la
-							composition musicale (SPL, Ziffers, Vortex Tidal, etc) + Possibilités I/O + Mécanisme de
-							récursion temporel.</li>
-						<li>À son import <b>Sardine</b> installe proprement l'environnement de jeu avec la configuration
-							utilisateur et mets toutes les bonnes variables et les bonnes références dans le scope de
-							l'utilisateur du REPL.</li>
-						<li><b>Tuna</b> est un éditeur textuel optionnel pour <b>Sardine</b> écrit en Rust fait pour les
-							nouveaux arrivants mais utilisé uniquement par Eden et Raphaël :3</li>
-						<ul>
-							<li>D'autres éditeurs sont supportés: Vim/Neovim, Emacs, etc...</li>
-						</ul>
-					</ul>
+					<figure class="citation">
+						<blockquote>Fluxus serait alors “ni un mouvement particulier ni un style particulier. Ce n’est sans doute pas un rassemblement organisé d’individus recherchant un même objectif artistique. Fluxus est peut-être une attitude, un esprit particulier envers la création artistique, l’art et la vie.”</blockquote>
+						<figcaption>Olivier Lussac, <cite>“Fluxus et la musique”</cite>, Les Presses du Réel, 2010, p.8</figcaption>
+					</figure>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					<h3>Quelles utilisations pour Sardine ?</h3>
-					<ul>
-						<li><b>Miika Alonen avec Ziffers:</b> Développer des DSLs par dessus les fonctionnalités de
-							Sardine.</li>
-						<li><b>Kate Sicchio:</b> Contrôler des robots en rythme pour des performances de chorégraphie
-							contemporaines à New York.</li>
-						<li><b>Jack Armitage:</b> Utiliser des bibliothèques de machine learning pour des performances
-							audiovisuelles.</li>
-						<ul>
-							<li>Contrôler le piano à résonnateur magnétique d'Andrew Mc Pherson</li>
-						</ul>
-						<li><b>Ralt144MI (aka notre Rémi national):</b> Contrôler du matériel audio obsolète et des
-							synthétiseurs vidéo modulaires.</li>
-						<li><b>De manière générale:</b> Algorave, improvisation algorythmique en live, faire des bétises
-							avec du code et des sons, et de l'impro <b>centré sur l'humain et pas la machine</b>.</li>
-
-					</ul>
-					<p>
-					</p>
+					<h3>Nam June Paik, au delà de la vidéo, le son et le lien à la technologie</h3>
 				</section>
 
 				<section>
-					Le code <b>Sardine</b> peut être écrit de deux façons différentes :
-					<br><br>
-					<ul>
-						<li> <b>Surfing Functions</b> / <b>Players</b> : une syntaxe simple et limitée, orientée
-							performance en live.
-						<li> <b>Swimming Functions</b> : ressemble à du Python régulier, verbeux mais puissant. Une
-							passerelle vers la récursion temporelle en Python.
-					</ul>
-				</section>
-
-				<section>
-					<div class="container">
-						<div class="col">
-							<h4>Swimming</h4>
-							<pre>
-				      <code data-trim data-noescape class="language-python">
-							@swim
-							def pat(p=1, i=0):
-					    	D("bd")
-					    	again(pat, p=1, i=i+1)
-
-						    silence() # arrêt doux
-						    panic()   # moins doux
-       						silence(pat)
-      						pat.stop()
-				      </code>
-				    </pre>
-						</div>
-						<div class="col">
-							<h4>Players</h4>
-							<pre>
-				      <code data-trim data-noescape class="language-python">
-      					Pa * d("bd", p=1)
-
-
-
-
-						  silence() # arrêt doux
-						  panic()   # moins doux
-    					  silence(pat)
-    					  pat.stop()
-
-
-				      </code>
-				    </pre>
-						</div>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/paik-listening-through-the-mouth.jpg" alt="Nam June Paik écoutant un disque sur un gramophone par la bouche">
+							<figcaption>Nam June Paik, <i>Listening to Music through the Mouth</i>, <i>Exposition of Music – Electronic Television</i>, Galerie Parnass, Wuppertal, 1963. Photo : Manfred Montwé</figcaption>
+						</figure>
 					</div>
 				</section>
 
 				<section>
-					<div class="container">
-						<div class="col">
-							<h4>Swimming</h4>
-							<pre>
-				      <code data-trim data-noescape class="language-python">
-							@swim
-							def pat(p=1, i=0):
-					    	D("bd hh sn hh . hh", i=i)
-					    	again(pat, p=1, i=i+1)
-				      </code>
-				    </pre>
-						</div>
-						<div class="col">
-							<h4>Players</h4>
-							<pre>
-				      <code data-trim data-noescape class="language-python">
-      					Pa * d("bd hh sn hh . hh", p=1)
-				      </code>
-				    </pre>
-						</div>
+					<h3>Une composition qui devient installation sonore, la très connue Organ²/ASLSP de John Cage.</h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/8/88/HalberstadtBurchardiChurchOrganForOrgan2ASLSP.jpg" alt="L'orgue construit pour Organ²/ASLSP dans l'église Saint-Burchardi de Halberstadt">
+							<figcaption>L'orgue d'Organ²/ASLSP, église Saint-Burchardi, Halberstadt</figcaption>
+						</figure>
 					</div>
 				</section>
 
 				<section>
-					<p>Sardine utilise le moteur audio <b>SuperDirt</b>! Célébrité du live coding écrit dans
-						Supercollider.</p>
-					<p>Qui a aussi été porté en JS (SuperDough) et en Rust (Doux) cette dernière année.</p>
+					<h3>Composer l'espace, le pionnier Max Neuhaus</h3>
 				</section>
 
 				<section>
-					Tout est sample ou synthétiseur sans distinction, juste préalablement défini dans le moteur.
-					<pre>
-				      <code data-trim data-noescape class='language-plaintext'>
-						ab ade ades2 ades3 ades4 alex alphabet amencutup armora arp arpy auto baa baa2 bass bass0
-						bass1 bass2 bass3 bassdm bassfoo battles bd bend bev bin birds birds3 bleep blip blue bottle
-						breaks125 breaks152 breaks157 breaks165 breath bubble can casio cb cc chin circus clak click
-						clubkick co coins control cosmicg cp cr crow d db diphone diphone2 dist dork2 dorkbot dr dr2
-						dr55 dr_few drum drumtraks e east electro1 em2 erk f feel feelfx fest fire flick fm foo future
-						gab gabba gabbaloud gabbalouder glasstap glitch glitch2 gretsch gtr h hand hardcore hardkick
-						haw hc hh hh27 hit hmm ho hoover house ht if ifdrums incoming industrial insect invaders jazz
-						jungbass jungle juno jvbass kicklinn koy kurt latibro led less lighter linnhats lt made made2
-						mash mash2 metal miniyeah monsterb moog mouth mp3 msg mt mute newnotes noise noise2 notes
-						numbers oc off outdoor pad padlong pebbles perc peri pluck popkick print proc procshort psr
-						rave rave2 ravemono realclaps reverbkick rm rs sax sd seawolf sequential sf sheffield short
-						sid sine sitar sn space speakspell speech speechless speedupdown stab stomp subroc3d sugar
-						sundance tabla tabla2 tablex tacscan tech techno tink tok toys trump ul ulgab uxay v voodoo
-						wind wobble world xmas yeah .......
-				      </code>
-				    </pre>
-					<pre><code>Pa * d('bd:2 cp speechless:4')</code></pre>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/neuhaus-proposals-for-aural-gardens.jpg" alt="Six dessins sur papier calque de Max Neuhaus pour Proposals for Aural Gardens">
+							<figcaption>Max Neuhaus, <i>Proposals for Aural Gardens, Sound spaces formed solely with plants and topography, Notes on method I-V</i>, 1988-2004, collection Frac Franche-Comté. Photo : Blaise Adilon</figcaption>
+						</figure>
+					</div>
 				</section>
 
 				<section>
-					Changer la période (<b>1 period = 1 beat</b>)
-					<pre class="r-fit-text">
-				      <code  data-trim data-noescape class="language-python">
-						Pa * d('bd cp', p=0.5) # La période est de 0.5, 2 notes par battement
-						Pa * d('bd cp hh:2', p=0.5) # ajoute le sample hh:2, le temps est maintenant ressenti en 3 battements
-						Pa * d('bd cp hh:2', p=0.25) # La période est de 0.25, 4 notes par battement, le rythme est doublé
-						Pa * d('bd!2 cp hh:2 .', p=0.25) # ajoute bd repeat et un rest "." - le temps est maintenant ressenti en 5 battements
-				      </code>
-				    </pre>
-					<br>
-					<br>
-					Adding keyword parameters (<b>key=value</b>)
-					<pre>
-				      <code  data-trim data-noescape class="language-python">
-						Pa * d('reverbkick east:4 yeah:2 mt', speed=1.2, shape=0.5, p=0.5)
-						Pa * d('reverbkick east:4 yeah:2 mt', speed='1.2 2', shape=0.5, p='0.5 0.25')
-						Pa * d('reverbkick east:4 yeah:2 mt cr', speed='1.2 2.2', shape=0.7, p='0.5!2 0.25!5')
-				      </code>
-				    </pre>
-				</section>
-
-
-				<section>
-					Changer le tempo
-					<pre>
-				      <code  data-trim data-noescape class="language-python">
-				      clock.tempo        # le tempo
-				      clock.tempo = 150  # le tempo en BPM
-				      </code>
-				    </pre>
-					<br>
-					<br>
-					Ajouter des paramètres <b>key=value</b>
-					<pre>
-				      <code  data-trim data-noescape class="language-python">
-						Pa * d('reverbkick east:4 yeah:2 mt', speed=1.2, shape=0.5, p=0.5)
-						Pa * d('reverbkick east:4 yeah:2 mt', speed='1.2 2', shape=0.5, p='0.5 0.25')
-						Pa * d('reverbkick east:4 yeah:2 mt cr', speed='1.2 2.2', shape=0.7, p='0.5!2 0.25!5')
-				      </code>
-				    </pre>
+					<h3>Ils essaient de définir l’art sonore, On peut essayer aussi ?</h3>
 				</section>
 
 				<section>
-					<br>
-					<br>
-					Voici les senders disponibles avec Sardine:
-					<br>
-					<br>
-					<section data-markdown style="font-size:24pt;">
-						| Player | @swim | Purpose and description |
-						|:-------:|:-------:|:----------|
-						| **Sardine** | **Senders** | senders used with Sardine patterns |
-						| d( ) | D( ) | **SuperDirt** - samples and synthesizers |
-						| n( ) | N( ) | **MIDI** notes |
-						| cc( ) | CC( ) | **MIDI** control messages |
-						| pc( ) | PC( ) | **MIDI** program changes |
-						| sy( ) | SY( ) | **MIDI** sysex message |
-						| **Ziffers** | **Senders** | senders used with Ziffers patterns |
-						| zd( ) | ZD() | **Ziffers SuperDirt** - samples /synths with Ziffers patterns|
-						| zn( ) | ZN() | **Ziffers MIDI** notes with Ziffers patterns |
-					</section>
-				</section>
-
-
-				<section>
-					<b>Rand, range, ramp, repeat, extend repeat, etc...</b>
-					<pre>
-				      <code data-trim data-noescape class="language-python">
-					@swim
-					def pat(p=1, i=0):
-					    D("bd sd . sd", i=i)
-					    D("synth",
-					        midinote="C4|E4 C4~G4 C4!3 [D4 F4 A4]!!4",
-					        cutoff="[100:1000, 100]",
-					        i=i)
-					    again(pat, p=1, i=i+1)
-				      </code>
-				    </pre>
-					<aside class="notes">
-						Le pipe permet de lancer une pièce à pile ou face pour choisir entre C et E.<br>
-						Le tilde crée une rampe entre deux valeurs extrêmes (ici, un chromatique ascension de C à
-						G).<br>
-						Le point d'exclamation indique de répéter la valeur sur laquelle il est appliqué un certain
-						nombre de fois.<br>
-						La virgule et les crochets permettent de générer une plage de valeurs équiréparties, ici des
-						valeurs de coupure pour un filtre passe-bas allant de 100 à 1000 par pas de 100 (100, 200, 300
-						etc).
-					</aside>
+					<figure class="citation long">
+						<blockquote>“L’Art Sonore. Je trouve que c’est un terme pratique, mais pourquoi ? Je l’applique à des pièces que je réalise en utilisant des ressources électro-acoustiques et dans lesquelles j’ai l’intention qu’elles soient présentes dans des galeries, des musées et d’autre endroits où le son est, de plus en plus, perçu comme un média en soi, comme la vidéo, les lasers, mais pas comme une performance. [..] Je pense que peut-être que ce que l’on appelle «l’Art Sonore» n’a pas l’intention de se connecter au langage. Et au final, tous les styles de musique, de performance deviennent des langages, même les œuvres anti-linguistiques de John Cage, alors que les gens se familiarisent de plus en plus avec ses intentions et ses mondes sonores. Néanmoins, le terme a peut-être été évoqué de manière pragmatique pour et par les conservateurs de musées pour rendre compte de l'acceptation du son dans leur monde.”</blockquote>
+						<figcaption>Annea Lockwood, <cite>“What is Sound Art?”</cite>, The EMF Institute, <a href="http://emfinstitute.emf.org/articles/aldrich03/lockwood.html">emfinstitute.emf.org/articles/aldrich03/lockwood.html</a>.</figcaption>
+					</figure>
 				</section>
 
 				<section>
-					<h2>Plus loin :</h2>
+					<figure class="citation">
+						<blockquote>“S'il y a une raison valable de classer et de nommer les choses dans la culture, c'est certainement pour le raffinement des distinctions. Les expériences esthétiques se situent dans le domaine des distinctions fines, et non de la destruction des distinctions pour la promotion d'activités avec leur plus petit dénominateur commun, dans ce cas, le son. Une grande partie de ce que l’on a appelé le «l’Art Sonore» n’a pas grand-chose à voir avec le son ou l’art”</blockquote>
+						<figcaption>Max Neuhaus, <cite>“Sound Art”</cite>, dans <cite>Volume: Bed of Sound</cite>, New York : P.S.1, 2000.</figcaption>
+					</figure>
 				</section>
 
 				<section>
-					<h3>It's bouncing ball time!</h3>
-					<pre>
-				      <code data-trim data-noescape class="language-python">
-						@swim(until=10)
-						def baba(p=0.5, i=0):
-    					D('sid:2',
-      					legato=0.9,
-      					speed=0.5,
-      					lpf='[5000:200,400]',
-      					i=i
-    					)
-    					again(baba, p=P('[1:0.1,0.1]', i), i=i+1)
-
-				      </code>
-				    </pre>
+					<figure class="citation long">
+						<blockquote>“Je pense que c’est une bonne chose qu’il y ait un intérêt envers le son et la musique, car la globalité des structures du monde de l’art ne sont pas prêtes pour cela, car le son nécessite différentes technologies et différentes architectures pour être présenté. On imagine toujours les galeries et les musées comme des galeries du 19ème siècle :”comment allons-nous l’accrocher au mur, comment allons-nous l’éclairer?” mais personne ne s’y connaît en son - comment orienter une enceinte, comment l’égaliser en fonction de la pièce. Il n’y pas ce genre d’expertise au sein du monde des musées. De plus en plus de musées possèdent des pièces d’écoutes mais il y a beaucoup de changements qui ont besoin d'être fait avant que le monde de l’art soit réellement prêt à présenter le son comme art”</blockquote>
+						<figcaption>Christian Marclay, <cite>Citation, Interview de Philip Sherburne,</cite> “This Artist Makes Music Like You’ve Never Seen Before and Art Like You’ve Never Heard Before”, Mars 2005</figcaption>
+					</figure>
 				</section>
 
 				<section>
-					<h3>Paresseux à écrire du code: les générateurs de rythmes euclidiens !</h3>
-					<pre>
-				      <code data-trim data-noescape class="language-python">
-				      Pa * d('(eu kick 5 8)', p=.5)
-				      Pb * d('(eu hat 6~7 8)', p=.5)
-				      Pc * d('(eu snare 2~3 8 1)', p=.5)
-
-				      Pd * d('(if (every 3) cp:rand*20 tabla)', p=.5, speed='[1:4]', leg=.1)
-				      </code>
-				    </pre>
+					<h3>Musique ou art sonore ? On va essayer de triturer la notion</h3>
 				</section>
 
 				<section>
-					<h3><b>D'autres sujets plus poussés dans Sardine:</b></h3>
-					<ul>
-						<li>Les Variables Globales dans le langage de pattern</li>
-						<li><b>Ziffers</b> le langage de pattern</li>
-						<li>Les Oscillateurs à basse fréquences pour du contrôle de paramètres</li>
-						<li>L'objet Pattern pour patterner tout</li>
-						<li>Plusieurs horloges : sync avec Link</li>
-						<li>La librairie de fonctions</li>
-						<li>Presets, MIDIInstruments, MIDIControllers</li>
-						<li>Les interactions avec SuperCollider</li>
-					</ul>
+					<h3>Prendre du recul</h3>
 				</section>
+			</section>
 
+			<!-- ============ EXEMPLES CONTEMPORAINS ============ -->
 
-				<section>
-					<h3><b>hésitez pas à tester Sardine, contribuer et surtout vous amuser!</b></h3>
-				</section>
-
+			<section>
+				<h2>Des exemples contemporains</h2>
 			</section>
 
 			<section>
 				<section>
-					<h3><b>Références</b></h3>
-					<br>
-					<br>
-					<h6>Vous avez dit live coding ?</h6>
-					<a href="https://livecoding.fr/">La base : livecoding.fr</a><br>
-					<a href="https://fr.wikipedia.org/wiki/Live_coding">We <3 Wikipedia</a><br>
-							<a href="https://youtu.be/Crz6R4p_owI?si=-_emiCXqtMcxuaDF">We <3 Arte aussi (vidéo Arte
-									Tracks)</a><br>
-									<a href="https://www.youtube.com/watch?v=X_NQKPH91kM">Et la version retro de la
-										vidéo précédente</a><br>
-									<br>
-									<br>
-									<h6><a href="https://github.com/toplap/awesome-livecoding">Une liste exhaustive des
-											outils de live
-											coding</a></h6>
+					<h2>Tarek Atoui</h2>
 				</section>
 
 				<section>
-					<h3><b>Références</b></h3>
-					<h6>Sardine</h6>
-					<br>
-					<a href="https://raphaelforment.fr/pages/logiciels/sardine/">Présentation</a><br>
-					<a href="https://sardine.raphaelforment.fr/">Documentation (un peu datée)</a><br>
-					<a href="http://raphaelforment.fr/">Le site de Raphaël Forment</a><br>
-					<a href="https://hal.science/hal-04309136v1/file/forment_armitage_sardine.pdf">Sa fameuse thèse</a><br>
-					<br>
-					Et <a href="https://zenodo.org/records/7841945">Ziffers !</a><br>
+					<h3><i>Whispering Playground</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/atoui-whispering-playground-2.jpg" alt="Objets sonores posés sur un tapis gris et reliés par des câbles noirs : platine vinyle, caisse claire, bac d'eau transparent surmonté d'une cymbale, seau en métal">
+							<figcaption>Tarek Atoui, <i>Whispering Playground</i>, 2021, vue de l'exposition <i>The Drift</i>, IAC, Villeurbanne.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/atoui-whispering-playground-1.jpg" alt="Cymbale mouillée posée au-dessus d'un bac d'eau transparent">
+							<figcaption>Tarek Atoui, <i>Whispering Playground</i> (détail), 2021.</figcaption>
+						</figure>
+					</div>
 				</section>
 			</section>
+
+			<section>
+				<section>
+					<h2>Ioana Vreme Moser, <i>Mineral Amnesia</i> et <i>Warble Buoys</i></h2>
+				</section>
+
+				<section>
+					<h3><i>Mineral Amnesia</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/vreme-moser-mineral-amnesia-1.jpg" alt="Une dizaine de trépieds noirs en métal portant des composants électroniques et de petits disques réfléchissants, dans une salle d'exposition blanche">
+							<figcaption>Ioana Vreme Moser, <i>Mineral Amnesia</i>, 2023, vue de l'exposition du Prix Ars Electronica, Lentos Museum, Linz, 2025. Photo : vog.photo</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/vreme-moser-mineral-amnesia-2.jpg" alt="Gros plan d'une puce électronique à fenêtre, éclairée d'une lumière violette">
+							<figcaption>Ioana Vreme Moser, <i>Mineral Amnesia</i> (détail), 2023.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<section>
+					<h3><i>Warble Buoys</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/vreme-moser-warble-buoys-1.jpg" alt="Trois bouées en verre flottant sur l'eau devant une rangée de roseaux">
+							<figcaption>Ioana Vreme Moser, <i>Warble Buoys</i>, 2026, Sfântu Gheorghe, delta du Danube.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/vreme-moser-warble-buoys-2.jpg" alt="Bouée en verre borosilicate surmontée d'un entonnoir, flottant parmi des feuilles de nénuphar">
+							<figcaption>Ioana Vreme Moser, <i>Warble Buoys</i> (détail), 2026.</figcaption>
+						</figure>
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Art Sonore Interactif : Le travail de Vahan Soghomonian et ses ORG</h2>
+				</section>
+
+				<section>
+					<h3><i>ORG</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/soghomonian-org-1.jpg" alt="Tubes verticaux cuivrés montés sur des pieds noirs, disposés en étoile dans une salle blanche, avec un visiteur au centre">
+							<figcaption>Vahan Soghomonian, <i>ORG</i>, 2015, vue de l'exposition <i>KATA TJUTA</i>, IAC, Villeurbanne.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/soghomonian-org-2.jpg" alt="Modules d'ORG disposés en cercle dans une salle aux boiseries anciennes">
+							<figcaption>Vahan Soghomonian, <i>ORG</i>.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<section>
+					<h3><i>ORG-RCHBRN</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/soghomonian-org-rchbrn-1.jpg" alt="Modules en métal alignés sur une pente enneigée, à côté d'une construction en escalier en béton">
+							<figcaption>Vahan Soghomonian, <i>ORG-RCHBRN</i>, 2019-..., Baronnies, Drôme provençale.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/soghomonian-org-rchbrn-2.jpg" alt="Un module d'ORG-RCHBRN, colonne métallique sur un socle en béton, au milieu des pins">
+							<figcaption>Vahan Soghomonian, <i>ORG-RCHBRN</i>.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<section>
+					<div class="images trio">
+						<figure class="image">
+							<img src="../img/soghomonian-org-rchbrn-3.jpg" alt="Rangée de modules éclairés à la tombée de la nuit sur une crête boisée">
+							<figcaption>Vahan Soghomonian, <i>ORG-RCHBRN</i>.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/soghomonian-org-rchbrn-4.jpg" alt="Cône de verre vert lumineux dans un module, sur fond de coucher de soleil">
+							<figcaption>Vahan Soghomonian, <i>ORG-RCHBRN</i>.</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/soghomonian-org-rchbrn-5.jpg" alt="Cône de verre vert pâle posé au cœur d'un module métallique">
+							<figcaption>Vahan Soghomonian, <i>ORG-RCHBRN</i>.</figcaption>
+						</figure>
+					</div>
+				</section>
+
+				<section>
+					<h3><i>ORG-MITRA</i></h3>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/soghomonian-org-mitra-1.jpg" alt="Tubes dorés suspendus sous des entonnoirs métalliques le long d'un mur de tunnel en béton">
+							<figcaption>Vahan Soghomonian, <i>ORG-MITRA</i>, tunnel sous l'A89, Saint-Germain-Nuelles. Photo : Lionel Rault</figcaption>
+						</figure>
+						<figure class="image">
+							<img src="../img/soghomonian-org-mitra-2.jpg" alt="Gros plan d'un tube doré contenant un cône de verre bleu">
+							<figcaption>Vahan Soghomonian, <i>ORG-MITRA</i> (détail). Photo : Lionel Rault</figcaption>
+						</figure>
+					</div>
+				</section>
+			</section>
+
+			<!-- ============ PURE DATA ============ -->
+
+			<section>
+				<h1>Pure Data</h1>
+			</section>
+
+			<section>
+				<section>
+					<h2>?</h2>
+				</section>
+
+				<section>
+					<h3>Max et Pd, une histoire commune</h3>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Miller Puckette</h2>
+				</section>
+
+				<section>
+					<div class="images">
+						<figure class="image">
+							<img src="../img/miller-puckette.jpg" alt="Miller Puckette en concert, derrière un ordinateur portable">
+							<figcaption>Miller Puckette en concert. Photo : Aretha Li et Alex Matthews, Qualcomm Institute, UC San Diego</figcaption>
+						</figure>
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<h2>plugdata</h2>
+			</section>
+
 		</div>
 	</div>
 
-
 	<script src="dist/reveal.js"></script>
 	<script src="plugin/notes/notes.js"></script>
-	<script src="plugin/markdown/markdown.js"></script>
-	<script src="plugin/highlight/highlight.js"></script>
 	<script>
-		// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
+		// Même effet de titre que la page index (voir style.css)
+		document.querySelectorAll('h1').forEach(h => h.dataset.text = h.textContent);
+
 		Reveal.initialize({
 			hash: true,
 			width: 1200,
 			height: 800,
-
-			// Learn about plugins: https://revealjs.com/plugins/
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+			slideNumber: true,
+			plugins: [RevealNotes]
 		});
 	</script>
 </body>
