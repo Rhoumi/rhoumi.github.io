@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<link rel="stylesheet" href="../style.css">
+<style>
+body { max-width: 50em; margin: 1em auto; padding: 0 1em; font: 400 15px/1.6 "IBM Plex Sans", sans-serif; color: #202122; }
+h1 { font-weight: normal; }
+h1, h2 { border-bottom: 1px solid #a2a9b1; }
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+table { border-collapse: collapse; background: #f8f9fa; }
+th, td { border: 1px solid #a2a9b1; padding: .2em .5em; vertical-align: top; }
+th { background: #eaecf0; font-family: var(--font-titre-2); font-weight: normal; }
+h2, h3 { clear: both; }
+code { font-family: ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: .9em; background: #f8f9fa; border: 1px solid #eaecf0; padding: 0 .25em; white-space: nowrap; }
+pre { font-family: ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; font-size: 13px; line-height: 1.35; background: #f8f9fa; border: 2px dashed #a2a9b1; padding: .8em 1em; overflow-x: auto; }
+pre code { background: none; border: 0; padding: 0; white-space: pre; font-size: inherit; }
+.tableau { overflow-x: auto; }
+.encadre { border: 2px dashed #a2a9b1; padding: .2em 1em; margin: 1.5em 0; }
+</style>
+</head>
+<body>
+
+<h1>Pure Data, capteurs et protocoles</h1>
+
+<p>Fichiers du cours : <a href="Patch_Cours2.pd">Patch_Cours2.pd</a> (tous les exemples de cette page), <a href="spring.wav" download>spring.wav</a> (le son lu par l'exemple de sample, à ranger dans le même dossier que le patch) et <a href="Generateurs.pd">Generateurs.pd</a> (le patch à partir duquel vous allez composer). Les deux s'ouvrent dans plugdata comme dans Pd vanilla.</p>
+
+<h2>Une installation interactive, c'est une grande chaîne de transformations</h2>
+
+<p>Dans les installations vues au premier cours (les <i>ORG</i> de Vahan Soghomonian, <i>Whispering Playground</i> de Tarek Atoui), le son réagit à quelque chose : une présence, un geste, de la lumière, de l'eau qui tombe. Entre ce « quelque chose », cette interaction et le haut-parleur, il y a toujours la même chaîne :</p>
+
+<pre><code>le monde extérieur ->  un capteur  ->  une carte ou une interface  ->  un PROTOCOLE  ->  Pure Data  ->  du son</code></pre>
+
+<p>Le capteur transforme un phénomène physique en électricité. Une carte (Arduino, ESP32, contrôleur MIDI, un logiciel, etc) transforme cette électricité en nombres. Reste à faire voyager ces nombres jusqu'à l'ordinateur : c'est le rôle du <b>protocole</b>, c'est-à-dire une convention sur la manière d'écrire et de transporter des données, pour que deux machines se comprennent.</p>
+<p>Aujourd'hui on regarde les trois protocoles qu'on croise le plus souvent : le <b>MIDI</b>, l'<b>OSC</b> et la <b>liaison série</b>. Dans les trois cas, ce qui arrive dans Pd, ce sont des <b>messages</b> (des nombres, des listes), pas du son. Tout le travail de composition est dans ce qu'on décide d'en faire.</p>
+
+<h2>La boîte à outils : les objets de base pour manipuler des données</h2>
+
+<p>Quel que soit le protocole, on fait toujours les mêmes gestes avec des données de capteurs : les regarder, les trier, les mettre à l'échelle, les lisser, en tirer des déclenchements. Voici les objets qui servent à ça (section 1 du patch d'exemples).</p>
+
+<div class="tableau">
+<table>
+<tr><th>Geste</th><th>Objets</th><th>Ce que ça fait</th></tr>
+<tr><td>Regarder</td><td><code>[print]</code>, boîte nombre</td><td>Avant toute chose, on regarde ce qui arrive : quelles valeurs, entre quelles bornes, à quelle vitesse. <code>[print]</code> écrit dans la console.</td></tr>
+<tr><td>Trier</td><td><code>[route]</code></td><td>Aiguille un message selon son premier élément et le retire : <code>ldr 512</code> dans <code>[route ldr pot]</code> sort <code>512</code> à gauche.</td></tr>
+<tr><td>Déballer, emballer</td><td><code>[unpack]</code>, <code>[pack]</code></td><td>Sépare une liste en éléments (<code>60 100</code> devient <code>60</code> et <code>100</code>), ou l'inverse.</td></tr>
+<tr><td>Mettre à l'échelle</td><td><code>[+ ]</code> <code>[- ]</code> <code>[* ]</code> <code>[/ ]</code>, <code>[clip]</code>, <code>[mtof]</code></td><td>Un capteur donne 0 à 1023, un oscillateur attend 100 à 2000 Hz : on divise, on multiplie, on décale. <code>[clip]</code> borne, <code>[mtof]</code> convertit une note MIDI en fréquence.</td></tr>
+<tr><td>Lisser</td><td><code>[line]</code>, <code>[line~]</code></td><td>Glisse vers une valeur en un temps donné au lieu d'y sauter. Indispensable pour éviter les clics quand un capteur pilote un volume ou une fréquence.</td></tr>
+<tr><td>Détecter</td><td><code>[&gt; ]</code> <code>[&lt; ]</code>, <code>[moses]</code>, <code>[change]</code>, <code>[select]</code></td><td>Transformer un flux continu en événement : « la valeur vient de dépasser 64 ». <code>[change]</code> ne laisse passer que ce qui change.</td></tr>
+<tr><td>Ouvrir, fermer</td><td><code>[spigot]</code></td><td>Un robinet : laisse passer les messages ou non.</td></tr>
+<tr><td>Ordonner</td><td><code>[trigger]</code> (<code>[t]</code>)</td><td>Envoie une même donnée à plusieurs endroits dans un ordre garanti, de droite à gauche.</td></tr>
+<tr><td>Rythmer</td><td><code>[metro]</code>, <code>[delay]</code>, <code>[timer]</code></td><td>Répéter, retarder, mesurer le temps entre deux événements.</td></tr>
+<tr><td>Transporter</td><td><code>[send]</code> / <code>[receive]</code> (<code>[s]</code> / <code>[r]</code>)</td><td>Un câble invisible, qui marche aussi d'un patch ouvert à un autre.</td></tr>
+</table>
+</div>
+
+<h3>Deux natures de données : les flux et les déclencheurs</h3>
+
+<p>C'est la distinction la plus utile pour composer avec des capteurs :</p>
+<ul>
+<li><b>Un flux</b> est une valeur qui arrive en continu, souvent très vite : une distance, une lumière, un accéléromètre à 50 valeurs par seconde. On s'en sert pour <i>moduler</i> : une hauteur, un volume, un filtre, une densité.</li>
+<li><b>Un déclencheur</b> (<i>trigger</i>) est un événement ponctuel : un bouton, un choc, quelqu'un qui entre. On s'en sert pour <i>lancer</i> quelque chose : une note, un son, un changement de section.</li>
+</ul>
+<p>On passe de l'un à l'autre. Un flux devient un déclencheur avec un seuil :</p>
+
+<pre><code>[r midi.cc22]     la valeur, de 0 à 127
+|
+[&gt; 50]            1 si elle est au-dessus de 50, sinon 0
+|
+[change]          on ne garde que le moment où ça bascule
+|
+[sel 1]           bang au moment où on passe au-dessus
+|
+(o)</code></pre>
+
+<p>Et un déclencheur devient un flux avec une enveloppe : chaque bang relance une rampe.</p>
+
+<pre><code>(o)
+|
+[1, 0 2000(       saute à 1 puis redescend à 0 en 2 secondes
+|
+[line]</code></pre>
+
+<h3>Nettoyer : un capteur n'est jamais tout propre</h3>
+
+<p>Les données d'un vrai capteur sont sales ou bruitées, et c'est normal. Avant de les faire sonner, il faut presque toujours les traiter. Les quatre défauts les plus courants sont présents dans le patch Générateurs :</p>
+
+<div class="tableau">
+<table>
+<tr><th>Défaut</th><th>À quoi ça ressemble</th><th>Remède</th></tr>
+<tr><td>Le bruit</td><td>La valeur tremble en permanence autour de la bonne, même quand rien ne bouge.</td><td>Lisser : <code>[$1 150(</code> puis <code>[line]</code> ou <code>[line~]</code>. Plus le temps est long, plus c'est calme, mais plus ça réagit tard.</td></tr>
+<tr><td>Les valeurs aberrantes</td><td>De temps en temps, une valeur absurde (le capteur a perdu son écho et renvoie son maximum).</td><td>Écarter : <code>[moses 250]</code> ne laisse passer à gauche que ce qui est en dessous de 250.</td></tr>
+<tr><td>Les rebonds</td><td>Un contact qui s'établit envoie 1, 0, 1 en quelques millisecondes au lieu d'un seul 1.</td><td>Attendre que ça se calme avant de croire la valeur (anti-rebond, ci-dessous).</td></tr>
+<tr><td>L'échelle brute</td><td>0 à 255, 0 à 1023, 0 à 65535, un repos à 512 : la valeur dépend de l'électronique, pas de la musique.</td><td>Recentrer (<code>[- 512]</code>), diviser, borner (<code>[clip]</code>). Regarder d'abord les vraies bornes : un capteur n'utilise presque jamais toute sa plage.</td></tr>
+</table>
+</div>
+
+<p>L'anti-rebond : chaque nouvelle valeur est mise de côté et relance un délai de 50 ms. Elle ne sort que si rien d'autre n'est arrivé entre-temps.</p>
+
+<pre><code>[route 60]        la vélocité de la note 60 : 127, 0, 127...
+|
+[t b f]
+|     |
+[delay 50]  |     chaque valeur relance le délai...
+|     |
+[f     ]          ...et seule la dernière sort, 50 ms plus tard
+|
+[change]</code></pre>
+
+<p>Dans plugdata, la bibliothèque ELSE ajoute des raccourcis pratiques, par exemple <code>[rescale]</code> pour mettre à l'échelle en un seul objet. Les versions vanilla ci-dessus marchent partout.</p>
+
+<h2>Le MIDI</h2>
+
+<p>Le <b>MIDI</b> (<i>Musical Instrument Digital Interface</i>) est une norme publiée en 1983, portée par Dave Smith (Sequential Circuits) et Ikutaro Kakehashi (Roland), pour que les synthétiseurs de marques différentes puissent se parler. Quarante ans plus tard, elle est toujours partout : claviers, contrôleurs à potentiomètres, pads, logiciels, et beaucoup de cartes électroniques.</p>
+<p>Le point important : <b>le MIDI ne transporte pas de son</b>. Il transporte des instructions de jeu, « telle touche vient d'être enfoncée avec telle force ». C'est une partition en temps réel, pas un enregistrement.</p>
+
+<h3>Ce que contient un message MIDI</h3>
+
+<p>Un message tient en deux ou trois octets : un octet de statut (quel type de message, sur quel canal) suivi d'une ou deux données. Presque toutes les valeurs vont de <b>0 à 127</b> (7 bits), et il y a <b>16 canaux</b>, qui permettent de s'adresser à 16 instruments sur le même câble.</p>
+
+<div class="tableau">
+<table>
+<tr><th>Message</th><th>Contenu</th><th>Usage</th><th>Objet Pd</th></tr>
+<tr><td>Note on / Note off</td><td>numéro de note (60 = do central), vélocité</td><td>Touches, pads. Une vélocité à 0 vaut note off.</td><td><code>[notein]</code></td></tr>
+<tr><td>Control Change (CC)</td><td>numéro de contrôleur, valeur</td><td>Potentiomètres, faders, pédales : tout ce qui est continu.</td><td><code>[ctlin]</code></td></tr>
+<tr><td>Pitch bend</td><td>une valeur sur 14 bits (0 à 16383)</td><td>La molette de hauteur, plus fine que les autres.</td><td><code>[bendin]</code></td></tr>
+<tr><td>Program Change</td><td>numéro de programme</td><td>Changer de son, de preset, de scène.</td><td><code>[pgmin]</code></td></tr>
+<tr><td>Aftertouch</td><td>pression</td><td>La pression sur une touche déjà enfoncée.</td><td><code>[touchin]</code></td></tr>
+</table>
+</div>
+
+<p>Chaque objet a son jumeau pour émettre : <code>[noteout]</code>, <code>[ctlout]</code>, <code>[bendout]</code>, <code>[pgmout]</code>. Pd peut donc aussi piloter un synthétiseur, un autre logiciel ou une machine.</p>
+
+<h3>Recevoir du MIDI dans Pd</h3>
+
+<p>On branche l'appareil (aujourd'hui presque toujours en USB), on le sélectionne comme entrée dans les réglages MIDI de plugdata, et on pose un objet :</p>
+
+<pre><code>[notein]                        [ctlin]
+|      |      |                 |      |      |
+[60 \  [100\  [1  \             [64 \  [74 \  [1  \
+note   vél.   canal             valeur n° CC  canal</code></pre>
+
+<p>Avec un argument, on filtre : <code>[notein 10]</code> n'écoute que le canal 10, <code>[ctlin 74]</code> n'écoute que le contrôleur 74 et ne sort plus que sa valeur.</p>
+
+<p>Un premier instrument (section 2 du patch d'exemples) : la note donne la fréquence, la vélocité donne le volume.</p>
+
+<pre><code>[notein]
+|        |
+[mtof]   [/ 127]          vélocité 0-127 -> volume 0-1
+|        |
+[osc~]   [$1 20(          on y va en 20 ms, pour éviter le clic
+|        |
+|        [line~]
+|        |
+[*~      ]
+|
+[*~ 0.3]
+|
+[dac~]</code></pre>
+
+<p>Quand la touche est relâchée, la vélocité vaut 0, donc le volume retombe à 0 : le note off est géré tout seul.</p>
+
+<h3>Le MIDI sans clavier : des capteurs déguisés</h3>
+
+<p>Dans une installation, le MIDI sert rarement à jouer des notes. Il sert de tuyau : comme tous les logiciels le comprennent, beaucoup de cartes à capteurs se présentent comme un appareil MIDI et déguisent leurs mesures.</p>
+<ul>
+<li>Une mesure continue (lumière, distance, pression) devient un <b>Control Change</b> : 0 à 127.</li>
+<li>Un état tout ou rien (un contact, une présence) devient une <b>note</b> : vélocité 127 quand c'est actif, 0 quand ça ne l'est plus. Le numéro de note ne désigne plus une hauteur mais <i>quel</i> capteur.</li>
+<li>Une mesure qui demande de la finesse emprunte le <b>pitch bend</b> et ses 14 bits : 16384 valeurs au lieu de 128.</li>
+</ul>
+<p>C'est ce que fait le patch Générateurs, et la section 2 du patch d'exemples en tire un premier son : une distance bruitée, lissée, pilote une fréquence, et une dalle de contact, passée par l'anti-rebond, ouvre le volume.</p>
+
+<pre><code>[r midi.cc21]            [r midi.note]
+|                        |
+[* 5]                    [route 60 61 62]
+|                        |
+[+ 150]                  (anti-rebond)
+|                        |
+[$1 150(                 [/ 127]
+|                        |
+[line~]                  [$1 300(
+|                        |
+[osc~]                   [line~]
+|                        |
+[*~                      ]
+|
+[*~ 0.3]
+|
+[dac~]</code></pre>
+
+<h3>Des forces mais aussi des limitations</h3>
+<ul>
+<li><b>En faveur du midi</b> : c'est universel, robuste, rien à configurer, très peu de latence, et des milliers de contrôleurs d'occasion à quelques euros. Des cartes comme la Teensy ou l'Arduino Leonardo peuvent se faire passer pour un appareil MIDI : on fabrique alors son propre contrôleur avec ses propres capteurs.</li>
+<li><b>Les limites</b> : 128 valeurs de résolution, c'est peu (on entend des marches d'escalier sur un filtre ou une hauteur, d'où l'intérêt de lisser), et tout y est pensé pour le clavier d'un piano. Un capteur de distance n'est ni une note ni un potentiomètre : on le déguise du coup en CC. </li>
+</ul>
+
+<h2>L'OSC</h2>
+
+<p>L'<b>OSC</b> (<i>Open Sound Control</i>) est né en 1997 au CNMAT, à l'université de Berkeley (Matt Wright et Adrian Freed), justement pour dépasser les limites du MIDI. L'idée : au lieu de passer par un câble dédié et des numéros, on fait passer les messages par <b>le réseau</b> (Ethernet, wifi), et on leur donne des <b>noms</b>.</p>
+
+<h3>Ce que contient un message OSC</h3>
+
+<pre><code>/capteur/distance  183
+/meteo/vent  8.2  193
+\_______________/  \______/
+     adresse       arguments</code></pre>
+
+<ul>
+<li><b>Une adresse</b>, écrite comme un chemin de dossier, qu'on invente librement : <code>/salle2/plante/humidite</code>. C'est à la fois la force de l'OSC (c'est lisible, on sait de quoi on parle) et son piège (aucune norme : il faut se mettre d'accord, ou lire la documentation de l'appareil).</li>
+<li><b>Des arguments</b> : autant qu'on veut, et de vrais types. Des entiers, des nombres à virgule en haute résolution, du texte. Plus de limite à 127.</li>
+</ul>
+
+<p>Pour que le message arrive, il faut deux informations, comme pour une lettre :</p>
+<ul>
+<li><b>une adresse IP</b> : quelle machine sur le réseau (<code>192.168.1.12</code> par exemple). <code>localhost</code>, ou <code>127.0.0.1</code>, désigne l'ordinateur lui-même : c'est ce qu'on utilise pour faire discuter deux logiciels sur la même machine.</li>
+<li><b>un port</b> : quelle « porte » sur cette machine, un numéro qu'on choisit (9000, 8000, 57120...). Un seul programme peut écouter un port donné à la fois.</li>
+</ul>
+<p>L'OSC voyage presque toujours en <b>UDP</b> : on envoie sans vérifier que c'est arrivé. C'est rapide, mais un message peut se perdre, surtout en wifi. Pour un flux de capteur, aucune importance, le suivant arrive 20 ms plus tard. Pour un déclencheur unique, c'est à garder en tête.</p>
+
+<h3>Recevoir de l'OSC dans Pd</h3>
+
+<p>Trois étapes : écouter un port, décoder, trier par adresse (section 3 du patch d'exemples).</p>
+
+<pre><code>[netreceive -u -b 9000]          écoute le port 9000 (-u : UDP, -b : binaire)
+|
+[oscparse]                       décode : sort la liste  capteur distance 183
+|
+[list trim]                      enlève le mot "list" pour que [route] puisse trier
+|
+[route capteur meteo]            premier étage de l'adresse
+|
+[route distance accel presence]  deuxième étage
+|         |               |
+[183 \    [unpack f f f]  [X]</code></pre>
+
+<p>On reconnaît <code>[route]</code> : une adresse OSC se trie étage par étage, comme on ouvre des dossiers.</p>
+
+<h3>Envoyer de l'OSC</h3>
+
+<pre><code>[0.5\
+|
+[oscformat lumiere intensite]    fabrique le message /lumiere/intensite 0.5
+|
+|   [connect localhost 9001(     à cliquer d'abord : vers quelle machine, quel port
+|   /
+[netsend -u -b]</code></pre>
+
+<p>plugdata fournit aussi, avec ELSE, des objets tout-en-un : <code>[osc.receive 9000]</code>, <code>[osc.route]</code>, <code>[osc.send]</code>.</p>
+
+<h3>Où on le croise</h3>
+<ul>
+<li>Entre logiciels : Pd, Max, SuperCollider, TouchDesigner, Processing, Ableton Live, les logiciels d'éclairage et de vidéo. C'est la langue commune du spectacle et de l'installation.</li>
+<li>Depuis un téléphone ou une tablette (des applications comme TouchOSC envoient les mouvements du téléphone et des interfaces tactiles).</li>
+<li>Depuis des cartes wifi comme l'ESP32 : un capteur sans fil, accroché à un corps ou à un objet, qui coûte que quelques euros.</li>
+<li>Depuis une station météo, un logiciel vidéo intégré, ou n'importe quel programme qui lit des données et les redistribue sur le réseau.</li>
+</ul>
+
+<h2>La liaison série</h2>
+
+<p>C'est la plus ancienne et la plus brute des trois : deux machines reliées par un câble (comme l'USB) s'envoient des <b>octets, l'un après l'autre</b>. Il n'y a ni notes, ni adresses, ni types : seulement une suite de nombres de 0 à 255. C'est ce que parle une carte <b>Arduino</b> branchée à l'ordinateur.</p>
+<p>Puisque rien n'est prévu, <b>c'est à nous d'inventer le protocole</b>. Le plus courant est d'écrire du texte, une mesure par ligne. Côté Arduino :</p>
+
+<pre><code>void setup() {
+  Serial.begin(9600);                // la vitesse, en bauds
+}
+
+void loop() {
+  Serial.print("ldr ");
+  Serial.println(analogRead(A0));    // une valeur de 0 à 1023, puis fin de ligne
+  delay(100);
+}</code></pre>
+
+<p>La carte envoie alors <code>ldr 512</code> dix fois par seconde. Mais ce qui arrive dans Pd, ce sont les codes ASCII des caractères, un par un :</p>
+
+<pre><code> l    d    r   espace  5    1    2   retour  fin de ligne
+108  100  114    32    53   49   50    13        10</code></pre>
+
+<h3>Recevoir du série dans Pd</h3>
+
+<p>L'objet s'appelle <code>[comport]</code> (fourni avec plugdata). On lui demande la liste des ports avec le message <code>devices</code>, on ouvre le bon avec <code>open</code>, à la même vitesse que la carte. Puis il faut reconstituer les lignes : empiler les octets jusqu'à la fin de ligne (le code 10), et retraduire le tout en message (section 4 du patch d'exemples).</p>
+
+<pre><code>[devices(  [open 0(
+|          /
+[comport 0 9600]
+|
+[sel 13 10 ]                   13 : on ignore / 10 : fin de ligne / le reste : un caractère
+     |       |
+     |       [list prepend]   on empile les caractères de la ligne en cours
+     |       [t l l]
+     |
+     [t b b]                  fin de ligne : on sort la ligne, puis on vide la pile
+     |
+     [list]
+     |
+     [fudiparse]              des octets au message : ldr 512
+     |
+     [route ldr pot btn piezo]
+     |      |     |     |
+     [512\  [300\ [X]   [870\</code></pre>
+
+<p>Le câblage exact est dans le patch d'exemples, il se copie tel quel d'un projet à l'autre. Et une fois passé <code>[fudiparse]</code>, on retombe sur le même <code>[route]</code> que pour l'OSC.</p>
+
+<h3>Les pièges classiques</h3>
+<ul>
+<li><b>Un seul programme à la fois</b> peut ouvrir un port série. Si le moniteur série de l'Arduino est ouvert, Pd n'aura rien (et inversement, on ne peut pas téléverser un programme tant que Pd tient le port).</li>
+<li><b>La vitesse</b> (9600, 115200 bauds...) doit être la même des deux côtés, sinon on reçoit n'importe quoi.</li>
+<li><b>Le nom du port</b> change selon la machine : <code>COM3</code> sous Windows, <code>/dev/cu.usbmodem...</code> sous macOS, <code>/dev/ttyACM0</code> sous Linux.</li>
+</ul>
+
+<h2>Et les autres</h2>
+
+<div class="tableau">
+<table>
+<tr><th>Protocole</th><th>C'est quoi</th><th>Dans une installation</th></tr>
+<tr><td>Le son lui-même</td><td>Un micro est un capteur, et c'est le moins cher de tous.</td><td>Un micro de contact (piezo) branché sur la carte son, puis <code>[adc~]</code> et <code>[env~]</code> pour suivre le volume, <code>[threshold~]</code> ou <code>[bonk~]</code> pour détecter les chocs, <code>[sigmund~]</code> pour la hauteur.</td></tr>
+<tr><td>HID</td><td>Le protocole des claviers, souris et manettes de jeu en USB.</td><td>Détourner une manette ou un clavier démonté en interface : des boutons et des joysticks fiables pour presque rien.</td></tr>
+<tr><td>DMX, Art-Net</td><td>Le protocole de la lumière de spectacle, par câble (DMX) ou par réseau (Art-Net).</td><td>Dans l'autre sens : Pd pilote des projecteurs à partir du son ou des capteurs.</td></tr>
+<tr><td>Firmata</td><td>Un protocole série tout fait pour Arduino.</td><td>On pilote et on lit les broches de la carte depuis Pd sans écrire de code Arduino.</td></tr>
+<tr><td>MQTT, WebSocket</td><td>Des protocoles du web et des objets connectés.</td><td>Des données qui viennent de loin : une station météo, une page web, un autre lieu d'exposition.</td></tr>
+<tr><td>MIDI Bluetooth</td><td>Du MIDI sans fil.</td><td>Des contrôleurs ou des capteurs portés sur le corps.</td></tr>
+<tr><td>I²C, SPI</td><td>Les protocoles entre un capteur et sa carte.</td><td>Ils n'arrivent jamais jusqu'à Pd, mais on lit leurs noms sur toutes les fiches de capteurs.</td></tr>
+</table>
+</div>
+
+<p>Pour choisir, en résumé : <b>MIDI</b> quand il existe déjà un contrôleur qui fait l'affaire, <b>OSC</b> dès qu'il y a du réseau, du sans-fil ou plusieurs logiciels, <b>série</b> quand on fabrique soi-même avec un Arduino branché en USB.</p>
+
+<h2>Le patch Générateurs</h2>
+
+<p>On n'a pas de capteurs sous la main pour tout le monde, alors on va tricher : <a href="Generateurs.pd">Generateurs.pd</a> simule ceux d'une installation sonore interactive. Imaginez un lieu où passent des visiteur·euses : une station météo sur le toit, des capteurs sans fil accrochés ici et là, des dalles de contact au sol, une carte Arduino cachée dans un socle. Le patch produit ce que tout cela enverrait : des flux rapides, des flux lents, des états, des déclencheurs. <b>Mais attention il ne fait aucun son</b>, et rien de ce qu'il envoie n'est déjà de la musique : ni notes, ni rythmes, seulement des mesures brutes, bruitées, à des échelles qui n'ont rien de musical. Les nettoyer et décider de ce qu'elles deviennent, c'est le travail à faire maitenant.</p>
+
+<h3>Mode d'emploi</h3>
+<ol>
+<li>Ouvrez <code>Generateurs.pd</code> dans plugdata et laissez-le ouvert.</li>
+<li>Créez votre propre patch à côté (un nouveau fichier, dans un autre onglet pour que se soit plus simple).</li>
+<li>Dans <code>Generateurs.pd</code>, cochez la grande case en haut à gauche : tout démarre. Les trois petites cases allument chaque famille séparément.</li>
+<li>Dans votre patch, récupérez les données avec les objets du tableau ci-dessous.</li>
+</ol>
+<p>Ne modifiez pas le générateur : c'est « le simulateur de l'installation », elle est la même pour tout le monde. Tout votre travail est à faire dans votre patch.</p>
+
+<h3>Ce qu'il envoie</h3>
+
+<div class="tableau">
+<table>
+<tr><th>Source simulée</th><th>Pour la recevoir</th><th>Ce qui arrive</th><th>Nature</th></tr>
+<tr><td colspan="4"><b>MIDI</b> : une carte qui déguise ses capteurs en messages MIDI</td></tr>
+<tr><td>Luminosité</td><td><code>[r midi.cc20]</code></td><td>0 à 127. Dérive lentement, tremble de quelques unités.</td><td>flux lent, bruité</td></tr>
+<tr><td>Distance infrarouge</td><td><code>[r midi.cc21]</code></td><td>0 à 120 environ, jusqu'à 50 valeurs par seconde. Très bruitée, avec de temps en temps un 127 aberrant.</td><td>flux rapide, sale</td></tr>
+<tr><td>Capteur capacitif (un objet qu'on touche)</td><td><code>[r midi.cc22]</code></td><td>Vers 10 au repos, vers 95 quand on touche, et ça tremble dans les deux cas.</td><td>flux à seuiller</td></tr>
+<tr><td>Jauge de poids</td><td><code>[r midi.bend]</code></td><td>0 à 16383 (14 bits), 20 fois par seconde.</td><td>flux fin</td></tr>
+<tr><td>Trois dalles de contact au sol</td><td><code>[r midi.note]</code></td><td>note, vélocité. Notes 60, 61, 62 ; vélocité 127 = quelqu'un dessus, 0 = personne. Le contact rebondit.</td><td>état ON/OFF</td></tr>
+<tr><td colspan="4"><b>OSC</b> : une station météo et des capteurs en wifi, reçus sur le port 9000 avec <code>[netreceive -u -b 9000]</code> puis <code>[oscparse]</code></td></tr>
+<tr><td>Température</td><td><code>/meteo/temperature</code></td><td>en degrés, toutes les 2 secondes.</td><td>flux très lent</td></tr>
+<tr><td>Humidité</td><td><code>/meteo/humidite</code></td><td>en %, toutes les 2 secondes.</td><td>flux très lent</td></tr>
+<tr><td>Pression</td><td><code>/meteo/pression</code></td><td>en hPa (autour de 1013), toutes les 2 secondes.</td><td>flux très lent</td></tr>
+<tr><td>Vent</td><td><code>/meteo/vent</code></td><td>vitesse (0 à 25 m/s) et direction (0 à 359 degrés), 10 fois par seconde, par rafales.</td><td>flux</td></tr>
+<tr><td>Pluie</td><td><code>/meteo/pluie</code></td><td>un 1 à chaque bascule du pluviomètre : rien pendant longtemps, puis des averses.</td><td>déclencheur</td></tr>
+<tr><td>Lumière</td><td><code>/meteo/lumiere</code></td><td>en lux, 0 à 65535 (16 bits), 2 fois par seconde.</td><td>flux lent</td></tr>
+<tr><td>Distance (ultrason)</td><td><code>/capteur/distance</code></td><td>valeur brute 8 bits (0 à 255), 20 fois par seconde, bruitée. 255 = écho perdu.</td><td>flux, sale</td></tr>
+<tr><td>Accéléromètre</td><td><code>/capteur/accel</code></td><td>x y z, valeurs brutes 10 bits (0 à 1023, repos vers 512), 50 fois par seconde.</td><td>flux rapide</td></tr>
+<tr><td>Détecteur de passage</td><td><code>/capteur/presence</code></td><td>1 quand quelqu'un passe, 0 trois secondes plus tard.</td><td>état ON/OFF</td></tr>
+<tr><td colspan="4"><b>Série</b> : une carte Arduino, reçue octet par octet avec <code>[r serie.octets]</code></td></tr>
+<tr><td>Photorésistance</td><td>ligne <code>ldr 512</code></td><td>0 à 1023, 10 fois par seconde.</td><td>flux</td></tr>
+<tr><td>Potentiomètre</td><td>ligne <code>pot 300</code></td><td>0 à 1023, seulement quand il bouge.</td><td>flux lent</td></tr>
+<tr><td>Bouton</td><td>ligne <code>btn 1</code></td><td>1 à l'appui, 0 au relâchement.</td><td>déclencheur</td></tr>
+<tr><td>Piezo</td><td>ligne <code>piezo 870</code></td><td>un choc et sa force, de 200 à 1000.</td><td>déclencheur</td></tr>
+</table>
+</div>
+
+<h3>Ce qui est vrai, ce qui est simulé</h3>
+<ul>
+<li><b>L'OSC est du vrai OSC</b> : le générateur envoie réellement des paquets sur le réseau, à destination de votre propre machine (<code>localhost</code>, port 9000). Votre patch le reçoit exactement comme s'il venait d'un capteur à l'autre bout de la salle.</li>
+<li><b>Le MIDI passe par des <code>[receive]</code></b>, parce qu'un logiciel ne peut pas s'envoyer du MIDI à lui-même sans installer un port virtuel. <code>[r midi.cc20]</code> remplace <code>[ctlin 20]</code>, <code>[r midi.bend]</code> remplace <code>[bendin]</code>, et <code>[r midi.note]</code> livre la liste « note vélocité » que donnerait <code>[notein]</code>. Le jour où vous branchez une vraie carte, il suffit de changer cet objet, le reste du patch ne bouge pas.</li>
+<li><b>Le série passe par un faux <code>[comport]</code></b> : le sous-patch <code>[pd comport]</code> de la section 4 du patch d'exemples, à copier dans le vôtre. Il s'utilise comme le vrai : <code>devices</code> liste les ports, <code>open 0</code> ouvre, <code>close</code> ferme, et tant que le port n'est pas ouvert rien ne sort. Il livre les mêmes octets, un par un : le décodage est donc exactement celui qu'il faudrait écrire pour une vraie carte, et le jour venu il suffit de remplacer <code>[pd comport]</code> par <code>[comport 0 9600]</code>.</li>
+</ul>
+<p>Si vous n'avez aucune donnée OSC : vérifiez qu'un seul patch écoute le port 9000 (un seul <code>[netreceive -u -b 9000]</code> ouvert à la fois, y compris celui du patch d'exemples).</p>
+
+<h2 id="rendu">Rendu 1 : composer à partir des générateurs</h2>
+
+<p>À partir de <code>Generateurs.pd</code>, et de lui seul comme source de données, fabriquez un <b>patch musical</b> : votre proposition sonore pour cette installation imaginaire. Le générateur fournit la météo, les présences, la lumière, les contacts, les chocs ; vous décidez de ce que cela donne à entendre.</p>
+
+<p>Le rendu comporte deux éléments :</p>
+<ol>
+<li><b>Une note d'intention</b>, qui expose votre démarche artistique : ce que vous avez voulu faire entendre, pourquoi, et comment les données deviennent du son. Quelles sources avez-vous choisies, lesquelles avez-vous laissées de côté ? Qu'est-ce qui déclenche, qu'est-ce qui module ? Quelle place pour le hasard, pour le silence ? Si cette pièce était installée pour de bon, où serait-elle, et que ferait le public ?</li>
+<li><b>Le patch de votre composition</b> (fichier <code>.pd</code>), qui doit fonctionner en ouvrant <code>Generateurs.pd</code> à côté, sans rien modifier dans celui-ci.</li>
+</ol>
+
+<div class="encadre">
+<p><b>Quelques repères</b></p>
+<ul>
+<li>Il ne s'agit pas de tout utiliser. Trois sources bien choisies et bien écoutées valent mieux que quinze branchées au hasard. Essayez tout de même de piocher dans au moins deux des trois protocoles (MIDI et OSC).</li>
+<li>Pensez en termes de flux et de déclencheurs : qu'est-ce qui lance un son, qu'est-ce qui le transforme pendant qu'il dure ?</li>
+<li>Rien ne sort du générateur prêt à jouer : il faudra lisser, écarter, seuiller, mettre à l'échelle. Ces choix-là sont déjà des choix d'écriture.</li>
+<li>Le lien direct (une valeur = une hauteur) est un point de départ, pas une fin. Seuils, lissages, comptages, mémoires : c'est dans ce que vous faites des données entre l'entrée et le son que se trouve la composition.</li>
+<li>La virtuosité technique ou musicale n'est pas un critère de qualité de votre patch. Ce qui compte, c'est la cohérence entre ce que dit la note d'intention et ce que fait le patch.</li>
+<li>Vous pouvez partir du patch d'exemples et du patch du premier cours, et en récupérer des morceaux.</li>
+<li>Très Très important /!\ Commentez votre patch : quelques mots à côté de chaque partie pour dire ce qu'elle fait. Je sais à quel point cela peut devenir une salade de câbles, la personne qui ouvre votre patch n'est jamais dans votre tête, le plus j'aurais d'infos le plus facile ce sera pour moi de comprendre ce que vous avez voulu faire</li>
+</ul>
+</div>
+
+<p>À m'envoyer par mail au plus tard le <b>30 octobre</b> : <a href="mailto:remi.georges@protonmail.com">remi.georges@protonmail.com</a></p>
+<p>Si vous avez des questions ou des interrogations, la doc, les fichiers help et les exemples de PureData sont vos nouveaux meilleurs amis, et si jamais vous êtes vraiment à cours de réponses, envoyez moi un mail.</p>
+
+<p><a href="../index.html">Retour</a></p>
+
+<script>
+document.querySelectorAll('h1').forEach(h => h.dataset.text = h.textContent);
+</script>
+
+</body>
+</html>
