@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="../style.css">
+<style>
+body { max-width: 50em; margin: 1em auto; padding: 0 1em; font: 400 15px/1.6 "IBM Plex Sans", sans-serif; color: #202122; }
+h1 { font-weight: normal; }
+h1, h2 { border-bottom: 1px solid #a2a9b1; }
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+table { border-collapse: collapse; background: #f8f9fa; margin: .5em 0 1em; }
+th, td { border: 1px solid #a2a9b1; padding: .2em .5em; vertical-align: top; }
+th { background: #eaecf0; font-family: var(--font-titre-2); font-weight: normal; text-align: left; }
+code, kbd, pre { font-family: "IBM Plex Mono", monospace; font-size: .9em; }
+code { background: #f8f9fa; padding: 0 .2em; }
+kbd { display: inline-block; padding: 0 .35em; border: 1px solid #a2a9b1; border-bottom-width: 2px; border-radius: 3px; background: #fff; white-space: nowrap; }
+pre { background: #f8f9fa; border-left: 3px solid #a2a9b1; padding: .6em 1em; overflow-x: auto; line-height: 1.45; }
+pre code { background: none; padding: 0; font-size: 1em; }
+.consigne { border: 2px dashed #a2a9b1; padding: .5em 1.2em; margin: 1em 0; }
+.doc { font-size: .9em; color: #54595d; }
+ul { list-style-type: "–  "; }
+.doc::before { content: "→ doc : "; }
+</style>
+</head>
+<body>
+
+<h1>Live Coding sur Cagire, mode expert</h1>
+
+<p>Ce dernier cours est un temps de travail : vous commencez votre track. Cette page sert de pense-bête. Elle rappelle la consigne du rendu, les raccourcis à connaître et des exemples de code à copier, modifier et casser. Chaque partie renvoie vers la page du <a href="https://cagire.raphaelforment.fr/docs/" target="_blank">manuel de Cagire</a> qui la détaille.</p>
+
+<p>Le manuel est aussi <b>dans Cagire</b> : <kbd>F4</kbd> ouvre l'aide, et ses exemples se lancent directement. Dans n'importe quelle vue, <kbd>?</kbd> affiche la liste des raccourcis de la vue où vous êtes.</p>
+
+<!-- ============================================================ -->
+
+<h2>Le rendu</h2>
+
+<div class="consigne">
+<p><b>Composez une track sur Cagire, découpée en plusieurs patterns.</b></p>
+<ul>
+<li>Envoyez-moi le fichier <code>.cagire</code> <b>avant le 27 novembre</b>, à <a href="mailto:remi.georges@protonmail.com">remi.georges@protonmail.com</a>.</li>
+<li>Si vous utilisez des samples, joignez le <b><code>.zip</code> de votre dossier de samples</b> (voir <a href="#samples">plus bas</a>). Le fichier <code>.cagire</code> ne contient pas l'audio, seulement le chemin vers vos fichiers : sans le zip, je ne pourrai pas écouter votre track.</li>
+<li><b>Partez d'un fichier vide.</b> Pas de démo modifiée : votre track part de zéro.</li>
+<li><b>Commentez et rangez votre code</b>, et laissez-moi des infos dans l'onglet <b>Notes</b> (voir <a href="#ranger">Ranger son projet</a>).</li>
+<li><b>Amusez-vous !</b> Testez, cassez, gardez les accidents qui sonnent bien.</li>
+</ul>
+<p><b>Concert :</b> le 27 novembre, Celeste Betancur vient à l'UJM et vous pouvez performer votre track sur scène. Si ça vous tente, envoyez-moi un mail <b>avant la fin du mois d'octobre</b>.</p>
+</div>
+
+<h3>Partir d'un fichier vide</h3>
+
+<p>Au lancement, Cagire ouvre une démo. Pour partir d'un projet vierge :</p>
+<ol>
+<li><kbd>l</kbd> ouvre le <i>Load hub</i> (démos, tutoriels et vos fichiers).</li>
+<li><kbd>n</kbd> crée un projet vierge : banks vides, tempo par défaut. Vos dossiers de samples restent configurés.</li>
+<li><kbd>s</kbd> enregistre tout de suite le projet avec un nom (par exemple <code>prenom-nom.cagire</code>). L'extension s'ajoute toute seule.</li>
+</ol>
+<p>Pour ne plus voir la démo au démarrage, désactivez <i>Demo on startup</i> dans la vue Options (<kbd>F3</kbd>).</p>
+<p><b>Il n'y a pas de sauvegarde automatique</b> : appuyez sur <kbd>s</kbd> souvent. Pour rouvrir votre track : <kbd>l</kbd> puis <kbd>f</kbd>, et choisissez votre fichier.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/project/saving-and-loading/" target="_blank">Saving and loading</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/first-run/" target="_blank">First run</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Les raccourcis de survie</h2>
+
+<p>La plupart du temps, vous êtes dans le Sequencer (<kbd>F5</kbd>). Il a trois niveaux de <i>focus</i> : la <b>grille</b> (toutes les banks et patterns), le <b>séquenceur</b> (les steps d'un pattern) et l'<b>éditeur</b> (le code d'un step). <kbd>Enter</kbd> rentre d'un niveau, <kbd>Esc</kbd> ressort d'un niveau.</p>
+
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>F5</kbd></td><td>Revenir au Sequencer, depuis n'importe où</td></tr>
+<tr><td><kbd>F9</kbd> / <kbd>F10</kbd></td><td>Lancer ou arrêter la lecture / tout arrêter et revenir au début (marche partout, même dans l'éditeur)</td></tr>
+<tr><td><kbd>Space</kbd></td><td>Dans le Sequencer : lancer ou arrêter le pattern sous le curseur</td></tr>
+<tr><td><kbd>Enter</kbd> / <kbd>Esc</kbd></td><td>Grille → séquenceur → éditeur / éditeur → séquenceur → grille. <kbd>Esc</kbd> dans l'éditeur sauvegarde et évalue le code</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>R</kbd></td><td>Jouer le step une fois, pour l'entendre tout de suite</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>Évaluer le code sans quitter l'éditeur</td></tr>
+<tr><td><kbd>t</kbd></td><td>Allumer ou éteindre un step (sur le séquenceur). Un step éteint garde son code</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd></td><td>Annuler / rétablir (sur la grille et le séquenceur). Dans l'éditeur, c'est <kbd>Ctrl</kbd>+<kbd>U</kbd></td></tr>
+<tr><td><kbd>s</kbd> / <kbd>l</kbd> / <kbd>q</kbd></td><td>Sauvegarder / charger / quitter (hors de l'éditeur)</td></tr>
+<tr><td><kbd>?</kbd></td><td>Tous les raccourcis de la vue actuelle</td></tr>
+<tr><td><kbd>:</kbd></td><td>Palette de commandes : cherchez une action par son nom</td></tr>
+<tr><td><kbd>F1</kbd> … <kbd>F8</kbd></td><td>Changer de vue : <kbd>F1</kbd> Dict (tous les mots du langage), <kbd>F2</kbd> Mix, <kbd>F3</kbd> Options, <kbd>F4</kbd> Help (le manuel), <kbd>F5</kbd> Sequencer, <kbd>F6</kbd> Engine, <kbd>F7</kbd> Sampler, <kbd>F8</kbd> Samples. <kbd>Ctrl</kbd>+flèches pour passer à la vue voisine</td></tr>
+</table>
+
+<p>Dans l'éditeur de step :</p>
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>Tab</kbd></td><td>Accepter la suggestion (Cagire propose les mots pendant que vous tapez). <kbd>Ctrl</kbd>+<kbd>N</kbd> / <kbd>Ctrl</kbd>+<kbd>P</kbd> pour passer d'une suggestion à l'autre</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>G</kbd></td><td>Ouvrir le mot sous le curseur dans le dictionnaire</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>Chercher le mot sous le curseur dans le manuel</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>B</kbd></td><td>Chercher un sample et insérer son nom</td></tr>
+<tr><td><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd>/<kbd>→</kbd> (<kbd>↑</kbd>/<kbd>↓</kbd>)</td><td>Pattern précédent / suivant (bank précédente / suivante), sans quitter l'éditeur</td></tr>
+</table>
+
+<p>Un mot qui s'affiche en rouge contient une erreur, et la raison s'affiche au bout de la ligne. Un step en erreur ne se coupe pas : il continue à jouer sa dernière version qui marchait, et un <code>/!\</code> apparaît en bas.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/keybindings/" target="_blank">Keybindings</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/navigation/" target="_blank">Navigation</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/views/sequencer/" target="_blank">Sequencer</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/sequencer/step-editor/" target="_blank">The step editor</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Découper sa track en patterns</h2>
+
+<p>Un projet Cagire s'organise en quatre niveaux :</p>
+<pre>Projet
+└─ Bank        (jusqu'à 32)
+   └─ Pattern  (jusqu'à 32 par bank)
+      └─ Step  (jusqu'à 1024 par pattern) : un petit script</pre>
+
+<p>Plusieurs patterns jouent en même temps. Une manière simple de s'organiser :</p>
+<ul>
+<li><b>un pattern = un instrument ou une voix</b> : kick, hats, basse, mélodie, nappe, textures…</li>
+<li><b>une bank = une partie de la track</b> : intro, partie A, partie B, fin… Par exemple vous pouvez mettre sur une même ligne ou une même colonne ou n'importe comment, au choix, les patterns qui jouent ensemble.</li>
+</ul>
+
+<p>Sur la <b>grille</b> (le focus le plus à l'extérieur, <kbd>Esc</kbd> depuis le séquenceur) :</p>
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>Space</kbd></td><td>Lancer ou arrêter le pattern sous le curseur. Il démarre au début de la mesure suivante, donc toujours en rythme</td></tr>
+<tr><td><kbd>m</kbd> / <kbd>x</kbd></td><td>Muter / mettre en solo. <kbd>M</kbd> / <kbd>X</kbd> retire tous les mutes / tous les solos</td></tr>
+<tr><td><kbd>h</kbd> puis <kbd>t</kbd></td><td>Mode HOLD : <kbd>Space</kbd>, <kbd>m</kbd> et <kbd>x</kbd> préparent des changements sans les jouer, puis <kbd>t</kbd> les déclenche tous ensemble. Pratique pour passer d'une partie à l'autre</td></tr>
+<tr><td><kbd>f</kbd></td><td><i>Follow actions</i> : un pattern passe la main à un autre après un certain nombre de boucles (<kbd>n</kbd> pattern suivant, <kbd>j</kbd> pattern de votre choix, puis tapez le nombre de boucles)</td></tr>
+<tr><td><kbd>c</kbd> / <kbd>v</kbd></td><td>Copier / coller un pattern, pour en faire une variation</td></tr>
+<tr><td><kbd>T</kbd> ou <kbd>+</kbd>/<kbd>-</kbd></td><td>Régler le tempo (dans la fenêtre de <kbd>T</kbd>, tapez sur <kbd>Space</kbd> pour le trouver à l'oreille)</td></tr>
+</table>
+
+<p>Les réglages d'un pattern, depuis le séquenceur :</p>
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>L</kbd></td><td>Nombre de steps du pattern (1 à 1024). Les steps au-delà sont cachés, pas effacés</td></tr>
+<tr><td><kbd>S</kbd></td><td>Vitesse du pattern par rapport au tempo (<code>2</code>, <code>1/2</code>, <code>3/4</code>…). Un pattern de basse à <code>1/2</code> va deux fois moins vite que la batterie, en restant calé dessus</td></tr>
+<tr><td><kbd>W</kbd></td><td>Swing : 50 = droit, 66 = ternaire, 80 = le plus syncopé</td></tr>
+</table>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/project/session-organization/" target="_blank">Session organization</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/project/playing-with-patterns/" target="_blank">Playing with patterns</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/project/pattern-properties/" target="_blank">Pattern properties</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Rappel : lire une ligne de Cagire</h2>
+
+<p>Comme on l'a vu Cagire est un langage de la famille Forth : on écrit <b>d'abord la valeur, puis le mot qui l'utilise</b>. Chaque son se construit de la même façon : on choisit une source avec <code>sound</code>, on ajoute des paramètres, et le point <code>.</code> joue le son.</p>
+<pre><code>saw sound     ;; la source : une onde dent de scie
+c4 note       ;; la hauteur : do 4 (le do du milieu)
+800 lpf       ;; un filtre passe-bas à 800 Hz
+0.5 gain      ;; le volume, de 0 à 1
+.             ;; le point joue le son</code></pre>
+<p>Tout ce qui suit <code>;;</code> est un commentaire. Les espaces séparent les mots : <code>c4note</code> ne marche pas, <code>c4 note</code> oui. Un mot que Cagire ne connaît pas devient du texte, sans erreur : si une ligne ne fait rien, vérifiez l'orthographe.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/basics/first-sounds/" target="_blank">First sounds</a> · <a href="https://cagire.raphaelforment.fr/docs/language/basics/words-and-comments/" target="_blank">Words &amp; comments</a> · <a href="https://cagire.raphaelforment.fr/docs/language/basics/the-sound-register/" target="_blank">The sound register</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Composer des rythmes</h2>
+
+<h3>La boîte à rythmes intégrée</h3>
+<p>Pas besoin de samples pour commencer : Cagire synthétise neuf sons de batterie, <code>kick</code>, <code>snare</code>, <code>hat</code>, <code>tom</code>, <code>rim</code>, <code>cowbell</code>, <code>cymbal</code>, <code>plate</code> et <code>clap</code>.</p>
+<pre><code>kick sound .</code></pre>
+<pre><code>;; une caisse claire plus discrète, avec un peu de réverbe
+snare sound
+0.6 gain
+0.2 verb
+.</code></pre>
+<p>Trois paramètres changent le caractère de chaque son, de <code>0</code> à <code>1</code> : <code>shape</code> (structure du son), <code>punch</code> (attaque) et <code>grit</code> (grain, saturation). <code>drumkit</code> change de machine : <code>0</code> analog, <code>1</code> fm, <code>2</code> west, <code>3</code> chip, <code>4</code> skin, <code>5</code> hard, <code>6</code> tube, <code>7</code> shake.</p>
+<pre><code>kick sound
+0.9 punch
+0.4 grit
+5 drumkit     ;; le kit "hard"
+.</code></pre>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/engine/sources/drum-synthesis/" target="_blank">Drum synthesis</a></p>
+
+<h3>Dupliquer les steps rapidement</h3>
+<p>Écrivez votre son dans un step, puis, avec le curseur sur ce step dans le séquenceur, utilisez un outil de remplissage. Les steps créés sont des <b>miroirs</b> du premier : modifiez-en un et tous suivent. <kbd>h</kbd> les rend indépendants.</p>
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>e</kbd></td><td>Rythme euclidien : <i>k</i> coups répartis le plus régulièrement possible sur <i>n</i> steps (3 sur 8, 5 sur 16…)</td></tr>
+<tr><td><kbd>u</kbd></td><td>Rythme de Barlow : les steps les plus forts de la mesure d'abord</td></tr>
+<tr><td><kbd>r</kbd></td><td>Répéter le step tous les <i>n</i> steps</td></tr>
+<tr><td><kbd>z</kbd></td><td>Remplir au hasard, avec le pourcentage que vous choisissez</td></tr>
+<tr><td><kbd>c</kbd> / <kbd>v</kbd> / <kbd>b</kbd></td><td>Copier / coller / coller en miroir</td></tr>
+<tr><td><kbd>Shift</kbd>+flèches, <kbd>a</kbd></td><td>Sélectionner plusieurs steps / tous les steps</td></tr>
+</table>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/sequencer/filling-steps/" target="_blank">Filling steps</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/sequencer/splitting-and-merging/" target="_blank">Splitting and merging</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/generators/euclidean-rhythms/" target="_blank">Euclidean rhythms</a></p>
+
+<h3>Faire évoluer un rythme dans le code</h3>
+<pre><code>;; alterne kick et snare à chaque passage sur ce step
+&lt;&lt; kick snare &gt;&gt; sound .</code></pre>
+<pre><code>;; une cymbale toutes les 4 boucles du pattern
+( cymbal sound . ) 4 every</code></pre>
+<pre><code>;; un crash uniquement au tout premier passage
+( cymbal sound . ) once</code></pre>
+<pre><code>;; sur une rangée de steps en miroir : un hat sur un rythme euclidien 3 sur 8
+( hat sound . ) 3 8 bjork</code></pre>
+<p>Les parenthèses <code>( … )</code> forment une <i>quotation</i> : du code mis de côté, qui ne s'exécute que si le mot qui suit le décide.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/reference/timing/periodic-execution/" target="_blank">Periodic execution</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/selection/alternation-brackets/" target="_blank">Alternation brackets</a> · <a href="https://cagire.raphaelforment.fr/docs/language/basics/quotations/" target="_blank">Quotations</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Composer des mélodies et des accords</h2>
+
+<h3>Les notes</h3>
+<p>Les notes s'écrivent en anglais (<code>c4</code>, <code>eb3</code>, <code>f#2</code>) ou en solfège (<code>do4</code>, <code>mib3</code>, <code>sol4</code>). <code>c4</code> est le do du milieu, qui vaut <code>60</code> en MIDI : on peut donc aussi écrire des nombres et faire des calculs.</p>
+<pre><code>;; une note différente à chaque boucle du pattern
+sine sound
+&lt; c4 eb4 g4 bb4 &gt; note
+.</code></pre>
+<pre><code>;; une note différente à chaque passage sur le step
+pluck sound
+[ c4 eb4 g4 bb4 ] cycle note
+0.3 verb
+.</code></pre>
+<p><code>&lt; … &gt;</code> avance d'une valeur à chaque boucle du pattern, <code>&lt;&lt; … &gt;&gt;</code> et <code>cycle</code> à chaque passage sur le step. <code>bounce</code> fait l'aller-retour, <code>rcycle</code> lit à l'envers.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/reference/pitch-and-harmony/notes-and-intervals/" target="_blank">Notes &amp; intervals</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/selection/cycling-words/" target="_blank">Cycling words</a></p>
+
+<h3>Rester dans une gamme</h3>
+<p><code>deg</code> prend une note de départ, une gamme et un numéro de degré (en partant de <code>0</code>), et donne la note correspondante. Changez seulement la gamme et toute la mélodie change de couleur.</p>
+<pre><code>;; ligne de basse en do mineur : degrés 0, 3, 4, 2, un par boucle
+saw sound
+c2 minor &lt; 0 3 4 2 &gt; deg note
+600 lpf
+0.3 decay
+.</code></pre>
+<p>Quelques gammes : <code>major</code>, <code>minor</code>, <code>dorian</code>, <code>phrygian</code>, <code>pentatonic</code>, <code>minpent</code>, <code>blues</code>, <code>wholetone</code>, <code>harmonicminor</code>, <code>chromatic</code>…</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/reference/pitch-and-harmony/scales-and-modes/" target="_blank">Scales &amp; modes</a></p>
+
+<h3>Les accords</h3>
+<p>Plusieurs notes avant <code>note</code> jouent ensemble. Vous pouvez aussi donner une fondamentale et un type d'accord avec <code>chord</code>.</p>
+<pre><code>;; accord écrit à la main
+c4 eb4 g4 note
+sine sound
+.</code></pre>
+<pre><code>;; une suite d'accords, un par boucle
+&lt; c3 ab2 f2 g2 &gt; note
+&lt; min7 maj7 min7 dom7 &gt; chord
+saw sound
+1200 lpf
+0.4 verb
+.</code></pre>
+<p>Types d'accord : <code>maj</code>, <code>m</code>, <code>dim</code>, <code>aug</code>, <code>sus2</code>, <code>sus4</code>, <code>maj7</code>, <code>min7</code>, <code>dom7</code>, <code>min9</code>, <code>add9</code>… Attention, <code>m7</code> et <code>M7</code> sont des intervalles, pas des accords : écrivez <code>min7</code> et <code>maj7</code>.</p>
+<pre><code>;; arpège : cn choisit une seule note de l'accord
+pluck sound
+c4 note
+min7 chord
+[ 0 1 2 3 ] cycle cn
+.</code></pre>
+<p><code>anchor</code> choisit le renversement le plus proche d'une note donnée, pour enchaîner les accords sans sauts : <code>g4 anchor</code>.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/reference/pitch-and-harmony/chords/" target="_blank">Chords</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/polyphony/" target="_blank">Polyphony</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Jouer avec l'aléatoire</h2>
+
+<p>Cagire relance le hasard à chaque fois qu'un step joue : une même ligne donne un résultat différent à chaque passage.</p>
+
+<table>
+<tr><th>Mot</th><th>Exemple</th><th>Ce que ça fait</th></tr>
+<tr><td><code>rand</code></td><td><code>200 2000 rand lpf</code></td><td>Un nombre au hasard entre deux bornes</td></tr>
+<tr><td><code>exprand</code></td><td><code>200.0 5000.0 exprand lpf</code></td><td>Pareil, mais avec plus de valeurs basses</td></tr>
+<tr><td><code>choose</code></td><td><code>[ kick snare hat ] choose sound</code></td><td>Une valeur au hasard dans la liste</td></tr>
+<tr><td><code>wchoose</code></td><td><code>[ c4 6  eb4 3  g4 1 ] wchoose note</code></td><td>Au hasard, avec des poids : <code>c4</code> souvent, <code>g4</code> rarement</td></tr>
+<tr><td><code>urn</code></td><td><code>[ kick snare hat clap ] urn sound</code></td><td>Comme un jeu de cartes mélangé : chaque valeur sort une fois avant de remélanger</td></tr>
+<tr><td><code>walk</code></td><td><code>[ c4 d4 eb4 g4 ] walk note</code></td><td>Avance ou recule d'une place au hasard : une mélodie qui « se promène »</td></tr>
+<tr><td><code>often</code>, <code>sometimes</code>, <code>rarely</code></td><td><code>( clap sound . ) rarely</code></td><td>Exécute le code entre parenthèses 75 % / 50 % / 25 % du temps</td></tr>
+<tr><td><code>chance</code>, <code>prob</code></td><td><code>( hat sound . ) 0.3 chance</code></td><td>Pareil, avec votre probabilité (0 à 1, ou 0 à 100 pour <code>prob</code>)</td></tr>
+</table>
+
+<pre><code>;; une note au hasard sur deux octaves, ramenée dans la gamme
+sine sound
+60 minpent c3 c5 rand snap note
+200.0 4000.0 exprand lpf
+( 0.5 verb ) sometimes
+.</code></pre>
+<p><code>snap</code> ramène n'importe quelle note sur la note de la gamme la plus proche : vous gardez le hasard, mais pas de fausse note.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/language/reference/randomness/random-values/" target="_blank">Random values</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/randomness/probabilistic-execution/" target="_blank">Probabilistic execution</a> · <a href="https://cagire.raphaelforment.fr/docs/language/reference/selection/choice/" target="_blank">Choice</a></p>
+
+<!-- ============================================================ -->
+
+<h2 id="samples">Ajouter ses samples</h2>
+
+<h3>L'arborescence</h3>
+<p>Dans Cagire, un sample se joue par le nom du <b>sous-dossier</b> qui le contient. Vous ajoutez à Cagire un dossier racine. Chacun de ses sous-dossiers devient un mot que vous pouvez écrire dans un step, et les fichiers à l'intérieur sont numérotés à partir de <code>0</code>, par ordre alphabétique.</p>
+<pre>mes-samples/               ← le dossier que vous ajoutez dans Cagire
+├── voix/                  → le mot  voix
+│   ├── 01-souffle.wav     →   voix sound 0 n .
+│   ├── 02-rire.wav        →   voix sound 1 n .
+│   └── 03-chuchote.wav    →   voix sound 2 n .
+├── terrain/               → le mot  terrain
+│   ├── pluie.wav          →   terrain sound 0 n .
+│   └── vent.wav           →   terrain sound 1 n .
+└── boucles/               → le mot  boucles
+    └── batterie.wav       →   boucles sound .</pre>
+<ul>
+<li>Cagire ne regarde <b>qu'un niveau</b> : un fichier posé directement dans <code>mes-samples/</code> est ignoré, un sous-sous-dossier aussi.</li>
+<li>Formats lus : WAV, MP3, OGG, FLAC, AAC, M4A.</li>
+<li>Vous pouvez aussi numéroter vos fichiers (<code>01-</code>, <code>02-</code>…) pour savoir lequel est le <code>0</code>, le <code>1</code>…</li>
+<li>Nommez vos sous-dossiers en <b>minuscules, sans espace ni accent</b>, et évitez les noms qui sont déjà des mots de Cagire : des noms de notes (<code>la4</code>, <code>c3</code>), des sons intégrés (<code>kick</code>, <code>hat</code>, <code>sine</code>), des gammes (<code>minor</code>, <code>blues</code>)…</li>
+</ul>
+
+<h3>Déclarer le dossier dans Cagire</h3>
+<ol>
+<li><kbd>F6</kbd> ouvre la vue Engine, puis <kbd>Tab</kbd> jusqu'à l'onglet <b>Sample</b>.</li>
+<li><kbd>A</kbd> ouvre un navigateur : choisissez <code>mes-samples/</code>. Les samples sont prêts tout de suite, et Cagire retient le dossier pour les prochaines fois. <kbd>D</kbd> retire un dossier de la liste, sans rien effacer sur le disque.</li>
+<li><kbd>F8</kbd> ouvre la vue Samples : écouter, renommer, chercher dans votre bibliothèque.</li>
+</ol>
+<p>Dans l'éditeur, <kbd>Ctrl</kbd>+<kbd>B</kbd> ouvre la recherche de samples : tapez quelques lettres, <kbd>→</kbd> pour écouter, <kbd>Ctrl</kbd>+<kbd>A</kbd> pour écouter automatiquement en parcourant la liste, <kbd>Ctrl</kbd>+<kbd>R</kbd> pour tomber sur un sample au hasard, <kbd>Enter</kbd> pour insérer <code>voix sound 2 n</code> dans votre code.</p>
+
+<h3>Jouer ses samples</h3>
+<pre><code>voix sound .                 ;; le premier fichier du dossier voix
+voix sound 2 n .             ;; le troisième</code></pre>
+<pre><code>;; un fichier au hasard, joué deux fois plus lentement (et plus grave)
+voix sound
+[ 0 1 2 ] choose n
+0.5 speed
+.</code></pre>
+<pre><code>;; une boucle calée sur 16 steps, quelle que soit sa durée
+boucles sound 16 loop .</code></pre>
+<pre><code>;; ne jouer qu'une partie du fichier : de 25 % à 50 %
+terrain sound 0.25 begin 0.5 end .</code></pre>
+<p><code>-1 speed</code> lit le sample à l'envers. <code>c4 note</code> sur un sample le transpose : un sample joue comme si sa note de base était <code>c4</code>.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/resources/loading-samples/" target="_blank">Loading samples</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/configuration/sample-folders/" target="_blank">Sample folders</a> · <a href="https://cagire.raphaelforment.fr/docs/engine/samples/selecting-samples/" target="_blank">Selecting samples</a> · <a href="https://cagire.raphaelforment.fr/docs/engine/samples/looping-samples/" target="_blank">Looping samples</a> · <a href="https://cagire.raphaelforment.fr/docs/interface/sequencer/sample-finder/" target="_blank">The sample finder</a></p>
+
+<h3>Pour le rendu</h3>
+<p>Le <code>.cagire</code> garde seulement le chemin de vos dossiers, pas les fichiers audio. Zippez <b>tout le dossier racine</b> (<code>mes-samples/</code>, avec ses sous-dossiers, sans les renommer) et envoyez-le avec votre <code>.cagire</code>. Cagire retrouve les samples par leur nom : je n'aurai qu'à ajouter votre dossier de mon côté.</p>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/project/exporting-and-sharing/" target="_blank">Exporting and sharing</a></p>
+
+<!-- ============================================================ -->
+
+<h2 id="ranger">Ranger son projet</h2>
+
+<p>Je vais lire votre code. Rendez-le lisible, pour moi mais aussi pour vous.</p>
+
+<h3>Commenter</h3>
+<pre><code>;; BASSE : une note par boucle, en do mineur
+;; essayer dorian à la place de minor pour la partie B
+saw sound
+c2 minor &lt; 0 3 4 2 &gt; deg note
+600 lpf     ;; filtre bas pour laisser de la place au kick
+.</code></pre>
+<p><code>;;</code> commente la fin de la ligne. <code>;*</code> … <code>*;</code> commente plusieurs lignes, pratique pour désactiver un bloc sans l'effacer.</p>
+
+<h3>Nommer et ranger les patterns</h3>
+<p>Sur la grille du Sequencer :</p>
+<table>
+<tr><th>Touche</th><th>Action</th></tr>
+<tr><td><kbd>r</kbd></td><td>Renommer le pattern ou la bank sous le curseur (« kick », « basse », « intro »…)</td></tr>
+<tr><td><kbd>d</kbd></td><td>Ajouter une description au pattern</td></tr>
+<tr><td><kbd>e</kbd></td><td>Toutes les propriétés du pattern : nom, description, la couleur du pattern, longueur, vitesse, swing, quantification</td></tr>
+<tr><td><kbd>[</kbd> / <kbd>]</kbd></td><td>Déplacer le pattern dans sa bank</td></tr>
+<tr><td><kbd>/</kbd></td><td>Retrouver un pattern par son nom</td></tr>
+</table>
+
+<h3>L'onglet Notes</h3>
+<p>Chaque projet a sa page de notes, enregistrée <b>dans</b> le fichier <code>.cagire</code>. Depuis le Sequencer, <kbd>n</kbd> l'ouvre ; <kbd>Esc</kbd> la referme et la sauvegarde dans le projet (pensez ensuite à <kbd>s</kbd> pour enregistrer le fichier). On peut aussi l'ouvrir avec <kbd>:</kbd> puis <b>Open Notes</b>.</p>
+<p>Notez-y toutes les infos utiles pour moi :</p>
+<ul>
+<li>votre nom, le titre de la track et le tempo prévu ;</li>
+<li>Possiblement un ordre de lecture : quels patterns lancer, dans quel ordre, combien de temps ;</li>
+<li>les samples utilisés et le nom de votre dossier de samples ;</li>
+<li>vos intentions, vos références, ce qui a marché ou pas, les questions que vous vous posez.</li>
+</ul>
+<p class="doc"><a href="https://cagire.raphaelforment.fr/docs/interface/project/taking-notes/" target="_blank">Taking notes</a> · <a href="https://cagire.raphaelforment.fr/docs/language/basics/words-and-comments/" target="_blank">Words &amp; comments</a></p>
+
+<!-- ============================================================ -->
+
+<h2>Avant d'envoyer</h2>
+<ul>
+<li>Le projet est parti d'un fichier vide (<kbd>l</kbd> puis <kbd>n</kbd>).</li>
+<li>La track est découpée en plusieurs patterns, nommés (<kbd>r</kbd>).</li>
+<li>Le code est commenté (<code>;;</code>).</li>
+<li>Les Notes (<kbd>n</kbd>) expliquent comment jouer la track.</li>
+<li>Le projet est sauvegardé (<kbd>s</kbd>) : vérifiez en le rouvrant avec <kbd>l</kbd> puis <kbd>f</kbd>.</li>
+<li>Si vous utilisez des samples : le <code>.zip</code> de votre dossier de samples est joint.</li>
+<li>Envoyé à <a href="mailto:remi.georges@protonmail.com">remi.georges@protonmail.com</a> <b>avant le 27 novembre</b>.</li>
+<li>Envie de jouer au concert ? Mail <b>avant la fin octobre</b>.</li>
+</ul>
+
+<h2>Pour aller plus loin</h2>
+<ul>
+<li><a href="https://cagire.raphaelforment.fr/docs/" target="_blank">Le manuel complet</a>, dans Cagire avec <kbd>F4</kbd>.</li>
+<li><a href="https://cagire.raphaelforment.fr/docs/language/introduction/" target="_blank">Le langage</a> et <a href="https://cagire.raphaelforment.fr/docs/interface/views/dictionary/" target="_blank">le dictionnaire</a> (<kbd>F1</kbd>) : tous les mots, avec leur explication.</li>
+<li><a href="https://cagire.raphaelforment.fr/docs/engine/introduction/" target="_blank">Le moteur sonore</a> : synthèse, filtres, effets, réverbes, delays…</li>
+<li>Les démos et tutoriels intégrés : <kbd>l</kbd>, puis <kbd>Tab</kbd> pour passer des démos aux tutoriels. Ouvrez-les pour voir comment c'est fait, sauvegarder bien votre travail avant, et oubliez pas votre rendu part d'un fichier vide !</li>
+<li><a href="https://git.raphaelforment.fr/BuboBubo/Cagire" target="_blank">Le code source de Cagire</a>, par Raphaël Forment (BuboBubo).</li>
+</ul>
+
+<h2>Pour se connecter avec la scène live coding</h2>
+<ul>
+<li><a href="https://livecoding.fr/" target="_blank">livecoding.fr</a> : la communauté francophone, avec son <a href="https://livecoding.fr/evenements" target="_blank">agenda</a> (pas toujours à jour mais on essaie), ses <a href="https://livecoding.fr/reseaux" target="_blank">et ses réseaux locaux</a>.</li>
+<li><b>Creative Code Lyon</b> : la communauté lyonnaise, sur <a href="https://discord.gg/B2e5a3Y3uk" target="_blank">Discord</a>.</li>
+<li><a href="https://cookie.paris/" target="_blank">Cookie Collective</a> : le collectif parisien dont moi-même et Raphaël Forment faisont partie (algorave, demoscene, live coding), sur <a href="https://discord.gg/VZQGhUC" target="_blank">Discord</a>.</li>
+<li><a href="https://blog.toplap.org/" target="_blank">TOPLAP</a> : le réseau international du live coding, sur <a href="https://discord.gg/D4Enr5u7Rp" target="_blank">Discord</a>. Pour discuter : le <a href="https://forum.toplap.org/" target="_blank">forum</a>, <a href="https://social.toplap.org/" target="_blank">Mastodon</a>, la <a href="https://we.lurk.org/postorius/lists/livecode.we.lurk.org/" target="_blank">mailing list</a> et les <a href="http://toplap.org/nodes/" target="_blank">groupes locaux</a>.</li>
+</ul>
+
+<script>
+document.querySelectorAll('h1').forEach(h => h.dataset.text = h.textContent);
+</script>
+
+</body>
+</html>
